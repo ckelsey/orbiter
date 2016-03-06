@@ -1,0 +1,12 @@
+<div
+    ng-controller="OrbiterCtlr as ctlr"
+    class="m-height100"
+    ng-mouseup="ctlr.trackingMouseMove = false"
+    ng-mouseleave="ctlr.trackingMouseMove = false"
+    ng-mousemove="ctlr.trackingMouseMove ? ctlr.mouseMoveMethod($event) : null"
+    ng-class="ctlr.trackingMouseMove ? 'c-tracking-mousemove blur-'+ctlr.dialogueOpen : 'c-ckrank_main blur-'+ctlr.dialogueOpen"
+>
+    <orbiter-canvas ng-style="{'width':ctlr.$localStorage.Orbiter.canvasWidth}"></orbiter-canvas>
+    <div class="c-section-resize m-horizontal" ng-style="{'left':ctlr.$localStorage.Orbiter.canvasWidth}" ng-mousedown="ctlr.trackingMouseMove=true; ctlr.mouseMoveMethod=ctlr.canvasElements; ctlr.sizingElement=[$event, 'target', 'previousSibling']"></div>
+    <orbiter-elements ng-style="{'left':ctlr.$localStorage.Orbiter.canvasWidth, 'width':ctlr.$localStorage.Orbiter.elementsWidth}"></orbiter-elements>
+</div>

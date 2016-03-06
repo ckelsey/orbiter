@@ -1,0 +1,92 @@
+html {
+  min-height: 100%;
+  height: 100%;
+}
+html body {
+  height: 100%;
+  margin: 0px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+  color: #535353;
+  line-height: 1.5;
+}
+
+.m-height100 {
+  height: 100%;
+}
+
+orbiter-elements {
+  display: inline-block;
+  width: 30%;
+  height: 100%;
+  background: #424d5a;
+  color: #fff;
+  vertical-align: top;
+  overflow: auto;
+}
+orbiter-elements h4 {
+  padding: 7px;
+  margin: 0px;
+  background: #9a9d96;
+  box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.26), inset 0 -1px 0 #333b45, 0 1px 0 rgba(0, 0, 0, 0.14), 0px -1px 0px rgba(0, 0, 0, 0.52), 0px 0px 0px 1px rgba(0, 0, 0, 0.26);
+}
+
+orbiter-canvas {
+  display: inline-block;
+  width: 70%;
+  height: 100%;
+  vertical-align: top;
+  overflow: auto;
+  position: relative;
+}
+orbiter-canvas iframe {
+  position: absolute;
+  width: 100%;
+  border: none;
+  height: 100%;
+  pointer-events: none;
+}
+
+.c-drag_can-accept {
+  box-shadow: inset 0px 0px 0px 1px #9fbe3c, 0px 0px 0px 1px #9fbe3c, inset 0px 0px 400px rgba(159, 190, 60, 0.5);
+}
+
+.c-elements_item {
+  cursor: move;
+  padding: 7px;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+.c-elements_item:before {
+  content: "||";
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0px 7px 1px 0px;
+  opacity: .7;
+  color: #718297;
+  font-size: 10px;
+}
+
+.c-interactive_includer {
+  height: 100%;
+}
+
+.c-interactive_wrapper {
+  height: 100%;
+}
+
+.c-section-resize {
+  position: absolute;
+  top: 0px;
+  box-shadow: inset 4px 0px 0px #e0e2dd, inset 5px 0px 0px rgba(0, 0, 0, 0.06), -1px 0px 0px rgba(0, 0, 0, 0.14);
+}
+.c-section-resize.m-horizontal {
+  height: 100%;
+  width: 8px;
+  cursor: col-resize;
+  left: 70%;
+  margin-left: -4px;
+}
+
+.c-tracking-mousemove * {
+  user-select: none;
+}

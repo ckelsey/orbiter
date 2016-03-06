@@ -1,0 +1,21 @@
+<!-- <div ng-controller="InteractiveCtlr as ictlr">
+    <div ng-if=
+    <div class="c-assembly_node_name">
+        <span ng-bind="data.label"></span>
+    </div>
+    <div class="c-assembly_node_nodes">
+        <div class="c-assembly_node" ng-repeat="childData in data.nodes track by $index" interactive-node="childData" interactive-node-parent="data" ng-init="thisPath=parentPath + ',nodes,' + $index" interactive-node-parent-path="thisPath" path="{{thisPath}}"></div>
+    </div>
+</div> -->
+
+<div ng-controller="InteractiveCtlr as ictlr">
+    <span ng-bind-html="data.properties.text.value"></span>
+    <div
+        ng-repeat="childData in data.nodes track by $index"
+        interactive-node="childData"
+        interactive-node-parent="data"
+        ng-init="thisPath=parentPath + ',nodes,' + $index"
+        interactive-node-parent-path="thisPath"
+        path="{{thisPath}}"
+    ></div>
+</div>
