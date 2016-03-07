@@ -1,12 +1,19 @@
 <div
-    ng-controller="OrbiterCtlr as ctlr"
+    ng-controller="OrbiterCtlr as orb"
     class="m-height100"
-    ng-mouseup="ctlr.trackingMouseMove = false"
-    ng-mouseleave="ctlr.trackingMouseMove = false"
-    ng-mousemove="ctlr.trackingMouseMove ? ctlr.mouseMoveMethod($event) : null"
-    ng-class="ctlr.trackingMouseMove ? 'c-tracking-mousemove blur-'+ctlr.dialogueOpen : 'c-ckrank_main blur-'+ctlr.dialogueOpen"
+    ng-mouseup="orb.trackingMouseMove = false"
+    ng-mouseleave="orb.trackingMouseMove = false"
+    ng-mousemove="orb.trackingMouseMove ? orb.mouseMoveMethod($event) : null"
+    ng-class="orb.trackingMouseMove ? 'c-tracking-mousemove blur-'+orb.dialogueOpen : 'c-ckrank_main blur-'+orb.dialogueOpen"
 >
-    <orbiter-canvas ng-style="{'width':ctlr.$localStorage.Orbiter.canvasWidth}"></orbiter-canvas>
-    <div class="c-section-resize m-horizontal" ng-style="{'left':ctlr.$localStorage.Orbiter.canvasWidth}" ng-mousedown="ctlr.trackingMouseMove=true; ctlr.mouseMoveMethod=ctlr.canvasElements; ctlr.sizingElement=[$event, 'target', 'previousSibling']"></div>
-    <orbiter-elements ng-style="{'left':ctlr.$localStorage.Orbiter.canvasWidth, 'width':ctlr.$localStorage.Orbiter.elementsWidth}"></orbiter-elements>
+    <div class="c-orbiter_body">
+        <div class="c-orbiter_body-inner">
+            <orbiter-canvas ng-style="{'width':orb.$localStorage.Orbiter.canvasWidth}"></orbiter-canvas>
+            <div class="c-section-resize m-horizontal" ng-style="{'left':orb.$localStorage.Orbiter.canvasWidth}" ng-mousedown="orb.trackingMouseMove=true; orb.mouseMoveMethod=orb.canvasElements; orb.sizingElement=[$event, 'target', 'previousSibling']"></div>
+            <orbiter-elements ng-style="{'left':orb.$localStorage.Orbiter.canvasWidth, 'width':orb.$localStorage.Orbiter.elementsWidth}"></orbiter-elements>
+        </div>
+    </div>
+    <div class="c-orbiter_menu">
+        <div class="c-orbiter_menu-item" ng-click="orb.OrbiterService.save()">Save</div>
+    </div>
 </div>

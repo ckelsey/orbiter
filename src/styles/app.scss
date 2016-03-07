@@ -17,9 +17,37 @@ html{
     }
 }
 
+a-ckolor .c-ckolor__input-wrapper{
+    background: #515f6f;
+    width: 100%;
+    box-sizing: border-box;
+    color: #fff;
+    height: auto;
+    font-size: 12px;
+    padding: 4px 7px;
+    line-height: 20px;
+}
+
+.c-ckolor__overlay-inner .c-ckolor__saturation,.c-ckolor__overlay-inner .c-ckolor__swatch span{
+    box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.07), 0px 1px 0px 1px rgba(0,0,0,0.07);
+}
+
+
+
+
+
+
+
+
+
 .m-height100{
     height: 100%;
 }
+
+
+
+
+
 
 orbiter-elements{
     display: inline-block;
@@ -62,15 +90,8 @@ orbiter-canvas{
 
 
 
-.c-drag_can-accept{
+.c-orbiter_body .c-drag_can-accept, .c-orbiter_body .m-active-iteractive-node{
     box-shadow: inset 0px 0px 0px 1px $color-mfly-green, 0px 0px 0px 1px $color-mfly-green, inset 0px 0px 400px rgba($color-mfly-green, .5);
-
-    // content: "";
-    // display: block;
-    // width: 100%;
-    // height: 100%;
-    // position: absolute;
-    // background: rgba($color-mfly-green, .5);
 }
 
 
@@ -90,6 +111,7 @@ orbiter-canvas{
     cursor: move;
     padding: 7px;
     box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1),inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    transition: all .1s;
 
     &:before {
         content: "||";
@@ -100,6 +122,47 @@ orbiter-canvas{
         color: lighten($color-mfly-blue, 21%);
         font-size: 10px;
     }
+
+    &:hover{
+        background: lighten($color-mfly-blue, 7%);
+        box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.03), inset 0 -1px 0 0 rgba(0, 0, 0, 0.3);
+    }
+}
+
+.c-elements_property{
+    padding: 7px 14px;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1),inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    transition: all .1s;
+
+    label{
+        display: block;
+        text-transform: capitalize;
+    }
+
+    textarea, input, select, button{
+        background: lighten($color-mfly-blue, 7%);
+        border: none;
+        width: 100%;
+        border-radius: 2px;
+        appearance: none;
+        color: #fff;
+        font-size: 12px;
+        font-family: "Open Sans",sans-serif;
+        padding: 7px;
+        box-sizing: border-box;
+        box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.07);
+        resize: vertical;
+        outline: none !important;
+        margin: 3px 0px 7px;
+        box-shadow: -1px 0 0 rgba(0, 0, 0, 0.19),-2px 0 0 rgba(255,255,255,.03);
+        transition: all .2s;
+
+        &:hover, &:focus{
+            transform: scale(1.01);
+            background: lighten($color-mfly-blue, 14%);
+            box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.07), 0px 2px 0px rgba(0, 0, 0, 0.14);
+        }
+    }
 }
 
 .c-interactive_includer{
@@ -107,6 +170,44 @@ orbiter-canvas{
 }
 
 .c-interactive_wrapper{
+    height: 100%;
+}
+
+.c-orbiter_menu{
+    position: relative;
+    height: 35px;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    overflow: hidden;
+    background-color: $color-mfly-blue;
+    color: #fff;
+}
+
+.c-orbiter_menu-item{
+    display: inline-block;
+    cursor: pointer;
+    padding: 7px;
+    box-sizing: border-box;
+    transition: all .2s;
+
+    &:hover{
+        background-color: $color-mfly-green;
+        transform: scale(1.05);
+    }
+}
+
+.c-orbiter_body{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding-top: 35px;
+}
+
+.c-orbiter_body-inner{
+    position: relative;
+    width: 100%;
     height: 100%;
 }
 

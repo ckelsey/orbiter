@@ -1,76 +1,24 @@
+// Select node
+//  - blur/opacity others
+
+// Global settings
+//  - color
+//  - font size
+
+// View settings
+//  - all borders
+//  - selected borders
+//  - none
+
+// Handle nested elements - <node><node></node></node>
+
 (function () {
     'use strict';
 
-    function OrbiterService(InteractiveService){
-        var self = {
-            elements: {
-                block:{
-                    label: 'Block',
-                    properties: {
-                        display: {
-                            type: 'select',
-                            options:['block', 'inline'],
-                            value: 'inline'
-                        }
-                    },
-                    tag:{
-                        block: 'p',
-                        inline: 'span'
-                    }
-                },
-                text:{
-                    label: 'Text',
-                    properties: {
-                        text: {
-                            type:'text',
-                            value: 'Text'
-                        },
-                        color: {
-                            type:'color',
-                            value: 'green'
-                        },
-                        size: {
-                            type:'number',
-                            value: '24'
-                        },
-                        weight: {
-                            type: 'select',
-                            options:['light', 'normal', 'bold'],
-                            value: 'normal'
-                        },
-                        display: {
-                            type: 'select',
-                            options:['block', 'inline'],
-                            value: 'inline'
-                        },
-                        align: {
-                            type: 'select',
-                            options:['left', 'center', 'right'],
-                            value: 'left'
-                        }
-                    },
-                    tag:{
-                        block: 'p',
-                        inline: 'span'
-                    }
-                },
-                link:{
-                    label: 'Link'
-                },
-                button:{
-                    label: 'Button'
-                },
-                list:{
-                    label: 'List'
-                },
-                filter:{
-                    label: 'Filter'
-                },
-                media:{
-                    label: 'Media'
-                }
-            },
+    function OrbiterService(InteractiveService, OrbiterElementTypes, $localStorage){
+        InteractiveService.developer = true;
 
+        var self = {
             dragging: null,
             drag: function(data){
                 self.dragging = data;
@@ -78,9 +26,35 @@
             },
 
             addToInteractive: function(parent, data){
-                parent.nodes.push(data)
-                console.log(parent, data)
-                //InteractiveService.htmlTree;
+                var node = data;
+                node.nodes = [];
+                node.id = data.label +'_'+ new Date().getTime();
+                if(self.elementProperties){
+                    self.elementProperties.active = false;
+                }
+                if(parent.id !== node.id){
+                    node.active = true;
+                    self.elementProperties = node;
+                    parent.nodes.push(data);
+                }
+            },
+
+            elementProperties: null,
+            activeProperties: function(data){
+                console.log(data);
+                if(self.elementProperties){
+                    self.elementProperties.active = false;
+                }
+                data.active = true;
+                self.elementProperties = data;
+            },
+
+            save: function(){
+                if(!$localStorage.OrbiterInteractive){
+                    $localStorage.OrbiterInteractive = {};
+                }
+console.log($localStorage)
+                $localStorage.OrbiterInteractive.htmlTree = InteractiveService.htmlTree;
             }
         };
         return self;

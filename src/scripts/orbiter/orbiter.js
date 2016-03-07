@@ -1,13 +1,14 @@
 (function () {
     'use strict';
 
-    function OrbiterCtlr($localStorage, $window, OrbiterService, InteractiveService){
+    function OrbiterCtlr($localStorage, $window, OrbiterService, OrbiterElementTypes, InteractiveService){
         var self = this;
         this.$localStorage = $localStorage;
         if(!$localStorage.Orbiter){
             $localStorage.Orbiter = {};
         }
         this.OrbiterService = OrbiterService;
+        this.OrbiterElementTypes = OrbiterElementTypes;
         this.InteractiveService = InteractiveService;
 
         this.trackingMouseMove = false;
@@ -30,7 +31,12 @@
 
         this.draggingElement = function(e, data){
             console.log(e, data)
-        }
+        };
+
+        this.debug = function(msg){
+            console.log(msg)
+            return msg;
+        };
     }
 
     angular.module('app')

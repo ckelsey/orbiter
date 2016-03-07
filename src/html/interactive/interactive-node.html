@@ -1,21 +1,31 @@
-<!-- <div ng-controller="InteractiveCtlr as ictlr">
-    <div ng-if=
-    <div class="c-assembly_node_name">
-        <span ng-bind="data.label"></span>
-    </div>
-    <div class="c-assembly_node_nodes">
-        <div class="c-assembly_node" ng-repeat="childData in data.nodes track by $index" interactive-node="childData" interactive-node-parent="data" ng-init="thisPath=parentPath + ',nodes,' + $index" interactive-node-parent-path="thisPath" path="{{thisPath}}"></div>
-    </div>
-</div> -->
+<script type="text/ng-template" id="/node-child.html">
+<div
+    ng-repeat="childData in data.nodes track by $index"
+    interactive-node="childData"
+    interactive-node-parent="data"
+    ng-init="thisPath=parentPath + ',nodes,' + $index"
+    interactive-node-parent-path="thisPath"
+    path="{{thisPath}}"
+    ng-style="ictlr.InteractiveService.getStyles(childData, 'display')"
+    ng-class="childData.active? 'm-active-iteractive-node' : ''"
+></div>
+</script>
 
-<div ng-controller="InteractiveCtlr as ictlr">
-    <span ng-bind-html="data.properties.text.value"></span>
-    <div
-        ng-repeat="childData in data.nodes track by $index"
-        interactive-node="childData"
-        interactive-node-parent="data"
-        ng-init="thisPath=parentPath + ',nodes,' + $index"
-        interactive-node-parent-path="thisPath"
-        path="{{thisPath}}"
-    ></div>
+<div ng-if="data.label === 'Block'" ng-controller="InteractiveCtlr as ictlr" ng-style="ictlr.InteractiveService.getStyles(data)" interactive-id="{{data.id}}">
+    <div ng-include src="'/node-child.html'" ng-style="ictlr.InteractiveService.getStyles(data)"></div>
 </div>
+
+<div ng-if="data.label === 'Text'" ng-controller="InteractiveCtlr as ictlr" ng-style="ictlr.InteractiveService.getStyles(data)" interactive-id="{{data.id}}">
+    <span ng-bind-html="data.properties.text.value"></span>
+    <div ng-include src="'/node-child.html'" ng-style="ictlr.InteractiveService.getStyles(data)"></div>
+</div>
+
+<a ng-if="data.label === 'Link'" ng-controller="InteractiveCtlr as ictlr" ng-style="ictlr.InteractiveService.getStyles(data)" interactive-id="{{data.id}}" href="{{data.properties.url.value}}">
+    <span ng-bind-html="data.properties.text.value"></span>
+    <div ng-include src="'/node-child.html'" ng-style="ictlr.InteractiveService.getStyles(data)"></div>
+</a>
+
+<button ng-if="data.label === 'Button'" ng-controller="InteractiveCtlr as ictlr" ng-style="ictlr.InteractiveService.getStyles(data)" interactive-id="{{data.id}}" href="{{data.properties.url.value}}">
+    <span ng-bind-html="data.properties.text.value"></span>
+    <div ng-include src="'/node-child.html'" ng-style="ictlr.InteractiveService.getStyles(data)"></div>
+</button>

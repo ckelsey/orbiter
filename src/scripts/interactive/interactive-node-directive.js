@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-    function interactiveNode(InteractiveService, OrbiterService){
+    function interactiveNode(InteractiveService, OrbiterService, $timeout){
         return {
             restrict: 'A',
             scope: {
@@ -30,10 +30,22 @@
 
                 element.bind("drop", function(e) {
                     e.preventDefault();
-                    var data = OrbiterService.dragging;
-                    element.removeClass(InteractiveService.canAcceptDragClass);
-                    OrbiterService.addToInteractive(scope.data, data)
+                    e.stopPropagation();
+                    $timeout(function(){
+                        angular.element(document.querySelectorAll('.'+InteractiveService.canAcceptDragClass)).removeClass(InteractiveService.canAcceptDragClass);
+                        OrbiterService.addToInteractive(scope.data, OrbiterService.dragging);
+                    });
                     return false;
+                });
+
+                element.bind("click", function(e){
+                    if(InteractiveService.developer){
+                        e.preventDefault();
+                    }
+                    e.stopPropagation();
+                    $timeout(function(){
+                        OrbiterService.activeProperties(scope.data);
+                    });
                 });
             }
         };

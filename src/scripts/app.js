@@ -10,7 +10,8 @@
         'ngSanitize',
         'ngRoute',
         'ngAnimate',
-        'ngStorage'
+        'ngStorage',
+        'aCKolor'
     ])
     .controller('AppCtlr', AppCtlr);
 })();

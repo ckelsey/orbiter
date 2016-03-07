@@ -59,7 +59,8 @@ var vendor_scripts = [
     'bower_components/angular-route/angular-route.js',
     'bower_components/angular-loader/angular-loader.js',
     'bower_components/angular-animate/angular-animate.min.js',
-    'bower_components/ngstorage/ngstorage.min.js'
+    'bower_components/ngstorage/ngstorage.min.js',
+    'bower_components/ackolor/dist/js/app.min.js'
 ];
 
 gulp.task('vendor_scripts', function() {

@@ -3,13 +3,26 @@
         <h4>Elements</h4>
         <div
             class="c-elements_item"
-            ng-repeat="element in orb.OrbiterService.elements track by $index"
+            ng-repeat="element in orb.OrbiterElementTypes track by $index"
             orbiter-draggable="true"
             orbiter-drag-data="element"
         ><span ng-bind="element.label"></span></div>
     </div>
     <div class="c-elements_properties">
         <h4>Properties</h4>
+        <div ng-if="orb.OrbiterService.elementProperties">
+            <div ng-repeat="(propertyKey, property) in orb.OrbiterService.elementProperties.properties track by $index" class="c-elements_property">
+                <label ng-bind="propertyKey"></label>
+                <select ng-if="property.type === 'select'" ng-model="property.value">
+                    <option ng-repeat="option in property.options track by $index" value="{{option}}" ng-bind="option"></option>
+                </select>
 
+                <a-ckolor ng-if="property.type === 'color'" model="property.value" element-id="'an_id'" input-id="'an_input_id'" name="'an-input-name'" type="'hidden'"></a-ckolor>
+
+                <input ng-if="property.type === 'text'" type="text" ng-model="property.value" />
+
+                <textarea ng-if="property.type === 'textarea'" ng-model="property.value"></textarea>
+            </div>
+        </div>
     </div>
 </div>

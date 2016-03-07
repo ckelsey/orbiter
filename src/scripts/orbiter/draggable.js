@@ -23,14 +23,11 @@
                 }
 
                 element.bind("dragstart", function(e) {
-                    OrbiterService.drag(scope.orbiterDragData);
-                    //return false;
+                    OrbiterService.drag(angular.copy(scope.orbiterDragData));
                 });
 
                 element.bind("dragend", function(e) {
                     OrbiterService.drag(null);
-                    // e.preventDefault();
-                    // return false;
                 });
             }
         };
