@@ -65,29 +65,22 @@
             },
 
             getBinding: function(obj, key){
-                if(obj.properties[key].bind){
-                    var pathArray = obj.properties[key].bind.split('.');
-                    var val = null;
-                    for(var p=0;p<pathArray.length;p++){
-                        if(p===0){
-                            val = self.properties;
-                        }
-                        val = val[pathArray[p]];
-                    }
-                    if(val){
-                        val = val.value;
-                    }
-                    return val;
-                }else{
-                    return null;
+                var val = self.lookUpPath(self.properties, obj.properties[key].bind);
+                if(val){
+                    val = val.value;
                 }
+                return val;
             },
 
-            getModel: function(data){
-                if(data.binding && data.binding.key && self.properties.hasOwnProperty(data.binding.key)){
-                    return self.properties[data.binding.key];
+            lookUpPath: function(obj, pathString){
+                if(pathString){
+                    var path = pathString.split('.');
+                    if(path.length == 1){
+                        return obj[path[0]];
+                    }
+                    return self.lookUpPath(obj[path[0]], path.slice(1).join("."));
                 }else{
-                    return data.value;
+                    return null;
                 }
             },
 
