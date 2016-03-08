@@ -11,39 +11,71 @@ html body {
   line-height: 1.5;
 }
 
+h3 {
+  font-size: 21px;
+  margin: 0px 0px 7px;
+}
+
 a-ckolor .c-ckolor__input-wrapper {
-  background: #515f6f;
+  background: rgba(43, 93, 116, 0.21);
   width: 100%;
   box-sizing: border-box;
-  color: #fff;
+  color: #b9d4da;
   height: auto;
   font-size: 12px;
   padding: 4px 7px;
   line-height: 20px;
+  box-shadow: -1px 0 0 rgba(0, 0, 0, 0.19), -2px 0 0 rgba(255, 255, 255, 0.03);
+  transition: all .2s;
+}
+a-ckolor .c-ckolor__input-wrapper:hover, a-ckolor .c-ckolor__input-wrapper:focus {
+  transform: scale(1.01);
+  background: #3c5764;
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.07), 0px 2px 0px rgba(0, 0, 0, 0.14);
+}
+
+a-ckolor .c-ckolor__overlay .c-ckolor__input-wrapper input {
+  margin-top: 2px;
 }
 
 .c-ckolor__overlay-inner .c-ckolor__saturation, .c-ckolor__overlay-inner .c-ckolor__swatch span {
   box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.07), 0px 1px 0px 1px rgba(0, 0, 0, 0.07);
 }
 
+a-ckolor-wheel .c-ckolor__overlay {
+  background: radial-gradient(ellipse at 50% 250px, rgba(19, 49, 63, 0.91) 0%, rgba(0, 0, 0, 0.91) 100%);
+}
+
+.blur-true * {
+  filter: blur(1px);
+}
+
 .m-height100 {
   height: 100%;
 }
 
-orbiter-elements {
+orbiter-sidebar {
   display: inline-block;
   width: 30%;
   height: 100%;
-  background: #424d5a;
-  color: #fff;
+  background: linear-gradient(63deg, #1c262b 0%, #23414f 100%);
+  color: #b9d4da;
   vertical-align: top;
   overflow: auto;
 }
-orbiter-elements h4 {
-  padding: 7px;
+orbiter-sidebar h4 {
+  padding: 7px 14px;
   margin: 0px;
-  background: #9a9d96;
-  box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.26), inset 0 -1px 0 #333b45, 0 1px 0 rgba(0, 0, 0, 0.14), 0px -1px 0px rgba(0, 0, 0, 0.52), 0px 0px 0px 1px rgba(0, 0, 0, 0.26);
+  color: #9fbe3c;
+  vertical-align: middle;
+}
+orbiter-sidebar h4:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+orbiter-sidebar h4 button {
+  float: right;
 }
 
 orbiter-canvas {
@@ -62,48 +94,251 @@ orbiter-canvas iframe {
   pointer-events: none;
 }
 
+.c-dialogue {
+  position: fixed;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at 50% 250px, rgba(19, 49, 63, 0.91) 0%, rgba(0, 0, 0, 0.91) 100%);
+  top: 0px;
+  padding: 35px 7%;
+  box-sizing: border-box;
+  color: #fff;
+  filter: blur(0px) !important;
+}
+.c-dialogue * {
+  filter: blur(0px) !important;
+}
+.c-dialogue h2 {
+  color: #fff;
+  margin: 7px 0px;
+  font-size: 28px;
+}
+.c-dialogue .c-dialogue_input.tasks {
+  padding: 14px 14px 7px;
+  background: rgba(255, 255, 255, 0.07);
+  box-sizing: border-box;
+}
+.c-dialogue .c-dialogue_input input, .c-dialogue .c-dialogue_input textarea, .c-dialogue .c-dialogue_input select {
+  background: white;
+  color: #213037;
+  font-size: 14px;
+}
+.c-dialogue .c-dialogue_input input:hover, .c-dialogue .c-dialogue_input input:focus, .c-dialogue .c-dialogue_input textarea:hover, .c-dialogue .c-dialogue_input textarea:focus, .c-dialogue .c-dialogue_input select:hover, .c-dialogue .c-dialogue_input select:focus {
+  background: white;
+  color: #213037;
+}
+.c-dialogue .c-dialogue_input button, .c-dialogue .c-dialogue_input button:hover, .c-dialogue .c-dialogue_input button:focus {
+  background: #9fbe3c;
+  color: #fff;
+}
+
+.c-dialogue_inner {
+  width: 100%;
+}
+
+.c-dialogue_input {
+  width: 100%;
+  margin: 7px 0px;
+}
+.c-dialogue_input.done_buttons {
+  text-align: right;
+  box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.05), 0px -1px 0px rgba(0, 0, 0, 0.51);
+  padding: 14px 0px;
+  margin: 21px 0px;
+}
+
+.c-dialogue_left {
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
+  transition: width .2s;
+}
+
+.c-dialogue_right {
+  width: 0%;
+  font-size: 0px;
+  display: inline-block;
+  vertical-align: top;
+  padding: 0px;
+  box-sizing: border-box;
+  height: 100%;
+  position: relative;
+  transition: width .2s, font-size .2s, padding .2s;
+}
+.c-dialogue_right h3 {
+  font-size: 0px;
+  transition: font-size .2s;
+}
+
+.c-dialogue_inner.properties .c-dialogue_left, .c-dialogue_inner.methods .c-dialogue_left {
+  width: 62%;
+}
+
+.c-dialogue_inner.properties .c-dialogue_right, .c-dialogue_inner.methods .c-dialogue_right {
+  width: 38%;
+  padding: 5px 14px 14px;
+  font-size: 14px;
+}
+.c-dialogue_inner.properties .c-dialogue_right h3, .c-dialogue_inner.methods .c-dialogue_right h3 {
+  font-size: 21px;
+}
+
+.c-dialogue_event-property-list, .c-dialogue_event-method-list {
+  opacity: 0;
+  position: absolute;
+  top: 4px;
+  left: 14px;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: opacity .2s;
+}
+
+.c-dialogue_inner.properties .c-dialogue_event-property-list, .c-dialogue_inner.methods .c-dialogue_event-method-list {
+  opacity: 1;
+  z-index: 2;
+}
+
+.c-dialogue_event-method-item, .c-dialogue_event-property-item {
+  background: rgba(255, 255, 255, 0.07);
+  padding: 7px;
+  border-radius: 2px;
+  margin-bottom: 3px;
+  cursor: pointer;
+}
+
+.c-task_action-string {
+  color: rgba(255, 255, 255, 0.38);
+}
+.c-task_action-string input {
+  width: 50%;
+  max-width: 200px;
+}
+
+.c-task_action-target {
+  color: #9fbe3c;
+}
+
 .c-orbiter_body .c-drag_can-accept, .c-orbiter_body .m-active-iteractive-node {
   box-shadow: inset 0px 0px 0px 1px #9fbe3c, 0px 0px 0px 1px #9fbe3c, inset 0px 0px 400px rgba(159, 190, 60, 0.5);
 }
 
+.c-interactive-bound {
+  white-space: pre;
+}
+
 .c-elements_item {
-  cursor: move;
-  padding: 7px;
+  cursor: grab;
+  padding: 0px;
+  font-size: 0px;
   box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.03);
   transition: all .1s;
 }
 .c-elements_item:before {
-  content: "||";
+  content: "\f0c8";
+  font: normal normal normal 14px/1 FontAwesome;
   display: inline-block;
   vertical-align: middle;
-  padding: 0px 7px 1px 0px;
+  padding: 0px;
   opacity: .7;
-  color: #718297;
-  font-size: 10px;
+  color: #496a7a;
+  font-size: 0px;
+  transition: all .1s;
+}
+.c-elements_item.typeText:before {
+  content: "\f036";
+}
+.c-elements_item.typeLink:before {
+  content: "\f0c1";
+}
+.c-elements_item.typeButton:before {
+  content: "\f25a";
 }
 .c-elements_item:hover {
-  background: #515f6f;
+  transform: scale(1.025);
+  background: #9fbe3c;
   box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.03), inset 0 -1px 0 0 rgba(0, 0, 0, 0.3);
 }
 
-.c-elements_property {
-  padding: 7px 14px;
+.c-sidebar_data, .c-sidebar_elements_properties, .c-sidebar_events {
   box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  padding: 7px 0px;
+}
+
+.c-sidebar_elements_property span {
+  vertical-align: middle;
+}
+
+.c-sidebar_elements_property_bind-button {
+  font-size: 13px;
+  height: 15px;
+  line-height: 16px;
+  width: 15px;
+  display: inline-block;
+  text-align: center;
+  color: #6492ab;
+  border-radius: 50%;
+  vertical-align: middle;
+  font-weight: 700;
+  cursor: pointer;
+  position: relative;
+  top: 1px;
+  transition: background .2s, color .2s;
+}
+.c-sidebar_elements_property_bind-button:hover {
+  background: #9fbe3c;
+  color: #fff;
+}
+
+.c-sidebar_data .c-sidebar_item, .c-sidebar_elements_properties .c-sidebar_item, .c-dialogue .c-sidebar_item, .c-sidebar_events .c-sidebar_item {
+  font-family: "Open Sans", sans-serif;
+  font-weight: lighter;
+  font-size: 12px;
+  padding: 7px 14px;
   transition: all .1s;
 }
-.c-elements_property label {
+.c-sidebar_data .c-sidebar_data_item, .c-sidebar_elements_properties .c-sidebar_data_item, .c-dialogue .c-sidebar_data_item, .c-sidebar_events .c-sidebar_data_item {
+  padding: 7px 14px;
+  transition: all .1s;
+}
+.c-sidebar_data .c-sidebar_data_item button, .c-sidebar_elements_properties .c-sidebar_data_item button, .c-dialogue .c-sidebar_data_item button, .c-sidebar_events .c-sidebar_data_item button {
+  float: right;
+}
+.c-sidebar_data .c-sidebar_data_item:after, .c-sidebar_elements_properties .c-sidebar_data_item:after, .c-dialogue .c-sidebar_data_item:after, .c-sidebar_events .c-sidebar_data_item:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.c-sidebar_data .c-sidebar_event_function, .c-sidebar_elements_properties .c-sidebar_event_function, .c-dialogue .c-sidebar_event_function, .c-sidebar_events .c-sidebar_event_function {
+  cursor: pointer;
+}
+.c-sidebar_data label, .c-sidebar_elements_properties label, .c-dialogue label, .c-sidebar_events label {
   display: block;
   text-transform: capitalize;
+  font-size: 12px;
 }
-.c-elements_property textarea, .c-elements_property input, .c-elements_property select, .c-elements_property button {
-  background: #515f6f;
+.c-sidebar_data label:after, .c-sidebar_elements_properties label:after, .c-dialogue label:after, .c-sidebar_events label:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.c-sidebar_data label button, .c-sidebar_elements_properties label button, .c-dialogue label button, .c-sidebar_events label button {
+  float: right;
+}
+.c-sidebar_data textarea, .c-sidebar_data input, .c-sidebar_data select, .c-sidebar_elements_properties textarea, .c-sidebar_elements_properties input, .c-sidebar_elements_properties select, .c-dialogue textarea, .c-dialogue input, .c-dialogue select, .c-sidebar_events textarea, .c-sidebar_events input, .c-sidebar_events select {
+  font-family: "Open Sans", sans-serif;
+  font-weight: lighter;
+}
+.c-sidebar_data textarea, .c-sidebar_data input, .c-sidebar_data select, .c-sidebar_data button, .c-sidebar_data .c-sidebar_event_function, .c-sidebar_data .c-sidebar_elements_property-input, .c-sidebar_elements_properties textarea, .c-sidebar_elements_properties input, .c-sidebar_elements_properties select, .c-sidebar_elements_properties button, .c-sidebar_elements_properties .c-sidebar_event_function, .c-sidebar_elements_properties .c-sidebar_elements_property-input, .c-dialogue textarea, .c-dialogue input, .c-dialogue select, .c-dialogue button, .c-dialogue .c-sidebar_event_function, .c-dialogue .c-sidebar_elements_property-input, .c-sidebar_events textarea, .c-sidebar_events input, .c-sidebar_events select, .c-sidebar_events button, .c-sidebar_events .c-sidebar_event_function, .c-sidebar_events .c-sidebar_elements_property-input {
+  background: rgba(43, 93, 116, 0.21);
   border: none;
   width: 100%;
   border-radius: 2px;
   appearance: none;
-  color: #fff;
+  color: #b9d4da;
   font-size: 12px;
-  font-family: "Open Sans",sans-serif;
+  font-family: "Open Sans", sans-serif;
   padding: 7px;
   box-sizing: border-box;
   box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.07);
@@ -113,10 +348,93 @@ orbiter-canvas iframe {
   box-shadow: -1px 0 0 rgba(0, 0, 0, 0.19), -2px 0 0 rgba(255, 255, 255, 0.03);
   transition: all .2s;
 }
-.c-elements_property textarea:hover, .c-elements_property textarea:focus, .c-elements_property input:hover, .c-elements_property input:focus, .c-elements_property select:hover, .c-elements_property select:focus, .c-elements_property button:hover, .c-elements_property button:focus {
+.c-sidebar_data textarea:hover, .c-sidebar_data textarea:focus, .c-sidebar_data input:hover, .c-sidebar_data input:focus, .c-sidebar_data select:hover, .c-sidebar_data select:focus, .c-sidebar_data button:hover, .c-sidebar_data button:focus, .c-sidebar_data .c-sidebar_event_function:hover, .c-sidebar_data .c-sidebar_event_function:focus, .c-sidebar_data .c-sidebar_elements_property-input:hover, .c-sidebar_data .c-sidebar_elements_property-input:focus, .c-sidebar_elements_properties textarea:hover, .c-sidebar_elements_properties textarea:focus, .c-sidebar_elements_properties input:hover, .c-sidebar_elements_properties input:focus, .c-sidebar_elements_properties select:hover, .c-sidebar_elements_properties select:focus, .c-sidebar_elements_properties button:hover, .c-sidebar_elements_properties button:focus, .c-sidebar_elements_properties .c-sidebar_event_function:hover, .c-sidebar_elements_properties .c-sidebar_event_function:focus, .c-sidebar_elements_properties .c-sidebar_elements_property-input:hover, .c-sidebar_elements_properties .c-sidebar_elements_property-input:focus, .c-dialogue textarea:hover, .c-dialogue textarea:focus, .c-dialogue input:hover, .c-dialogue input:focus, .c-dialogue select:hover, .c-dialogue select:focus, .c-dialogue button:hover, .c-dialogue button:focus, .c-dialogue .c-sidebar_event_function:hover, .c-dialogue .c-sidebar_event_function:focus, .c-dialogue .c-sidebar_elements_property-input:hover, .c-dialogue .c-sidebar_elements_property-input:focus, .c-sidebar_events textarea:hover, .c-sidebar_events textarea:focus, .c-sidebar_events input:hover, .c-sidebar_events input:focus, .c-sidebar_events select:hover, .c-sidebar_events select:focus, .c-sidebar_events button:hover, .c-sidebar_events button:focus, .c-sidebar_events .c-sidebar_event_function:hover, .c-sidebar_events .c-sidebar_event_function:focus, .c-sidebar_events .c-sidebar_elements_property-input:hover, .c-sidebar_events .c-sidebar_elements_property-input:focus {
   transform: scale(1.01);
-  background: #607083;
+  background: #3c5764;
   box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.07), 0px 2px 0px rgba(0, 0, 0, 0.14);
+}
+.c-sidebar_data .c-sidebar_elements_property-input, .c-sidebar_elements_properties .c-sidebar_elements_property-input, .c-dialogue .c-sidebar_elements_property-input, .c-sidebar_events .c-sidebar_elements_property-input {
+  min-height: 32px;
+}
+.c-sidebar_data textarea:hover, .c-sidebar_data textarea:focus, .c-sidebar_elements_properties textarea:hover, .c-sidebar_elements_properties textarea:focus, .c-dialogue textarea:hover, .c-dialogue textarea:focus, .c-sidebar_events textarea:hover, .c-sidebar_events textarea:focus {
+  transform: scale(1);
+}
+.c-sidebar_data button, .c-sidebar_elements_properties button, .c-dialogue button, .c-sidebar_events button {
+  background: #9fbe3c;
+  width: auto;
+  color: #fff;
+  cursor: pointer;
+}
+.c-sidebar_data button:focus, .c-sidebar_elements_properties button:focus, .c-dialogue button:focus, .c-sidebar_events button:focus {
+  background: #9fbe3c;
+  transform: scale(1);
+}
+.c-sidebar_data button:hover, .c-sidebar_elements_properties button:hover, .c-dialogue button:hover, .c-sidebar_events button:hover {
+  background: #9fbe3c;
+  transform: scale(1.05);
+}
+.c-sidebar_data button.circle, .c-sidebar_elements_properties button.circle, .c-dialogue button.circle, .c-sidebar_events button.circle {
+  width: 28px;
+  border-radius: 50%;
+}
+.c-sidebar_data button.small, .c-sidebar_elements_properties button.small, .c-dialogue button.small, .c-sidebar_events button.small {
+  padding: 3px;
+  width: 15px;
+  height: 15px;
+  font-size: 63%;
+  margin: 0px;
+  vertical-align: middle;
+  box-shadow: none;
+}
+.c-sidebar_data button.small.info, .c-sidebar_elements_properties button.small.info, .c-dialogue button.small.info, .c-sidebar_events button.small.info {
+  font-size: 12px;
+  padding: 1px 3px;
+}
+.c-sidebar_data button.blue, .c-sidebar_elements_properties button.blue, .c-dialogue button.blue, .c-sidebar_events button.blue {
+  background: #213037;
+}
+.c-sidebar_data button.blue:focus, .c-sidebar_data button.blue:hover, .c-sidebar_elements_properties button.blue:focus, .c-sidebar_elements_properties button.blue:hover, .c-dialogue button.blue:focus, .c-dialogue button.blue:hover, .c-sidebar_events button.blue:focus, .c-sidebar_events button.blue:hover {
+  background: #213037;
+}
+.c-sidebar_data button.light-blue, .c-sidebar_elements_properties button.light-blue, .c-dialogue button.light-blue, .c-sidebar_events button.light-blue {
+  background: #35728e;
+}
+.c-sidebar_data button.light-blue:focus, .c-sidebar_data button.light-blue:hover, .c-sidebar_elements_properties button.light-blue:focus, .c-sidebar_elements_properties button.light-blue:hover, .c-dialogue button.light-blue:focus, .c-dialogue button.light-blue:hover, .c-sidebar_events button.light-blue:focus, .c-sidebar_events button.light-blue:hover {
+  background: #35728e;
+}
+.c-sidebar_data button.red, .c-sidebar_data button.red:hover, .c-sidebar_elements_properties button.red, .c-sidebar_elements_properties button.red:hover, .c-dialogue button.red, .c-dialogue button.red:hover, .c-sidebar_events button.red, .c-sidebar_events button.red:hover {
+  background: #962525;
+}
+.c-sidebar_data button.orange, .c-sidebar_data button.orange:hover, .c-sidebar_elements_properties button.orange, .c-sidebar_elements_properties button.orange:hover, .c-dialogue button.orange, .c-dialogue button.orange:hover, .c-sidebar_events button.orange, .c-sidebar_events button.orange:hover {
+  background: #D67100;
+}
+.c-sidebar_data button.info, .c-sidebar_elements_properties button.info, .c-dialogue button.info, .c-sidebar_events button.info {
+  font-weight: bold;
+  font-family: serif;
+  font-style: italic;
+}
+
+.c-dropdown {
+  position: relative;
+}
+.c-dropdown:hover .c-elements_item {
+  padding: 7px;
+  font-size: 14px;
+}
+.c-dropdown:hover .c-elements_item:before {
+  padding: 0 7px 1px 0;
+  font-size: 10px;
+}
+
+.c-dropdown_list {
+  position: absolute;
+  background: #273841;
+  width: 100px;
+  top: 34px;
+  left: -7px;
+  border-radius: 0px 0px 2px 2px;
+  height: auto;
+  text-align: left;
 }
 
 .c-interactive_includer {
@@ -133,9 +451,10 @@ orbiter-canvas iframe {
   position: fixed;
   top: 0px;
   width: 100%;
-  overflow: hidden;
-  background-color: #424d5a;
-  color: #fff;
+  background-color: #213037;
+  color: #b9d4da;
+  box-shadow: 0px 1px 0px #141d21;
+  transition: all .1s;
 }
 
 .c-orbiter_menu-item {
@@ -143,11 +462,21 @@ orbiter-canvas iframe {
   cursor: pointer;
   padding: 7px;
   box-sizing: border-box;
+  vertical-align: top;
+  width: 35px;
+  text-align: center;
   transition: all .2s;
+}
+.c-orbiter_menu-item:nth-child(1) {
+  background-color: #3c5764;
+}
+.c-orbiter_menu-item:nth-child(2) {
+  background-color: #2e434d;
 }
 .c-orbiter_menu-item:hover {
   background-color: #9fbe3c;
   transform: scale(1.05);
+  color: #fff;
 }
 
 .c-orbiter_body {

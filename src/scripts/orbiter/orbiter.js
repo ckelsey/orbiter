@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function OrbiterCtlr($localStorage, $window, OrbiterService, OrbiterElementTypes, InteractiveService){
+    function OrbiterCtlr($localStorage, $window, OrbiterService, OrbiterElementTypes, InteractiveService, $scope){
         var self = this;
         this.$localStorage = $localStorage;
         if(!$localStorage.Orbiter){
@@ -10,6 +10,7 @@
         this.OrbiterService = OrbiterService;
         this.OrbiterElementTypes = OrbiterElementTypes;
         this.InteractiveService = InteractiveService;
+        InteractiveService.developer = true;
 
         this.trackingMouseMove = false;
         this.mouseMoveMethod = null;
@@ -37,6 +38,44 @@
             console.log(msg)
             return msg;
         };
+
+        this.dialogueOpen = false;
+
+        $scope.$watch(function(){
+            return self.OrbiterService.newDataObject;
+        }, function(o,n){
+            if(o !== n){
+                if(self.OrbiterService.newDataObject){
+                    self.dialogueOpen = true;
+                }else{
+                    self.dialogueOpen = false;
+                }
+            }
+        });
+
+        $scope.$watch(function(){
+            return self.OrbiterService.propertyDialogue;
+        }, function(o,n){
+            if(o !== n){
+                if(self.OrbiterService.propertyDialogue){
+                    self.dialogueOpen = true;
+                }else{
+                    self.dialogueOpen = false;
+                }
+            }
+        });
+
+        $scope.$watch(function(){
+            return self.OrbiterService.currentEventObject;
+        }, function(o,n){
+            if(o !== n){
+                if(self.OrbiterService.currentEventObject){
+                    self.dialogueOpen = true;
+                }else{
+                    self.dialogueOpen = false;
+                }
+            }
+        });
     }
 
     angular.module('app')

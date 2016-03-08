@@ -1,3 +1,4 @@
+<!--
 <script type="text/ng-template" id="/node-child.html">
 <div
     ng-repeat="childData in data.nodes track by $index"
@@ -16,7 +17,7 @@
 </div>
 
 <div ng-if="data.label === 'Text'" ng-controller="InteractiveCtlr as ictlr" ng-style="ictlr.InteractiveService.getStyles(data)" interactive-id="{{data.id}}">
-    <span ng-bind-html="data.properties.text.value"></span>
+    <span ng-bind-html="ictlr.InteractiveService.getBinding(data)"></span>
     <div ng-include src="'/node-child.html'" ng-style="ictlr.InteractiveService.getStyles(data)"></div>
 </div>
 
@@ -29,3 +30,4 @@
     <span ng-bind-html="data.properties.text.value"></span>
     <div ng-include src="'/node-child.html'" ng-style="ictlr.InteractiveService.getStyles(data)"></div>
 </button>
+-->
