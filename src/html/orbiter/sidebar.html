@@ -1,0 +1,58 @@
+<div ng-controller="OrbiterCtlr as orb">
+    <!--
+    <div class="c-sidebar_data">
+        <h4>Data&nbsp;&nbsp;<button class="circle small light-blue" ng-click="orb.OrbiterService.newDataObject = {label:null,value:null}">&#10010;</button></h4>
+        <div
+            class="c-sidebar_data_item c-sidebar_item"
+            ng-repeat="obj in orb.InteractiveService.dataObjects track by $index"
+            orbiter-draggable="true"
+            orbiter-drag-data="obj"
+        ><span ng-bind="obj.label"></span><button class="circle small info light-blue" ng-click="orb.OrbiterService.newDataObject = obj">i</button></div>
+    </div>
+-->
+
+    <div class="c-sidebar_elements_properties">
+        <h4>Properties</h4>
+        <div ng-if="orb.InteractiveService.elementProperties">
+            <div ng-repeat="(propertyKey, property) in orb.InteractiveService.elementProperties.properties track by $index" class="c-sidebar_elements_property c-sidebar_item">
+                <label><span ng-bind="propertyKey"></span>&nbsp;&nbsp;<span ng-click="orb.OrbiterService.propertyDialogue={element:orb.InteractiveService.elementProperties, propertyKey:propertyKey};orb.debug(property)" class="c-sidebar_elements_property_bind-button">@</span></label>
+                <!--
+                <select ng-if="property.type === 'select'" ng-model="orb.InteractiveService.properties[property.bind.key].value">
+                    <option ng-repeat="option in property.options track by $index" value="{{option}}" ng-bind="option"></option>
+                </select>
+
+                <a-ckolor ng-if="property.type === 'color'" model="orb.InteractiveService.properties[property.bind.key].value" element-id="'an_id'" input-id="'an_input_id'" name="'an-input-name'" type="'hidden'"></a-ckolor>
+
+                <input ng-if="property.type === 'text'" type="text" ng-model="orb.InteractiveService.properties[property.bind.key].value" ng-trim="false" />
+                <textarea ng-if="property.type === 'textarea'" ng-model="orb.InteractiveService.properties[property.bind.key].value" ng-trim="false"></textarea>
+
+                ng-bind="property.bind.key? orb.InteractiveService.properties[property.bind.key].value : orb.InteractiveService.properties[orb.InteractiveService.propertyPrefix + orb.InteractiveService.elementProperties.id][propertyKey].value"
+                ng-bind="orb.InteractiveService.properties[orb.InteractiveService.propertyPrefix + orb.InteractiveService.elementProperties.id][propertyKey].value"
+                -->
+                <div
+                    class="c-sidebar_elements_property-input"
+                    ng-bind="orb.InteractiveService.getBinding(orb.InteractiveService.elementProperties, propertyKey)"
+                    contenteditable="true"
+                    interactive-model="{element: orb.InteractiveService.elementProperties, propertyKey: propertyKey}"
+                ></div>
+            </div>
+        </div>
+    </div>
+    <div class="c-sidebar_events">
+        <h4>Events</h4>
+        <div ng-if="orb.InteractiveService.elementProperties">
+            <div ng-repeat="(eventKey, event) in orb.InteractiveService.elementProperties.events track by $index" class="c-sidebar_event c-sidebar_item">
+                <label>
+                    <span ng-bind="eventKey"></span>
+                    <button class="circle small light-blue" ng-if="!event.fn.length" ng-click="orb.OrbiterService.currentEventObject=event"><i class="fa fa-plus"></i></button>
+                </label>
+                <div class="c-sidebar_event_function" ng-if="event.fn.length">
+                    <label>
+                        <span ng-bind="event.label"></span>
+                        <button class="circle small" style="color:#fff;" ng-click="orb.OrbiterService.currentEventObject=event;"><i class="fa fa-pencil"></i></button>
+                    </label
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
