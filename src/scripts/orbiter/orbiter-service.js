@@ -1,7 +1,19 @@
+// Data
+//  - new
+//      - simple var
+//      - mfly data
+//  - conditionals on nodes based on data
+
+// More css attributes
+//  - fix color picker
+//  - bring back dropdowns
+
+
+
 // Select node
 //  - blur/opacity others
 
-// Global settings
+// Global settings- can be done with custom bindings
 //  - color
 //  - font size
 
@@ -12,11 +24,7 @@
 
 // Handle nested elements - <node><node></node></node>
 
-// Data
-//  - new
-//      - simple var
-//      - mfly data
-//  - conditionals on nodes based on data
+
 
 // Events
 //  - add to node

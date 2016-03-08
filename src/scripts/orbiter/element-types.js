@@ -2,11 +2,11 @@
     'use strict';
     function OrbiterElementTypes(){
         var textProperties = {
-            data: {
-                type: 'text',
-                value: null,
-                bind: null
-            },
+            // data: {
+            //     type: 'text',
+            //     value: null,
+            //     bind: null
+            // },
             text: {
                 type:'textarea',
                 value: 'Text',

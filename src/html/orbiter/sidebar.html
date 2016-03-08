@@ -20,21 +20,22 @@
                 <select ng-if="property.type === 'select'" ng-model="orb.InteractiveService.properties[property.bind.key].value">
                     <option ng-repeat="option in property.options track by $index" value="{{option}}" ng-bind="option"></option>
                 </select>
+            -->
 
-                <a-ckolor ng-if="property.type === 'color'" model="orb.InteractiveService.properties[property.bind.key].value" element-id="'an_id'" input-id="'an_input_id'" name="'an-input-name'" type="'hidden'"></a-ckolor>
+                <!-- <a-ckolor ng-if="property.type === 'color'" model="orb.InteractiveService.getBinding(orb.InteractiveService.elementProperties, propertyKey)" element-id="'an_id'" input-id="'an_input_id'" name="'an-input-name'" type="'hidden'" interactive-model="{element: orb.InteractiveService.elementProperties, propertyKey: propertyKey}"></a-ckolor> -->
 
-                <input ng-if="property.type === 'text'" type="text" ng-model="orb.InteractiveService.properties[property.bind.key].value" ng-trim="false" />
-                <textarea ng-if="property.type === 'textarea'" ng-model="orb.InteractiveService.properties[property.bind.key].value" ng-trim="false"></textarea>
-
+                <textarea ng-if="property.type === 'textarea' || property.type === 'text'" ng-bind="orb.InteractiveService.getBinding(orb.InteractiveService.elementProperties, propertyKey)" interactive-model="{element: orb.InteractiveService.elementProperties, propertyKey: propertyKey}"></textarea>
+<!--
                 ng-bind="property.bind.key? orb.InteractiveService.properties[property.bind.key].value : orb.InteractiveService.properties[orb.InteractiveService.propertyPrefix + orb.InteractiveService.elementProperties.id][propertyKey].value"
                 ng-bind="orb.InteractiveService.properties[orb.InteractiveService.propertyPrefix + orb.InteractiveService.elementProperties.id][propertyKey].value"
-                -->
+
                 <div
                     class="c-sidebar_elements_property-input"
                     ng-bind="orb.InteractiveService.getBinding(orb.InteractiveService.elementProperties, propertyKey)"
                     contenteditable="true"
                     interactive-model="{element: orb.InteractiveService.elementProperties, propertyKey: propertyKey}"
                 ></div>
+                -->
             </div>
         </div>
     </div>

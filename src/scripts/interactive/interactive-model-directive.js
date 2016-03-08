@@ -8,7 +8,6 @@
             },
             link:function(scope,element,attributes){
                 element.bind('input', function(e){
-                    console.log(scope.interactiveModel)
                     $timeout(function(){
                         var bindedTo = null;
                         var path = scope.interactiveModel.element.properties[scope.interactiveModel.propertyKey].bind.split('.');
@@ -19,7 +18,7 @@
                             }
                             val = val[path[p]];
                         }
-                        val.value = e.target.textContent;
+                        val.value = element.val();
                     });
                 });
             }
