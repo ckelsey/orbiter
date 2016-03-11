@@ -1,0 +1,15 @@
+<div class="c-dialogue_inner">
+    <h2>Available properties</h2>
+    <div class="c-dialogue_input">
+        <div
+            ng-repeat="property in orb.InteractiveService.properties track by $index"
+            ng-click="orb.OrbiterService.propertyDialogue.element.properties[orb.OrbiterService.propertyDialogue.propertyKey].bind = property.key; orb.OrbiterService.propertyDialogue=null;"
+            ng-bind="property.label"
+            ng-if="property.label"
+            class="c-dialogue_event-property-item"
+        ></div>
+    </div>
+    <div class="c-dialogue_input" style="text-align: right;">
+        <button class="circle" ng-click="orb.OrbiterService.propertyDialogue=null">&#10006;</button>
+    </div>
+</div>

@@ -8,7 +8,9 @@
 (function(aCKolor) {
     aCKolor.factory('CKolorFactory', function(){
         var self = {
+            alpha: 100,
             ckoloring: false,   // Flag that determines if the color wheel is open or not
+            defaultColor: '#FFFFFF', // If model is null, default to this
             display: 'hex',     // Color mode that is displayed, auto selected by model's color mode and changed by the dropdown selection
             inputHsl: {         // HSL number input values - hue, saturation, lightness
                 h: null,
@@ -25,6 +27,7 @@
             model: null,        // The given color value
             modelId: null,      // The id of the given model. When there are multiple colorpickers, this is used by the directives to determine which model is currently being worked on so they aren't all updated
             originalFormat: null, // The original format of the model. HSL, Hex, or RGB
+            previousColors: [], // Previous chosen colors. Global and stored to localStorage
             rgb: {              // RGB input value. Red, Green, Blue
                 r: null,
                 g: null,
@@ -34,9 +37,16 @@
 
             /* Called from the input directive to initialize the color wheel with it's values */
             init: function(data){
+                self.alpha = 100;
+
                 /* Given model info */
+                self.defaultColor = data.defaultColor ? data.defaultColor : '#FFFFFF';
                 self.model = data.model;
                 self.modelId = data.modelId;
+                var previous = angular.fromJson(localStorage.aCKolorPreviousColors);
+                if(previous){
+                    self.previousColors = previous;
+                }
 
                 /* Convert the color data */
                 var current = self.convertTo(); /* To HSL */
@@ -55,12 +65,43 @@
             /* Updates the model and toggles the ckoloring flag off */
             save: function(){
                 /* convert back to original format */
-                switch(self.originalFormat){
-                    case 'hex': self.model = self.hex; break;
-                    case 'hsl': self.model = 'hsl(' + self.hsl.h + ',' + self.hsl.s + '%,' + self.hsl.l + '%)'; break;
-                    case 'rgb': self.model = 'rgb(' + self.rgb.r + ',' + self.rgb.g + ',' + self.rgb.b + ')'; break;
-                };
+                if(self.alpha === 100){
+                    switch(self.originalFormat){
+                        case 'hex': self.model = self.hex; break;
+                        case 'hsl': self.model = 'hsl(' + self.hsl.h + ',' + self.hsl.s + '%,' + self.hsl.l + '%)'; break;
+                        case 'rgb': self.model = 'rgb(' + self.rgb.r + ',' + self.rgb.g + ',' + self.rgb.b + ')'; break;
+                    };
+                }else{
+                    if(self.originalFormat === 'hsl'){
+                        self.model = 'hsla(' + self.hsl.h + ',' + self.hsl.s + '%,' + self.hsl.l + '%' + ',' + (self.alpha / 100) + ')';
+                    }else{
+                        self.model = 'rgba(' + self.rgb.r + ',' + self.rgb.g + ',' + self.rgb.b + ',' + (self.alpha / 100) + ')';
+                    }
+                }
+                if(self.previousColors.indexOf(self.model) === -1){
+                    self.previousColors.unshift(self.model);
+                    if(self.previousColors.length > 20){
+                        self.previousColors.length = 20;
+                    }
+                    localStorage.aCKolorPreviousColors = angular.toJson(self.previousColors);
+                }
                 self.toggleCKoloring();
+            },
+
+            previousColorClick: function(color){
+                var originalFormat = self.originalFormat;
+                var current = self.convertTo(color); /* To HSL */
+                if(current){
+                    self.hsl.h = self.inputHsl.h = current.h;
+                    self.hsl.s = self.inputHsl.s = current.s;
+                    self.hsl.l = self.inputHsl.l = current.l;
+                    self.rgb = self.hslToRgb(current);
+                    self.hex = self.rgbToHex(self.rgb);
+
+                    /* Set the display to be original format, ie hex->hex */
+                    self.display = self.originalFormat;
+                }
+                self.updateHSL();
             },
 
             /* Toggles ckoloring off */
@@ -155,7 +196,7 @@
             /* Convert color string to HSL */
             convertTo: function(str){
                 /* If not supplied, use the given model */
-                str = (!str) ? self.model : str;
+                str = (!str) ? self.model ? self.model : 'null' : str;
 
                 /* If hex */
                 if(str.indexOf('#') > -1){
@@ -166,6 +207,20 @@
                 }
 
                 /* If HSL */
+                else if(str.indexOf('hsla') > -1){
+                    str = str.split('(')[1];
+                    str = str.substring(0, str.length - 1);
+                    str = str.split(',');
+                    self.originalFormat = 'hsl';
+                    self.alpha = str[3] * 100;
+                    return {
+                        h: parseInt(str[0]),
+                        s: parseInt(str[1]),
+                        l: parseInt(str[2])
+                    }
+
+                }
+
                 else if(str.indexOf('hsl') > -1){
                     str = str.split('(')[1];
                     str = str.substring(0, str.length - 1);
@@ -180,6 +235,19 @@
                 }
 
                 /* If RGB */
+                else if(str.indexOf('rgba') > -1){
+                    str = str.split('(')[1];
+                    str = str.substring(0, str.length - 1);
+                    str = str.split(',');
+                    self.originalFormat = 'rgb';
+                    self.alpha = str[3] * 100;
+                    return self.rgbToHsl({
+                        r: parseInt(str[0]),
+                        g: parseInt(str[1]),
+                        b: parseInt(str[2])
+                    });
+                }
+
                 else if(str.indexOf('rgb') > -1){
                     str = str.split('(')[1];
                     str = str.substring(0, str.length - 1);
@@ -190,9 +258,19 @@
                         g: parseInt(str[1]),
                         b: parseInt(str[2])
                     });
+                }
 
-                }else{
-                    return false;
+                else if(str.indexOf('transparent') > -1){
+                    self.originalFormat = 'rgb';
+                    self.alpha = 0;
+                    var rgb = self.hexToRgb(self.defaultColor);
+                    return self.rgbToHsl(rgb);
+                }
+
+                else{
+                    self.originalFormat = 'rgb';
+                    var rgb = self.hexToRgb(self.defaultColor);
+                    return self.rgbToHsl(rgb);
                 }
             },
 

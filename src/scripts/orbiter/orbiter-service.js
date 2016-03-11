@@ -90,6 +90,22 @@
                 $localStorage.OrbiterInteractiveMethods = InteractiveService.methods;
             },
 
+            spacingProperties: function(obj){
+                var results = {};
+                var styles = ['padding-top', 'padding-right', 'padding-bottom', 'padding-left', 'margin-top', 'margin-right', 'margin-bottom', 'margin-left'];
+                for(var p=0;p<styles.length;p++){
+                    if(obj.properties.hasOwnProperty(styles[p])){
+                        var key_prop = styles[p].split('-');
+                        if(!results[key_prop[0]]){
+                            results[key_prop[0]] = {};
+                        }
+                        results[key_prop[0]][key_prop[1]] = obj.properties[styles[p]];
+                    }
+                }
+                console.log(results);
+                return results;
+            },
+
             newDataObject: null,
 
             currentEventObject: null,

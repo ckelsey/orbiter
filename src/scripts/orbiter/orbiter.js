@@ -16,6 +16,23 @@
         this.mouseMoveMethod = null;
         this.sizingElement = null;
 
+        this.endTrackingMouseMove = function(){
+            if(self.trackingMouseMove){
+                self.trackingMouseMove = false;
+                self.mouseMoveMethod = null;
+            }else{
+                return false;
+            }
+        };
+
+        this.trackMouseMove = function(e){
+            if(self.trackingMouseMove){
+                self.mouseMoveMethod(e)
+            }else{
+                return false;
+            }
+        };
+
         this.canvasElements = function(e){
             var element = self.sizingElement[0];
             for(var i=1;i<self.sizingElement.length;i++){
@@ -89,5 +106,26 @@
         })
         ;
     })
-    .controller('OrbiterCtlr', OrbiterCtlr);
+    .controller('OrbiterCtlr', OrbiterCtlr)
+
+
+    .directive('orbiterMenu', function(){
+        return {
+            restrict: 'E',
+            templateUrl: '../../html/orbiter/menu.html'
+        };
+    })
+    .directive('propertyDialogue', function(){
+        return {
+            restrict: 'E',
+            templateUrl: '../../html/orbiter/property-dialogue.html'
+        };
+    })
+    .directive('currentEventDialogue', function(){
+        return {
+            restrict: 'E',
+            templateUrl: '../../html/orbiter/current-event-dialogue.html'
+        };
+    })
+    ;
 })();

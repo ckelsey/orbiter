@@ -1,0 +1,15 @@
+<div class="c-orbiter_menu">
+    <div class="c-orbiter_menu-item" ng-click="orb.OrbiterService.save()"><i class="fa fa-check"></i></div>
+    <div class="c-orbiter_menu-item c-dropdown">
+        <div><i class="fa fa-plus"></i></div>
+        <div class="c-dropdown_list">
+            <div
+                class="c-elements_item"
+                ng-class="'type'+element.label"
+                ng-repeat="element in orb.OrbiterElementTypes track by $index"
+                orbiter-draggable="true"
+                orbiter-drag-data="element"
+            ><span ng-bind="element.label"></span></div>
+        </div>
+    </div>
+</div>

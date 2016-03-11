@@ -23,11 +23,11 @@
     "angular-route": "latest",
     "angular-sanitize": "latest"
   },
-  "_release": "c19f42566e",
+  "_release": "6748f16f76",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "c19f42566ef7fe693be10ec900c4d8a26e07fd8a"
+    "commit": "6748f16f7684e4dddd4a60f22e6aa70839568f85"
   },
   "_source": "git://github.com/ckelsey/aCKolor.git",
   "_target": "*",

@@ -50,9 +50,6 @@ a-ckolor .c-ckolor__overlay .c-ckolor__input-wrapper input {
     margin-top: 2px;
 }
 
-.c-ckolor__overlay-inner .c-ckolor__saturation,.c-ckolor__overlay-inner .c-ckolor__swatch span{
-    box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.07), 0px 1px 0px 1px rgba(0,0,0,0.07);
-}
 
 a-ckolor-wheel .c-ckolor__overlay {
     background: radial-gradient(ellipse at 50% 250px,rgba(darken(saturate($color-mfly-blue, 28%), 1%), .91) 0,rgba(darken(saturate($color-mfly-blue, 28%), 50%), .91) 100%);
@@ -614,4 +611,393 @@ orbiter-canvas{
 
 .c-tracking-mousemove *{
     user-select: none;
+}
+
+
+
+
+
+
+
+
+.c-spacing-table,
+.c-border-table{
+    display: table;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0px;
+
+    &.margin {
+        max-width: 250px;
+        background: #213F4C;
+
+        .c-spacing-table-cell{
+            width: 60%;
+
+            &:nth-child(1), &:nth-child(3){
+                width: 20%;
+            }
+        }
+    }
+
+    .c-border-table-cell{
+        width: 50%;
+
+        &:nth-child(1), &:nth-child(3){
+            width: 25%;
+        }
+    }
+
+    &.padding {
+        background: #1F475A;
+
+        .c-spacing-table-cell{
+            width: 40%;
+
+            &:nth-child(1), &:nth-child(3){
+                width: 30%;
+            }
+        }
+    }
+}
+
+.c-spacing-table-cell,
+.c-border-table-cell{
+    padding: 0px !important;
+    display: table-cell;
+    vertical-align: middle;
+    position: relative;
+
+    input, input:hover, input:focus{
+        background: transparent;
+        text-align: center;
+        box-shadow: none;
+        appearance: none;
+        padding: 0px;
+        width: 42px;
+        margin: 0px auto;
+        display: block;
+        font-size: 0px;
+        line-height: 0px;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    span{
+        position: relative;
+        display: block;
+        text-align: center;
+        display: none;
+    }
+}
+
+.c-border-table-cell{
+    input, input:hover, input:focus, select, select:hover, select:focus{
+        display: inline-block;
+        width: 40%;
+        border-radius: 0px;
+        background: transparent !important;
+        box-shadow: none !important;
+        text-align: center;
+        transform: none;
+        appearance: none;
+    }
+
+    select, select:hover, select:focus{
+        text-align-last: center;
+        height: 0px;
+        padding: 0px;
+        margin: 0px;
+        line-height: 0px;
+        display: block;
+    }
+
+
+
+    a-ckolor{
+        display: inline-block;
+        width: 20%;
+        height: 0px;
+        padding: 0px;
+        margin: 0px auto;
+        vertical-align: middle;
+        text-align: center;
+
+        .c-ckolor__wrapper{
+            padding: 0px;
+
+            .c-ckolor__input-wrapper{
+                padding: 0px;
+                margin: 0px;
+                background: transparent !important;
+                box-shadow: none !important;
+
+                span{
+                    display: none;
+                    &.c-ckolor__swatch{
+                        display: block;
+                        width: 21px;
+                        height: 0px;
+                        margin: 0px auto;
+                        box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.04);
+                    }
+                }
+            }
+        }
+    }
+
+    .left-side, .right-side{
+        text-align: center;
+        padding-top: 0px;
+
+        input, input:hover, input:focus, select, select:hover, select:focus{
+            display:block;
+            width: 100%;
+            margin: 0px auto
+        }
+
+        select{
+            display: block;
+        }
+
+        a-ckolor{
+            display: block;
+            width: 100%;
+        }
+    }
+
+    .middle-middle{
+        height: 0px;
+        box-shadow: inset 0px 0px 0px 1px rgba(255,255,255,0.1);
+        background: rgba(255,255,255,0.07);
+    }
+}
+
+.c-expandable.active{
+    .c-border-table{
+        .c-border-table-cell{
+            .middle-middle{
+                height: 26px;
+            }
+
+            .left-side, .right-side{
+                text-align: center;
+                padding-top: 11px;
+            }
+
+            a-ckolor{
+                height: 21px;
+                padding: 2px 0px;
+                .c-ckolor__wrapper{
+                    .c-ckolor__input-wrapper{
+                        span{
+                            &.c-ckolor__swatch{
+                                height: 21px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            select{
+                height: 26px;
+                padding: 3px 7px;
+                margin: 3px 0 7px;
+                line-height: 20px;
+                display: inline-block;
+            }
+        }
+    }
+}
+
+
+
+.c-expandable{
+    margin: 0px 0px 1px;
+    &.active{
+        .c-expandable_toggler{
+            &:before{
+                border-top-color: #b9d4da;
+                border-right-color: transparent;
+                border-bottom-color: transparent;
+                border-left-color: transparent;
+                top: 3px;
+                left: -3px;
+            }
+        }
+
+        .c-expandable_content{
+            opacity: 1;
+            margin: 7px 14px;
+            font-size: 12px;
+        }
+
+        .c-expandable_content-inner{
+            padding: 7px;
+        }
+
+        .c-input-group .c-ckolor__swatch,
+        .c-input-group label{
+            padding: 4px 7px;
+            height: 26px;
+            font-size: 12px;
+        }
+
+        .c-input-group{
+            margin: 0px 7px 7px 0px;
+        }
+
+        .c-ckolor__input-wrapper {
+            line-height: 20px;
+            font-size: 12px;
+        }
+
+        input, select{
+            padding: 3px 7px;
+            line-height: 20px;
+            font-size: 12px;
+        }
+
+        .c-spacing-table-cell, .c-border-table-cell{
+            input, input:hover, input:focus{
+                padding: 3px;
+                font-size: 12px;
+                line-height: 20px;
+            }
+        }
+    }
+}
+
+.c-expandable_toggler{
+    font-size: 12px;
+    font-weight: 100;
+    margin: 0px 14px;
+    background: #213F4C;
+    padding: 7px;
+    cursor: pointer;
+
+    &:before{
+        transition: all .1s;
+        content: "";
+        display: inline-block;
+        border: 5px solid #b9d4da;
+        border-top-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        position: relative;
+        top: 1px;
+        left: 0px;
+    }
+}
+
+.c-expandable_content{
+    opacity: 0;
+    margin: 0px;
+    font-size: 0px;
+    transition: all .2s;
+}
+
+.c-expandable_content-inner{
+    padding: 0px;
+    transition: padding .2s;
+}
+
+
+.c-input-row{
+    &:after{
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+
+
+.c-input-group{
+    display: table;
+    background: #152931;
+    vertical-align: middle;
+    border-radius: 2px;
+    float: left;
+    transition: all .2s;
+
+    &:hover{
+        transform: scale(1.05);
+    }
+
+    &.full{
+        width: 100%;
+        margin: 0px;
+        display: table;
+
+        label{
+            width: auto;
+            display: table-cell;
+        }
+
+        input{
+            width: 100%;
+            display: table-cell;
+        }
+    }
+
+    label, .c-ckolor__swatch{
+        display: table-cell;
+        vertical-align: middle;
+        padding: 0px;
+        font-weight: 700;
+        font-size: 0px;
+        background: #213F4C;
+        height: 0px;
+        min-width: 28px;
+        width: 28px;
+        box-sizing: border-box;
+        text-align: center;
+        box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.03), 0px 1px 3px rgba(0, 0, 0, 0.14);
+        border-radius: 2px;
+
+        &.text{
+            font-weight: normal;
+        }
+    }
+
+
+
+    input, select{
+        display: table-cell;
+        vertical-align: middle;
+        padding: 0px;
+        box-shadow: none !important;
+        background: transparent !important;
+        margin: 0px;
+        transform: none !important;
+        width: 56px;
+        text-transform: capitalize;
+        line-height: 0px;
+        font-size: 0px;
+    }
+
+    .c-ckolor__input-wrapper {
+        line-height: 0px;
+        font-size: 0px;
+
+        & > span{
+            display: none;
+        }
+
+        & > span.c-ckolor__swatch{
+            width: 56px;
+            border-radius: 1px;
+            display: inline-block;
+        }
+    }
+
+    .c-ckolor__input-wrapper{
+        margin: 0px;
+        padding: 0px;
+    }
 }

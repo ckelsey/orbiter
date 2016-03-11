@@ -5,16 +5,17 @@
             restrict: 'E',
             scope:{
                 element: '=elementModel',
-                propertyKey: '=propertyKey'
+                propertyKey: '=propertyKey',
+                inputType: '=inputType'
             },
             link:function(scope,element,attributes){
                 function run(){
                     var html = '';
                     scope.property = scope.element.properties[scope.propertyKey];
+
                     if(scope.property){
                         scope.bindingObj = InteractiveService.lookUpPath(InteractiveService.properties, scope.property.bind);
-
-                        switch (scope.property.type) {
+                        switch (scope.inputType) {
                             case 'select':
                                 html += '<select ng-model="bindingObj.value"><option ng-repeat="option in property.options track by $index" value="{{option}}" ng-bind="option"></option></select>';
                                 break;

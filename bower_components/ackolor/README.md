@@ -13,7 +13,7 @@ angular.module('app', ['aCKolor'])
 ## Directives
 
 ### Input
-Contains an input element that binds, via ngModel, a scope model. It is wrapped in an element ('.c-ckolor__input-wrapper') that when clicked, opens up the color wheel.
+The a-ckolor directive creates an input that will be bound to the color string(via ngModel). By default, it's a hidden input, but can be defined using the ``type`` attribute. The input is wrapped in an element ('.c-ckolor__input-wrapper') that when clicked, opens up the color wheel.
 
 **Markup:**
 ```html
@@ -25,11 +25,13 @@ Contains an input element that binds, via ngModel, a scope model. It is wrapped 
 
   ``type`` - Optional. Set the directive's input type attribute. If omitted, it defaults to hidden.  
 
-  ``element-id`` - Optional. Set the directive's id.  
+  ``element-id`` - Optional. Sets the input's wrapper, .c-ckolor__input-wrapper, id. This is useful if you plan on targeting the whole element with css or javascript.  
 
-  ``input-id`` - Optional. Set the directive's input id.  
+  ``input-id`` - Optional. Set the input id.  
 
-  ``name`` - Optional. Set the directive's input name attribute.
+  ``name`` - Optional. Set the directive's input name attribute.  
+
+  ``default-color`` - Optional. If the initial value is not a valid color string(transparent, inherit, null, etc), this can be used to set a default when the color wheel is opened. Be sure to wrap in single quotes, i.e. ``default-color="'#a10005'"``.  
 
 
 ___
@@ -45,6 +47,8 @@ ___
 <br />
 ## Factory
 ####Properties:  
+
+  ``alpha : INT`` - The alpha value of RGB and HSL colors.
 
   ``ckoloring : BOOL`` - Flag that determines if the color wheel is open or not.
 
@@ -63,6 +67,8 @@ ___
   ``modelId : STRING`` - The id of the given model. When there are multiple color pickers, this is used by the directives to determine which model is currently being worked on so they aren't all updated.
 
   ``originalFormat : STRING`` - The original format of the model. HSL, Hex, or RGB.
+
+  ``previousColors : ARRAY`` - Previously selected colors. Stored in localStorage.
 
   ``rgb : {r:INT, g:INT, b:INT}`` - RGB input value. Red, Green, Blue.
 
@@ -100,3 +106,5 @@ ___
   ``intToHex`` - Convert a rgb integer to a hex value.
 
   ``rgbToHex`` - Convert rgb to hex.
+
+  ``previousColorClick`` - Sets the color to a previously stored color.

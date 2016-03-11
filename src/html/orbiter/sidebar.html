@@ -1,15 +1,17 @@
 <div ng-controller="OrbiterCtlr as orb">
     <div class="c-sidebar_elements_properties">
-        <h4>Properties</h4>
-        <div ng-if="orb.InteractiveService.elementProperties">
-            <div
-                ng-repeat="(propertyKey, property) in orb.InteractiveService.elementProperties.properties track by $index"
-                class="c-sidebar_elements_property c-sidebar_item"
-            >
-                <label><span ng-bind="propertyKey"></span>&nbsp;&nbsp;<span ng-click="orb.OrbiterService.propertyDialogue={element:orb.InteractiveService.elementProperties, propertyKey:propertyKey};orb.debug(property)" class="c-sidebar_elements_property_bind-button">@</span></label>
-                <element-property-input element-model="orb.InteractiveService.elementProperties" property-key="propertyKey"></element-property-input>
-            </div>
-            <element-property-input element-model="orb.InteractiveService.elementProperties"></element-property-input>
+        <h4>Text</h4>
+        <div class="c-sidebar_item" ng-if="orb.InteractiveService.elementProperties">
+            <element-property-input element-model="orb.InteractiveService.elementProperties" property-key="'text'" input-type="'textarea'"></element-property-input>
+        </div>
+    </div>
+    <div class="c-sidebar_elements_properties">
+        <h4>Style</h4>
+        <div ng-if="orb.InteractiveService.elementProperties" style="margin-bottom: 21px;">
+            <text-properties></text-properties>
+            <diplay-properties></diplay-properties>
+            <spacing-properties></spacing-properties>
+            <border-properties></border-properties>
         </div>
     </div>
     <div class="c-sidebar_events">
@@ -30,3 +32,20 @@
         </div>
     </div>
 </div>
+
+
+<!-- <div ng-init="spacingProperties=orb.OrbiterService.spacingProperties(orb.InteractiveService.elementProperties)">
+    <div ng-repeat="(propertyTypeKey, propertyType) in spacingProperties track by $index">
+        <div ng-bind="propertyTypeKey"></div>
+    </div>
+</div> -->
+<!--
+<div
+    ng-repeat="(propertyKey, property) in orb.InteractiveService.elementProperties.properties track by $index"
+    class="c-sidebar_elements_property c-sidebar_item"
+>
+    <label><span ng-bind="propertyKey"></span>&nbsp;&nbsp;<span ng-click="orb.OrbiterService.propertyDialogue={element:orb.InteractiveService.elementProperties, propertyKey:propertyKey};orb.debug(property)" class="c-sidebar_elements_property_bind-button">@</span></label>
+    <element-property-input element-model="orb.InteractiveService.elementProperties" property-key="propertyKey"></element-property-input>
+</div>
+<element-property-input element-model="orb.InteractiveService.elementProperties"></element-property-input>
+ -->

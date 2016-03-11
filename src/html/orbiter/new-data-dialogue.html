@@ -1,0 +1,13 @@
+<div class="c-dialogue_inner">
+    <h2>Data object</h2>
+    <div class="c-dialogue_input">
+        <input type="text" ng-model="orb.OrbiterService.newDataObject.label" placeholder="object name" />
+    </div>
+    <div class="c-dialogue_input">
+        <textarea ng-model="orb.OrbiterService.newDataObject.value"></textarea>
+    </div>
+    <div class="c-dialogue_input" style="text-align: right;">
+        <button class="circle" ng-click="orb.InteractiveService.dataObjects[orb.OrbiterService.newDataObject.label] = orb.OrbiterService.newDataObject; orb.OrbiterService.newDataObject=null" ng-if="orb.OrbiterService.newDataObject.label">&#10004;</button>
+        <button class="circle" ng-click="orb.OrbiterService.newDataObject=null">&#10006;</button>
+    </div>
+</div>

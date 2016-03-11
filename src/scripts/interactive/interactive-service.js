@@ -8,7 +8,9 @@
             propertyPrefix: '!@#$%^&*()|',
 
             htmlTree: {},
-            properties:{},
+            properties: {},
+            styleClasses: {},
+            elementProperties: {},
             methods:{},
 
 

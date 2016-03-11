@@ -1,61 +1,184 @@
 (function () {
     'use strict';
     function OrbiterElementTypes(){
+        var borderStyleOptions = ['dashed', 'dotted', 'double', 'groove', 'hidden', 'inherit', 'inset', 'none', 'outset', 'ridge', 'solid'];
         var textProperties = {
-            // data: {
-            //     type: 'text',
-            //     value: null,
-            //     bind: null
-            // },
             text: {
-                type:'textarea',
                 value: 'Text',
                 bind: null
             },
+
+            /* TEXT */
             color: {
-                type:'color',
-                value: "#30363B",
+                value: "inherit",
                 bind: null
             },
             "font-size": {
-                type:'select',
-                options: ['3px', '5px', '7px', '8px', '9px', '10px', '11px', '12px', '13px', '14px', '15px', '16px', '17px', '18px', '19px', '20px', '22px', '24px', '28px', '32px'],
-                value: null,
+                value: 'inherit',
                 bind: null
             },
             "font-weight": {
-                type: 'select',
-                options: ['light', 'normal', 'bold'],
-                value: null,
+                options: ['light', 'normal', 'bold', 'inherit'],
+                value: 'inherit',
                 bind: null
             },
+            "font-style": {
+                options: ['italic', 'normal', 'oblique', 'inherit'],
+                value: 'inherit',
+                bind: null
+            },
+            "text-decoration": {
+                options: ['none', 'line-through', 'overline', 'underline', 'inherit'],
+                value: 'inherit',
+                bind: null
+            },
+            "text-align": {
+                options: ['left', 'center', 'right', 'inherit'],
+                value: 'inherit',
+                bind: null
+            },
+
+
+
+
+            /* SPACING */
+            "padding-top": {
+                value: '0px',
+                bind: null
+            },
+            "padding-right": {
+                value: '0px',
+                bind: null
+            },
+            "padding-bottom": {
+                value: '0px',
+                bind: null
+            },
+            "padding-left": {
+                value: '0px',
+                bind: null
+            },
+
+            "margin-top": {
+                value: '0px',
+                bind: null
+            },
+            "margin-right": {
+                value: '0px',
+                bind: null
+            },
+            "margin-bottom": {
+                value: '0px',
+                bind: null
+            },
+            "margin-left": {
+                value: '0px',
+                bind: null
+            },
+
+
+
+
+            "background-color": {
+                value: 'transparent',
+                bind: null
+            },
+
             display: {
-                type: 'select',
                 options: ['block', 'inline'],
                 value: 'inline',
                 bind: null
             },
-            "text-align": {
-                type: 'select',
-                options: ['left', 'center', 'right'],
-                value: null,
+
+            "box-shadow":{
+                value: 'none',
                 bind: null
-            }
+            },
+
+            "border-radius":{
+                value: '0px',
+                bind: null
+            },
+
+
+
+
+            "border-top-color":{
+                value: 'transparent',
+                bind: null
+            },
+
+            "border-top-width":{
+                value: '0px',
+                bind: null
+            },
+
+            "border-top-style":{
+                value: 'none',
+                options: borderStyleOptions,
+                bind: null
+            },
+
+            "border-bottom-color":{
+                value: 'transparent',
+                bind: null
+            },
+
+            "border-bottom-width":{
+                value: '0px',
+                bind: null
+            },
+
+            "border-bottom-style":{
+                value: 'none',
+                options: borderStyleOptions,
+                bind: null
+            },
+
+            "border-left-color":{
+                value: 'transparent',
+                bind: null
+            },
+
+            "border-left-width":{
+                value: '0px',
+                bind: null
+            },
+
+            "border-left-style":{
+                value: 'none',
+                options: borderStyleOptions,
+                bind: null
+            },
+
+            "border-right-color":{
+                value: 'transparent',
+                bind: null
+            },
+
+            "border-right-width":{
+                value: '0px',
+                bind: null
+            },
+
+            "border-right-style":{
+                value: 'none',
+                options: borderStyleOptions,
+                bind: null
+            },
+
+
         };
 
         var linkProperties = angular.copy(textProperties);
-        linkProperties.url = {
-            type: 'text',
-            value: null,
-            bind: null
-        };
-
         var buttonProperties = angular.copy(textProperties);
-        buttonProperties['background-color'] = {
-            type:'color',
-            value: "#68BCD8",
-            bind: null
-        };
+        var blockProperties = angular.copy(textProperties);
+        blockProperties.display.value = 'block';
+
+
+
+
+
 
 
         var basicEvents = {
@@ -80,14 +203,7 @@
         return {
             block:{
                 label: 'Block',
-                properties: {
-                    display: {
-                        type: 'select',
-                        options:['block', 'inline'],
-                        value: 'block',
-                        bind: null
-                    }
-                },
+                properties: blockProperties,
                 events: basicEvents
             },
 
