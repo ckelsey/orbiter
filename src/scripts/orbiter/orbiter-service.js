@@ -1,40 +1,49 @@
-// Data
-//  - new
-//      - simple var
-//      - mfly data
-//  - conditionals on nodes based on data
+/* TODO
+    APP:
+        - CSS
+            - clean up transitions, make specific
+            - convert expandable to collapsable classes
 
-// More css attributes
-//  - fix color picker
-//  - bring back dropdowns
+    Import libraries:
+        - mflyCommands
 
+    Properties:
+        - rename
+        - delete
 
+        - Style classes
+        - Global CSS
 
-// Select node
-//  - blur/opacity others
+    Elements:
+        - delete
+        - move, maybe a copy/cut+paste
 
-// Global settings- can be done with custom bindings
-//  - color
-//  - font size
+    CSS:
+        - outline
+        - cursor
+        - box-shadow: breakup into arrays of objects. Example:
+            [
+                {
+                    type: 'inset',
+                    horizontal:0px,
+                    vertical: 1px,
+                    radius: 3px,
+                    width: 0px,
+                    color: (colorpicker)
+                }
+            ]
 
-// View settings
-//  - all borders
-//  - selected borders
-//  - none
+    Node selection:
+        - blur/opacity others
+        - view buttons : all(show all node borders), selected(blurs others and shows node borders), none(hide all borders)
+        - handle nested elements - <node><node></node></node>
+        - Drag to resize node
 
-// Handle nested elements - <node><node></node></node>
-
-
-
-// Events
-//  - add to node
-//  - on event, do something
-
-// Interactives - need a cycle and find/mod function
-
-// Drag to resize
-
-// minimize transitions
+    Events:
+        - workflow:
+            Tasks:
+                [task type(set, if, endif, for, etc)] [property] [action(=, ===, etc)] [propert, value]
+*/
 
 
 (function () {
@@ -51,6 +60,7 @@
             addToInteractive: function(parent, data){
                 var node = data;
                 node.nodes = [];
+                node.name = data.label;
                 node.id = data.label +'_'+ new Date().getTime();
 
                 if(parent.id !== node.id){
@@ -102,7 +112,6 @@
                         results[key_prop[0]][key_prop[1]] = obj.properties[styles[p]];
                     }
                 }
-                console.log(results);
                 return results;
             },
 
@@ -116,9 +125,39 @@
 
 
             propertyDialogue: null,
+            propertyMapperDialogue: null,
 
-            updatedValue: function(property){
-                console.log(property)
+            mapProperties: function(element, data){
+                for(var prop in data){
+                    if(data[prop].new && data[prop].new !== 'none'){
+                        element.properties[prop].bind = data[prop].new;
+                    }else if(data[prop].new === 'none'){
+                        element.properties[prop].bind = InteractiveService.propertyPrefix + element.id +'.'+ prop;
+                    }
+                }
+            },
+
+            updateProperties: function(data){
+                for(var prop in InteractiveService.properties){
+                    console.log(data)
+                }
+            },
+
+            stagedNewProperty: null,
+            stagedNewPropertyKeyConflict: false,
+            insertNewProperty: function(data){
+                if(!data.key){
+                    self.stagedNewPropertyKeyConflict = "Property name is required";
+                }else if(InteractiveService.properties.hasOwnProperty(data.key)){
+                    self.stagedNewPropertyKeyConflict = "There is already a property with this name";
+                }else{
+                    data.value = data.defaultValue;
+                    data.orbiterType = 'property';
+                    InteractiveService.properties[data.key] = data;
+                    self.stagedNewProperty = null;
+                }
+
+                console.log(InteractiveService.properties);
             }
         };
 
@@ -128,6 +167,13 @@
             $localStorage.OrbiterInteractiveProperties = angular.copy(InteractiveProperties);
             InteractiveService.properties = $localStorage.OrbiterInteractiveProperties;
         }
+
+        for(var prop in InteractiveService.properties){
+            if(InteractiveService.properties[prop].hasOwnProperty('defaultValue')){
+                InteractiveService.properties[prop].value = InteractiveService.properties[prop].defaultValue;
+            }
+        }
+
 
         if($localStorage.hasOwnProperty('OrbiterInteractiveMethods') && $localStorage.OrbiterInteractiveMethods && Object.keys($localStorage.OrbiterInteractiveMethods).length > 0){
             InteractiveService.methods = $localStorage.OrbiterInteractiveMethods;
@@ -144,6 +190,8 @@
             self.addToInteractive(InteractiveService.htmlTree, OrbiterElementTypes.block);
 
         }
+
+        console.log(InteractiveService.htmlTree, InteractiveService.properties);
 
 
         return self;

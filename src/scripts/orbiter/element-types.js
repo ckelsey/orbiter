@@ -173,6 +173,7 @@
         var linkProperties = angular.copy(textProperties);
         var buttonProperties = angular.copy(textProperties);
         var blockProperties = angular.copy(textProperties);
+        delete blockProperties.text;
         blockProperties.display.value = 'block';
 
 

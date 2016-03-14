@@ -30,8 +30,6 @@
                     e.preventDefault();
                     var data = OrbiterService.dragging;
                     element.removeClass(InteractiveService.canAcceptDragClass)
-                    console.log(scope, data)
-                    //addToInteractive
                     return false;
                 });
             }

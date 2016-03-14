@@ -22,12 +22,10 @@
                 }
 
                 html += 'ng-controller="InteractiveCtlr as ictlr" ng-style="ictlr.InteractiveService.getStyles(data)';
-                //for(var s in styles){ html += s +':'+ styles[s] +';'; }
                 html += '" ';
 
                 for(var ev in thisData.events){
                     if(thisData.events[ev].fn && thisData.events[ev].fn.length){
-                        // var fn = thisData.events[ev].fn.replace(/"/g, '&quot;').replace(/'/g, '&#8217;');
                         html += thisData.events[ev].method +'="ictlr.InteractiveService.runFN(data.events[\''+ ev +'\'])" ';
                     }
                 }
@@ -36,14 +34,8 @@
                 html += '>';
 
                 if(thisData.label === 'Text' || thisData.label === 'Link' || thisData.label === 'Button'){
-                    // html += '<span ng-bind-html="ictlr.InteractiveService.getBinding(data)" class="c-interactive-bound"></span>';
-                    // html += '<span ng-bind-html="data.properties.text.bind.key? ictlr.InteractiveService.properties[data.properties.text.bind.key].value : ictlr.InteractiveService.properties[ictlr.InteractiveService.propertyPrefix + data.id].text.value" class="c-interactive-bound"></span>';
-                    // html += '<span ng-bind-html="ictlr.InteractiveService.properties[ictlr.InteractiveService.propertyPrefix + data.id].text.value" class="c-interactive-bound"></span>';
-                    //html += '<span ng-bind-html="ictlr.InteractiveService.properties[data.properties.text.bind.key].value" class="c-interactive-bound"></span>';
                     html += '<span ng-bind-html="ictlr.InteractiveService.getBinding(data, \'text\')" class="c-interactive-bound"></span>';
                 }
-
-                //orb.InteractiveService.properties[property.bind.key].value
 
                 html += '<div ng-repeat="childData in data.nodes track by $index"';
                 html += ' interactive-node="childData"';
@@ -111,29 +103,3 @@
     angular.module('app')
     .directive('interactiveNode', interactiveNode);
 })();
-
-
-// template: function(el, attrs){
-//     console.log(el, attrs);
-//     return '<p>hi</p>';
-// },
-//templateUrl: '../../html/interactive/interactive-node.html',
-// template: function(el, attrs){
-//     console.log(el, attrs);
-//     return '<p>hi</p>';
-// },
-// template: '{{thisHTML}}',
-// compile: function(el, attrs){
-//     return function($scope) {
-//         var html = document.createElement('p');
-//         html.textContent = $scope.data.label;
-//         //console.log($scope, el)
-//
-//         $scope.thisHTML = '<p>Hi</p>';
-//         //return $scope;
-//         console.log($scope)
-//         //$scope.example = $scope.data + "!";
-//     };
-// },
-//transclude: true,
-//replace: true,

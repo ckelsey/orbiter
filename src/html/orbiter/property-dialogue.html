@@ -1,15 +1,27 @@
 <div class="c-dialogue_inner">
-    <h2>Available properties</h2>
+    <h2>
+        <span>Available properties&nbsp;&nbsp;</span>
+        <span>
+            <button class="circle" ng-click="orb.OrbiterService.stagedNewProperty={key:null,defaultValue:null}"><i class="fa fa-plus"></i></button>
+            <button class="circle orange" ng-click="orb.OrbiterService.propertyDialogue=null"><i class="fa fa-close"></i></button>
+        </span>
+    </h2>
+    <div class="c-dialogue_input" ng-if="orb.OrbiterService.stagedNewProperty" style="background: rgba(0, 0, 0, 0.42); padding: 14px 14px 7px; box-sizing: border-box;">
+        <h4 style="margin: 0px 0px 7px;">New property</h4>
+        <small class="error" ng-if="orb.OrbiterService.stagedNewPropertyKeyConflict" ng-bind="orb.OrbiterService.stagedNewPropertyKeyConflict"></small>
+        <input ng-model="orb.OrbiterService.stagedNewProperty.key" placeholder="name" type="text" ng-class="orb.OrbiterService.stagedNewPropertyKeyConflict ? 'red' : ''">
+        <input ng-model="orb.OrbiterService.stagedNewProperty.defaultValue" placeholder="default value" type="text">
+        <button class="circle" ng-click="orb.OrbiterService.insertNewProperty(orb.OrbiterService.stagedNewProperty)"><i class="fa fa-check"></i></button>
+        <button class="circle orange" ng-click="orb.OrbiterService.stagedNewProperty=null"><i class="fa fa-close"></i></button>
+    </div>
     <div class="c-dialogue_input">
         <div
-            ng-repeat="property in orb.InteractiveService.properties track by $index"
-            ng-click="orb.OrbiterService.propertyDialogue.element.properties[orb.OrbiterService.propertyDialogue.propertyKey].bind = property.key; orb.OrbiterService.propertyDialogue=null;"
-            ng-bind="property.label"
-            ng-if="property.label"
-            class="c-dialogue_event-property-item"
-        ></div>
-    </div>
-    <div class="c-dialogue_input" style="text-align: right;">
-        <button class="circle" ng-click="orb.OrbiterService.propertyDialogue=null">&#10006;</button>
+            ng-repeat="(propertyKey, property) in orb.InteractiveService.properties track by $index"
+            ng-if="property.hasOwnProperty('defaultValue')"
+            class="property"
+        >
+            <label ng-bind="propertyKey"></label>
+            <input ng-model="property.defaultValue" type="text">
+        </div>
     </div>
 </div>

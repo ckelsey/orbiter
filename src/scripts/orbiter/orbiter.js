@@ -47,13 +47,40 @@
             self.$localStorage.Orbiter.canvasWidth = ((width / $window.innerWidth) * 100) + '%';
         };
 
-        this.draggingElement = function(e, data){
-            console.log(e, data)
-        };
 
         this.debug = function(msg){
             console.log(msg)
             return msg;
+        };
+
+        this.lowerCase = function(str){
+            return str.toLowerCase();
+        };
+
+        this.formatDate = function(timestamp){
+            if(!timestamp){
+                timestamp = new Date().getTime();
+            }
+
+            var date = new Date(+timestamp);
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var ampm = hours > 11 ? 'PM' : 'AM';
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var year = date.getFullYear();
+
+            return month +'-'+ day +'-'+ year +' '+ hours +':'+ minutes +' '+ ampm;
+        };
+
+        this.typeOf = function(thing){
+            if(thing instanceof Object){
+                return 'object';
+            }else if(thing instanceof Array){
+                return 'array';
+            }else{
+                return 'string';
+            }
         };
 
         this.dialogueOpen = false;
@@ -87,6 +114,18 @@
         }, function(o,n){
             if(o !== n){
                 if(self.OrbiterService.currentEventObject){
+                    self.dialogueOpen = true;
+                }else{
+                    self.dialogueOpen = false;
+                }
+            }
+        });
+
+        $scope.$watch(function(){
+            return self.OrbiterService.propertyMapperDialogue;
+        }, function(o,n){
+            if(o !== n){
+                if(self.OrbiterService.propertyMapperDialogue){
                     self.dialogueOpen = true;
                 }else{
                     self.dialogueOpen = false;

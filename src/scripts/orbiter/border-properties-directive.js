@@ -14,8 +14,6 @@
                         }
                     }
 
-                    console.log(scope.borderProperties)
-
                     var html = ''+
                         '<div class="c-expandable" ng-class="borderPropertiesToggled ? \'active\' : \'\'">'+
                             '<div class="c-expandable_toggler" ng-click="borderPropertiesToggled ? borderPropertiesToggled=false : borderPropertiesToggled=true">Borders</div>' +

@@ -4,13 +4,10 @@
     function InteractiveService(InteractiveStyles, InteractiveProperties, InteractiveMethods, $localStorage){
         var self = {
             developer: false,
-            elementProperties: null,
             propertyPrefix: '!@#$%^&*()|',
 
             htmlTree: {},
             properties: {},
-            styleClasses: {},
-            elementProperties: {},
             methods:{},
 
 
@@ -26,6 +23,7 @@
                 }
             },
 
+            styles: InteractiveStyles,
             getStyles: function(data, rule){
                 if(data && data.hasOwnProperty('properties')){
                     var props = data.properties;
@@ -69,9 +67,10 @@
             getBinding: function(obj, key){
                 var val = self.lookUpPath(self.properties, obj.properties[key].bind);
                 if(val){
-                    val = val.value;
+                    return val.value;
+                }else{
+                    return null;
                 }
-                return val;
             },
 
             lookUpPath: function(obj, pathString){
@@ -86,7 +85,43 @@
                 }
             },
 
+            findElement: function(obj, id){
+                if(id === obj.id){
+                    return obj;
+                }else{
+                    for(var i=0;i<obj.nodes.length;i++){
+                        var result = self.findElement(obj.nodes[i], id);
+                        if(result){
+                            return result;
+                        }
+                    }
+                    return false;
+                }
+            },
+
             runFN: function(data){
+                console.log(data);
+
+                var setFunction = function(thisFN){
+                    if(thisFN.valueType === 'custom text'){
+                        self.properties[thisFN.target].value = thisFN.value;
+                    }else if(thisFN.valueType === 'property'){
+                        self.properties[thisFN.target].value = self.properties[thisFN.value].value;
+                    }
+                };
+
+                if(!self.developer){
+                    for(var f=0;f<data.fn.length;f++){
+                        var thisFN = data.fn[f];
+                        switch (thisFN.type) {
+                            case 'set':
+                                setFunction(thisFN);
+                                break;
+                        }
+                    }
+                }
+
+                /*
                 if(!self.developer){
                     for(var f=0;f<data.fn.length;f++){
                         var thisFN = data.fn[f];
@@ -111,6 +146,7 @@
                         }
                     }
                 }
+                */
             }
         };
 

@@ -11,6 +11,10 @@ html body {
   line-height: 1.5;
 }
 
+button {
+  vertical-align: middle;
+}
+
 h3 {
   font-size: 21px;
   margin: 0px 0px 7px;
@@ -25,7 +29,7 @@ a-ckolor .c-ckolor__input-wrapper {
   font-size: 12px;
   padding: 4px 7px;
   line-height: 20px;
-  box-shadow: -1px 0 0 rgba(0, 0, 0, 0.19), -2px 0 0 rgba(255, 255, 255, 0.03);
+  box-shadow: 0px 1px 0 rgba(0, 0, 0, 0.19);
   transition: all .2s;
 }
 a-ckolor .c-ckolor__input-wrapper:hover, a-ckolor .c-ckolor__input-wrapper:focus {
@@ -90,140 +94,6 @@ orbiter-canvas iframe {
   pointer-events: none;
 }
 
-.c-dialogue {
-  position: fixed;
-  overflow: auto;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(ellipse at 50% 250px, rgba(19, 49, 63, 0.91) 0%, rgba(0, 0, 0, 0.91) 100%);
-  top: 0px;
-  padding: 35px 7%;
-  box-sizing: border-box;
-  color: #fff;
-  filter: blur(0px) !important;
-}
-.c-dialogue * {
-  filter: blur(0px) !important;
-}
-.c-dialogue h2 {
-  color: #fff;
-  margin: 7px 0px;
-  font-size: 28px;
-}
-.c-dialogue .c-dialogue_input.tasks {
-  padding: 14px 14px 7px;
-  background: rgba(255, 255, 255, 0.07);
-  box-sizing: border-box;
-}
-.c-dialogue .c-dialogue_input input, .c-dialogue .c-dialogue_input textarea, .c-dialogue .c-dialogue_input select {
-  background: white;
-  color: #213037;
-  font-size: 14px;
-}
-.c-dialogue .c-dialogue_input input:hover, .c-dialogue .c-dialogue_input input:focus, .c-dialogue .c-dialogue_input textarea:hover, .c-dialogue .c-dialogue_input textarea:focus, .c-dialogue .c-dialogue_input select:hover, .c-dialogue .c-dialogue_input select:focus {
-  background: white;
-  color: #213037;
-}
-.c-dialogue .c-dialogue_input button, .c-dialogue .c-dialogue_input button:hover, .c-dialogue .c-dialogue_input button:focus {
-  background: #9fbe3c;
-  color: #fff;
-}
-
-.c-dialogue_inner {
-  width: 100%;
-}
-
-.c-dialogue_input {
-  width: 100%;
-  margin: 7px 0px;
-}
-.c-dialogue_input.done_buttons {
-  text-align: right;
-  box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.05), 0px -1px 0px rgba(0, 0, 0, 0.51);
-  padding: 14px 0px;
-  margin: 21px 0px;
-}
-
-.c-dialogue_left {
-  width: 100%;
-  display: inline-block;
-  vertical-align: top;
-  transition: width .2s;
-}
-
-.c-dialogue_right {
-  width: 0%;
-  font-size: 0px;
-  display: inline-block;
-  vertical-align: top;
-  padding: 0px;
-  box-sizing: border-box;
-  height: 100%;
-  position: relative;
-  transition: width .2s, font-size .2s, padding .2s;
-}
-.c-dialogue_right h3 {
-  font-size: 0px;
-  transition: font-size .2s;
-}
-
-.c-dialogue_inner.properties .c-dialogue_left, .c-dialogue_inner.methods .c-dialogue_left {
-  width: 62%;
-}
-
-.c-dialogue_inner.properties .c-dialogue_right, .c-dialogue_inner.methods .c-dialogue_right {
-  width: 38%;
-  padding: 5px 14px 14px;
-  font-size: 14px;
-}
-.c-dialogue_inner.properties .c-dialogue_right h3, .c-dialogue_inner.methods .c-dialogue_right h3 {
-  font-size: 21px;
-}
-
-.c-dialogue_event-property-list, .c-dialogue_event-method-list {
-  opacity: 0;
-  position: absolute;
-  top: 4px;
-  left: 14px;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  transition: opacity .2s;
-}
-
-.c-dialogue_inner.properties .c-dialogue_event-property-list, .c-dialogue_inner.methods .c-dialogue_event-method-list {
-  opacity: 1;
-  z-index: 2;
-}
-
-.c-dialogue_event-method-item, .c-dialogue_event-property-item {
-  background: rgba(255, 255, 255, 0.07);
-  padding: 7px;
-  border-radius: 2px;
-  margin-bottom: 3px;
-  cursor: pointer;
-}
-
-.c-task_action-string {
-  color: rgba(255, 255, 255, 0.38);
-}
-.c-task_action-string input {
-  width: 50%;
-  max-width: 200px;
-}
-
-.c-task_action-target {
-  color: #9fbe3c;
-}
-
-.c-orbiter_body .c-drag_can-accept, .c-orbiter_body .m-active-iteractive-node {
-  box-shadow: inset 0px 0px 0px 1px #9fbe3c, 0px 0px 0px 1px #9fbe3c, inset 0px 0px 400px rgba(159, 190, 60, 0.5);
-}
-
-.c-interactive-bound {
-  white-space: pre;
-}
-
 .c-elements_item {
   cursor: grab;
   padding: 0px;
@@ -279,7 +149,7 @@ orbiter-canvas iframe {
   font-weight: 700;
   cursor: pointer;
   position: relative;
-  top: 1px;
+  top: -1px;
   transition: background .2s, color .2s;
 }
 .c-sidebar_elements_property_bind-button:hover {
@@ -326,7 +196,7 @@ orbiter-canvas iframe {
   font-family: "Open Sans", sans-serif;
   font-weight: lighter;
 }
-.c-sidebar_data textarea, .c-sidebar_data input, .c-sidebar_data select, .c-sidebar_data button, .c-sidebar_data .c-sidebar_event_function, .c-sidebar_data .c-sidebar_elements_property-input, .c-sidebar_elements_properties textarea, .c-sidebar_elements_properties input, .c-sidebar_elements_properties select, .c-sidebar_elements_properties button, .c-sidebar_elements_properties .c-sidebar_event_function, .c-sidebar_elements_properties .c-sidebar_elements_property-input, .c-dialogue textarea, .c-dialogue input, .c-dialogue select, .c-dialogue button, .c-dialogue .c-sidebar_event_function, .c-dialogue .c-sidebar_elements_property-input, .c-sidebar_events textarea, .c-sidebar_events input, .c-sidebar_events select, .c-sidebar_events button, .c-sidebar_events .c-sidebar_event_function, .c-sidebar_events .c-sidebar_elements_property-input {
+.c-sidebar_data textarea, .c-sidebar_data input, .c-sidebar_data select, .c-sidebar_data button, .c-sidebar_data .c-sidebar_event_function, .c-sidebar_data .c-sidebar_elements_property-input, .c-sidebar_data .dropdown-tree, .c-sidebar_elements_properties textarea, .c-sidebar_elements_properties input, .c-sidebar_elements_properties select, .c-sidebar_elements_properties button, .c-sidebar_elements_properties .c-sidebar_event_function, .c-sidebar_elements_properties .c-sidebar_elements_property-input, .c-sidebar_elements_properties .dropdown-tree, .c-dialogue textarea, .c-dialogue input, .c-dialogue select, .c-dialogue button, .c-dialogue .c-sidebar_event_function, .c-dialogue .c-sidebar_elements_property-input, .c-dialogue .dropdown-tree, .c-sidebar_events textarea, .c-sidebar_events input, .c-sidebar_events select, .c-sidebar_events button, .c-sidebar_events .c-sidebar_event_function, .c-sidebar_events .c-sidebar_elements_property-input, .c-sidebar_events .dropdown-tree {
   background: rgba(43, 93, 116, 0.21);
   border: none;
   width: 100%;
@@ -341,10 +211,10 @@ orbiter-canvas iframe {
   resize: vertical;
   outline: none !important;
   margin: 3px 0px 7px;
-  box-shadow: -1px 0 0 rgba(0, 0, 0, 0.19), -2px 0 0 rgba(255, 255, 255, 0.03);
+  box-shadow: 0px 1px 0 rgba(0, 0, 0, 0.19);
   transition: all .2s;
 }
-.c-sidebar_data textarea:hover, .c-sidebar_data textarea:focus, .c-sidebar_data input:hover, .c-sidebar_data input:focus, .c-sidebar_data select:hover, .c-sidebar_data select:focus, .c-sidebar_data button:hover, .c-sidebar_data button:focus, .c-sidebar_data .c-sidebar_event_function:hover, .c-sidebar_data .c-sidebar_event_function:focus, .c-sidebar_data .c-sidebar_elements_property-input:hover, .c-sidebar_data .c-sidebar_elements_property-input:focus, .c-sidebar_elements_properties textarea:hover, .c-sidebar_elements_properties textarea:focus, .c-sidebar_elements_properties input:hover, .c-sidebar_elements_properties input:focus, .c-sidebar_elements_properties select:hover, .c-sidebar_elements_properties select:focus, .c-sidebar_elements_properties button:hover, .c-sidebar_elements_properties button:focus, .c-sidebar_elements_properties .c-sidebar_event_function:hover, .c-sidebar_elements_properties .c-sidebar_event_function:focus, .c-sidebar_elements_properties .c-sidebar_elements_property-input:hover, .c-sidebar_elements_properties .c-sidebar_elements_property-input:focus, .c-dialogue textarea:hover, .c-dialogue textarea:focus, .c-dialogue input:hover, .c-dialogue input:focus, .c-dialogue select:hover, .c-dialogue select:focus, .c-dialogue button:hover, .c-dialogue button:focus, .c-dialogue .c-sidebar_event_function:hover, .c-dialogue .c-sidebar_event_function:focus, .c-dialogue .c-sidebar_elements_property-input:hover, .c-dialogue .c-sidebar_elements_property-input:focus, .c-sidebar_events textarea:hover, .c-sidebar_events textarea:focus, .c-sidebar_events input:hover, .c-sidebar_events input:focus, .c-sidebar_events select:hover, .c-sidebar_events select:focus, .c-sidebar_events button:hover, .c-sidebar_events button:focus, .c-sidebar_events .c-sidebar_event_function:hover, .c-sidebar_events .c-sidebar_event_function:focus, .c-sidebar_events .c-sidebar_elements_property-input:hover, .c-sidebar_events .c-sidebar_elements_property-input:focus {
+.c-sidebar_data textarea:hover, .c-sidebar_data textarea:focus, .c-sidebar_data input:hover, .c-sidebar_data input:focus, .c-sidebar_data select:hover, .c-sidebar_data select:focus, .c-sidebar_data button:hover, .c-sidebar_data button:focus, .c-sidebar_data .c-sidebar_event_function:hover, .c-sidebar_data .c-sidebar_event_function:focus, .c-sidebar_data .c-sidebar_elements_property-input:hover, .c-sidebar_data .c-sidebar_elements_property-input:focus, .c-sidebar_data .dropdown-tree:hover, .c-sidebar_data .dropdown-tree:focus, .c-sidebar_elements_properties textarea:hover, .c-sidebar_elements_properties textarea:focus, .c-sidebar_elements_properties input:hover, .c-sidebar_elements_properties input:focus, .c-sidebar_elements_properties select:hover, .c-sidebar_elements_properties select:focus, .c-sidebar_elements_properties button:hover, .c-sidebar_elements_properties button:focus, .c-sidebar_elements_properties .c-sidebar_event_function:hover, .c-sidebar_elements_properties .c-sidebar_event_function:focus, .c-sidebar_elements_properties .c-sidebar_elements_property-input:hover, .c-sidebar_elements_properties .c-sidebar_elements_property-input:focus, .c-sidebar_elements_properties .dropdown-tree:hover, .c-sidebar_elements_properties .dropdown-tree:focus, .c-dialogue textarea:hover, .c-dialogue textarea:focus, .c-dialogue input:hover, .c-dialogue input:focus, .c-dialogue select:hover, .c-dialogue select:focus, .c-dialogue button:hover, .c-dialogue button:focus, .c-dialogue .c-sidebar_event_function:hover, .c-dialogue .c-sidebar_event_function:focus, .c-dialogue .c-sidebar_elements_property-input:hover, .c-dialogue .c-sidebar_elements_property-input:focus, .c-dialogue .dropdown-tree:hover, .c-dialogue .dropdown-tree:focus, .c-sidebar_events textarea:hover, .c-sidebar_events textarea:focus, .c-sidebar_events input:hover, .c-sidebar_events input:focus, .c-sidebar_events select:hover, .c-sidebar_events select:focus, .c-sidebar_events button:hover, .c-sidebar_events button:focus, .c-sidebar_events .c-sidebar_event_function:hover, .c-sidebar_events .c-sidebar_event_function:focus, .c-sidebar_events .c-sidebar_elements_property-input:hover, .c-sidebar_events .c-sidebar_elements_property-input:focus, .c-sidebar_events .dropdown-tree:hover, .c-sidebar_events .dropdown-tree:focus {
   transform: scale(1.01);
   background: #3c5764;
   box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.07), 0px 2px 0px rgba(0, 0, 0, 0.14);
@@ -451,6 +321,19 @@ orbiter-canvas iframe {
   color: #b9d4da;
   box-shadow: 0px 1px 0px #141d21;
   transition: all .1s;
+}
+.c-orbiter_menu:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.left-side {
+  float: left;
+}
+
+.right-side {
+  float: right;
 }
 
 .c-orbiter_menu-item {
@@ -829,4 +712,330 @@ orbiter-canvas iframe {
 .c-input-group .c-ckolor__input-wrapper {
   margin: 0px;
   padding: 0px;
+}
+
+.collapsable-toggle {
+  cursor: pointer;
+}
+.collapsable-toggle:before {
+  transition: all .1s;
+  content: "";
+  display: inline-block;
+  border: 5px solid rgba(255, 255, 255, 0.5);
+  border-top-color: rgba(255, 255, 255, 0.5);
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  position: relative;
+  top: 2px;
+  left: -3px;
+}
+
+.collapsable.collapsed .collapsable-toggle:before {
+  border: 5px solid rgba(255, 255, 255, 0.5);
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  top: 0px;
+  left: 0px;
+}
+
+.collapsable-content.collapsed, .collapsable-content.collapsed * {
+  font-size: 0px;
+  line-height: 0px;
+  margin: 0px;
+  padding: 0px;
+  margin: 0px;
+}
+
+property-dialogue .property {
+  margin: 21px 0px;
+}
+
+input.red, input.red:hover, input.red:focus {
+  background: #962525;
+}
+
+small.error {
+  color: #962525;
+  font-style: italic;
+}
+
+property-mapper-dialogue .left-side {
+  display: inline-block;
+  width: 62%;
+}
+property-mapper-dialogue .right-side {
+  display: inline-block;
+  width: 38%;
+}
+property-mapper-dialogue .collapsable {
+  padding: 7px;
+  background: rgba(9, 24, 31, 0.27);
+  margin: 3px 0px;
+  box-sizing: border-box;
+}
+property-mapper-dialogue .property {
+  display: table;
+  width: 100%;
+}
+property-mapper-dialogue .property label {
+  display: table-cell;
+  background: rgba(18, 30, 35, 0.57);
+  margin: 0px;
+  padding: 0px 7px;
+  box-sizing: border-box;
+  width: 30%;
+}
+property-mapper-dialogue .property label small {
+  opacity: .33;
+  font-weight: 100;
+  font-size: 12px;
+}
+property-mapper-dialogue .property .property-options-wrapper {
+  display: table-cell;
+  position: relative;
+}
+property-mapper-dialogue .property .property-options-wrapper input {
+  margin: 0px;
+}
+property-mapper-dialogue .property .property-options-wrapper input:hover, property-mapper-dialogue .property .property-options-wrapper input:focus {
+  transform: none;
+}
+property-mapper-dialogue .property .property-options {
+  position: absolute;
+  width: 100%;
+  font-size: 0px;
+  background: rgba(60, 87, 100, 0.74);
+  transition: font-size .1s;
+}
+property-mapper-dialogue .property .property-options.open {
+  font-size: 12px;
+}
+property-mapper-dialogue .property .property-options.open .property-option {
+  padding: 7px;
+}
+property-mapper-dialogue .property .property-option {
+  padding: 0px;
+  cursor: pointer;
+  transition: padding .1s;
+}
+property-mapper-dialogue .property .property-option:hover {
+  background: #3c5764;
+}
+
+.property-mapper-toggler {
+  text-transform: capitalize;
+}
+
+.c-sidebar_elements_properties .collapsable-toggle {
+  font-size: 12px;
+  font-weight: 100;
+  margin: 0 14px;
+  background: #213F4C;
+  padding: 7px;
+  cursor: pointer;
+}
+.c-sidebar_elements_properties .collapsable-content {
+  opacity: 1;
+  margin: 7px 14px;
+  padding: 7px;
+  font-size: 12px;
+  transition: all .2s;
+}
+.c-sidebar_elements_properties .collapsable-content.collapsed {
+  opacity: 0;
+  margin: 0px;
+  padding: 0px;
+  font-size: 0px;
+}
+
+.c-dialogue {
+  position: fixed;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at 50% 250px, rgba(19, 49, 63, 0.91) 0%, rgba(0, 0, 0, 0.91) 100%);
+  top: 0px;
+  padding: 35px 7%;
+  box-sizing: border-box;
+  color: #fff;
+  filter: blur(0px) !important;
+}
+.c-dialogue * {
+  filter: blur(0px) !important;
+}
+.c-dialogue h2 {
+  color: #fff;
+  margin: 7px 0px;
+  font-size: 28px;
+  width: 100%;
+  display: table;
+}
+.c-dialogue h2 span {
+  display: table-cell;
+}
+.c-dialogue h2 span:nth-child(2) {
+  text-align: right;
+}
+.c-dialogue label {
+  font-size: 14px;
+}
+
+.c-dialogue_input.tasks {
+  padding: 14px 14px 7px;
+  background: rgba(0, 0, 0, 0.21);
+  box-sizing: border-box;
+}
+.c-dialogue_input.tasks select, .c-dialogue_input.tasks input, .c-dialogue_input.tasks .dropdown-tree {
+  width: auto;
+  text-transform: capitalize;
+  margin-right: 7px;
+}
+.c-dialogue_input.tasks input {
+  text-transform: none;
+}
+.c-dialogue_input.tasks .dropdown-tree {
+  display: inline-block;
+  padding: 5px .5%;
+  box-sizing: border-box;
+  vertical-align: middle;
+  margin: 0px 1% 0px 0px;
+  max-width: 100px;
+  width: 18%;
+}
+.c-dialogue_input.tasks .dropdown-tree-selection {
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+}
+.c-dialogue_input.tasks .dropdown-tree-list {
+  width: 112px;
+  top: 28px;
+  background: #2e434d;
+}
+.c-dialogue_input.tasks .dropdown-tree-list-item:hover {
+  background-color: #9fbe3c;
+  color: #213037;
+}
+
+.c-dialogue_inner {
+  width: 100%;
+}
+
+.c-dialogue_input {
+  width: 100%;
+  margin: 7px 0px;
+}
+.c-dialogue_input.done_buttons {
+  text-align: right;
+  box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.05), 0px -1px 0px rgba(0, 0, 0, 0.51);
+  padding: 14px 0px;
+  margin: 21px 0px;
+}
+
+.c-dialogue_left {
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
+  transition: width .2s;
+}
+
+.c-dialogue_right {
+  width: 0%;
+  font-size: 0px;
+  display: inline-block;
+  vertical-align: top;
+  padding: 0px;
+  box-sizing: border-box;
+  height: 100%;
+  position: relative;
+  transition: width .2s, font-size .2s, padding .2s;
+}
+.c-dialogue_right h3 {
+  font-size: 0px;
+  transition: font-size .2s;
+}
+
+.c-dialogue_inner.properties .c-dialogue_left, .c-dialogue_inner.methods .c-dialogue_left {
+  width: 62%;
+}
+
+.c-dialogue_inner.properties .c-dialogue_right, .c-dialogue_inner.methods .c-dialogue_right {
+  width: 38%;
+  padding: 5px 14px 14px;
+  font-size: 14px;
+}
+.c-dialogue_inner.properties .c-dialogue_right h3, .c-dialogue_inner.methods .c-dialogue_right h3 {
+  font-size: 21px;
+}
+
+.c-dialogue_event-property-list, .c-dialogue_event-method-list {
+  opacity: 0;
+  position: absolute;
+  top: 4px;
+  left: 14px;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: opacity .2s;
+}
+
+.c-dialogue_inner.properties .c-dialogue_event-property-list, .c-dialogue_inner.methods .c-dialogue_event-method-list {
+  opacity: 1;
+  z-index: 2;
+}
+
+.c-dialogue_event-method-item, .c-dialogue_event-property-item {
+  background: rgba(255, 255, 255, 0.07);
+  padding: 7px;
+  border-radius: 2px;
+  margin-bottom: 3px;
+  cursor: pointer;
+}
+
+.c-task_action-string {
+  color: rgba(255, 255, 255, 0.38);
+}
+.c-task_action-string input {
+  width: 50%;
+  max-width: 200px;
+}
+
+.c-task_action-target {
+  color: #9fbe3c;
+}
+
+.c-orbiter_body .c-drag_can-accept, .c-orbiter_body .m-active-iteractive-node {
+  box-shadow: inset 0px 0px 0px 1px #9fbe3c, 0px 0px 0px 1px #9fbe3c, inset 0px 0px 400px rgba(159, 190, 60, 0.5);
+}
+
+.c-interactive-bound {
+  white-space: pre;
+}
+
+.dropdown-tree {
+  position: relative;
+}
+.dropdown-tree:hover * {
+  font-size: inherit;
+}
+.dropdown-tree:hover .dropdown-tree-list-item {
+  padding: 3px 7px;
+}
+
+.dropdown-tree-list {
+  position: absolute;
+  left: 1px;
+  border-radius: 2px;
+}
+.dropdown-tree-list * {
+  font-size: 0px;
+  padding: 0px;
+}
+
+.dropdown-tree-list-item {
+  position: relative;
+  cursor: pointer;
+  transition: font-size .1s, padding .1s;
 }

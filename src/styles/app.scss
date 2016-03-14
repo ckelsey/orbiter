@@ -22,6 +22,10 @@ html{
     }
 }
 
+button {
+vertical-align: middle;
+}
+
 h3{
     font-size: 21px;
     margin: 0px 0px 7px;
@@ -36,7 +40,7 @@ a-ckolor .c-ckolor__input-wrapper{
     font-size: 12px;
     padding: 4px 7px;
     line-height: 20px;
-    box-shadow: -1px 0 0 rgba(0,0,0,.19),-2px 0 0 rgba(255,255,255,.03);
+    box-shadow: 0px 1px 0 rgba(0,0,0,.19);
     transition: all .2s;
 
     &:hover, &:focus{
@@ -128,160 +132,6 @@ orbiter-canvas{
 
 
 
-.c-dialogue{
-    position: fixed;
-    overflow: auto;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(ellipse at 50% 250px,rgba(darken(saturate($color-mfly-blue, 28%), 1%), .91) 0,rgba(darken(saturate($color-mfly-blue, 28%), 50%), .91) 100%);
-    top: 0px;
-    padding: 35px 7%;
-    box-sizing: border-box;
-    color: #fff;
-    filter: blur(0px) !important;
-
-    & *{
-        filter: blur(0px) !important;
-    }
-
-    h2{
-        color: #fff;
-        margin: 7px 0px;
-        font-size: 28px;
-    }
-
-    .c-dialogue_input{
-        &.tasks{
-            padding: 14px 14px 7px;
-            background: rgba(255, 255, 255, 0.07);
-            box-sizing: border-box;
-        }
-
-        input, textarea, select{
-            background: rgb(255, 255, 255);
-            color: $color-mfly-blue;
-            font-size: 14px;
-
-            &:hover, &:focus{
-                background: rgb(255, 255, 255);
-                color: $color-mfly-blue;
-            }
-        }
-
-        button, button:hover, button:focus{
-            background: $color-mfly-green;
-            color: #fff;
-        }
-    }
-}
-
-.c-dialogue_inner{
-    width: 100%;
-}
-
-.c-dialogue_input{
-    width: 100%;
-    margin: 7px 0px;
-
-    &.done_buttons{
-        text-align: right;
-        box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.05), 0px -1px 0px rgba(0, 0, 0, 0.51);
-        padding: 14px 0px;
-        margin: 21px 0px;
-    }
-}
-
-.c-dialogue_left{
-    width: 100%;
-    display: inline-block;
-    vertical-align: top;
-    transition: width .2s;
-}
-
-.c-dialogue_right{
-    width: 0%;
-    font-size: 0px;
-    display: inline-block;
-    vertical-align: top;
-    padding: 0px;
-    box-sizing: border-box;
-    height: 100%;
-    position: relative;
-    transition: width .2s, font-size .2s, padding .2s;
-
-    h3{
-        font-size: 0px;
-        transition: font-size .2s;
-    }
-}
-
-.c-dialogue_inner.properties .c-dialogue_left, .c-dialogue_inner.methods .c-dialogue_left{
-    width: 62%;
-}
-
-.c-dialogue_inner.properties .c-dialogue_right, .c-dialogue_inner.methods .c-dialogue_right{
-    width: 38%;
-    padding: 5px 14px 14px;
-    font-size: 14px;
-    h3{
-        font-size: 21px;
-    }
-}
-
-.c-dialogue_event-property-list, .c-dialogue_event-method-list{
-    opacity: 0;
-    position: absolute;
-    top: 4px;
-    left: 14px;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    transition: opacity .2s;
-}
-
-.c-dialogue_inner.properties .c-dialogue_event-property-list, .c-dialogue_inner.methods .c-dialogue_event-method-list{
-    opacity: 1;
-    z-index: 2;
-}
-
-.c-dialogue_event-method-item, .c-dialogue_event-property-item{
-    background: rgba(255,255,255,.07);
-    padding: 7px;
-    border-radius: 2px;
-    margin-bottom: 3px;
-    cursor: pointer;
-}
-
-.c-task_action-string{
-    color: rgba(255,255,255,.38);
-    input{
-        width:50%;
-        max-width: 200px;
-    }
-}
-
-.c-task_action-target{
-    color: $color-mfly-green;
-}
-
-
-
-
-.c-orbiter_body .c-drag_can-accept, .c-orbiter_body .m-active-iteractive-node{
-    box-shadow: inset 0px 0px 0px 1px $color-mfly-green, 0px 0px 0px 1px $color-mfly-green, inset 0px 0px 400px rgba($color-mfly-green, .5);
-}
-
-
-
-
-
-
-.c-interactive-bound{
-    white-space: pre;
-}
-
-
-
 
 
 
@@ -352,7 +202,7 @@ orbiter-canvas{
     font-weight: 700;
     cursor: pointer;
     position: relative;
-    top: 1px;
+    top: -1px;
     transition: background .2s, color .2s;
 
     &:hover{
@@ -410,7 +260,7 @@ orbiter-canvas{
         font-weight: lighter;
     }
 
-    textarea, input, select, button, .c-sidebar_event_function, .c-sidebar_elements_property-input{
+    textarea, input, select, button, .c-sidebar_event_function, .c-sidebar_elements_property-input, .dropdown-tree{
         background: rgba(lighten(saturate($color-mfly-blue, 21%), 14%), .21);
         border: none;
         width: 100%;
@@ -425,7 +275,7 @@ orbiter-canvas{
         resize: vertical;
         outline: none !important;
         margin: 3px 0px 7px;
-        box-shadow: -1px 0 0 rgba(0, 0, 0, 0.19),-2px 0 0 rgba(255,255,255,.03);
+        box-shadow: 0px 1px 0 rgba(0, 0, 0, 0.19);
         transition: all .2s;
 
         &:hover, &:focus{
@@ -554,6 +404,20 @@ orbiter-canvas{
     color: $color-light-blue;
     box-shadow: 0px 1px 0px darken($color-mfly-blue, 7%);
     transition: all .1s;
+
+    &:after{
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+.left-side {
+    float: left;
+}
+
+.right-side {
+    float: right;
 }
 
 .c-orbiter_menu-item{
@@ -1000,4 +864,402 @@ orbiter-canvas{
         margin: 0px;
         padding: 0px;
     }
+}
+
+
+
+
+
+
+
+.collapsable{
+
+}
+
+.collapsable-toggle{
+    cursor: pointer;
+    &:before{
+        transition: all .1s;
+        content: "";
+        display: inline-block;
+        border: 5px solid rgba(255,255,255,.5);
+        border-top-color: rgba(255,255,255,.5);
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+        position: relative;
+        top: 2px;
+        left: -3px;
+    }
+}
+
+.collapsable.collapsed .collapsable-toggle{
+    &:before{
+        border: 5px solid rgba(255,255,255,.5);
+        border-top-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        top: 0px;
+        left: 0px;
+    }
+}
+
+
+.collapsable-content.collapsed, .collapsable-content.collapsed *{
+    font-size: 0px;
+    line-height: 0px;
+    margin: 0px;
+    padding: 0px;
+    margin: 0px;
+}
+
+
+property-dialogue{
+    .property{
+        margin: 21px 0px;
+    }
+}
+
+input.red, input.red:hover, input.red:focus{
+    background: $color-red;
+}
+
+small.error{
+    color: $color-red;
+    font-style: italic;
+}
+
+
+
+
+property-mapper-dialogue{
+    .left-side{
+        display: inline-block;
+        width: 62%;
+    }
+
+    .right-side{
+        display: inline-block;
+        width: 38%;
+    }
+
+    .collapsable{
+        padding: 7px;
+        background: rgba(9, 24, 31, 0.27);
+        margin: 3px 0px;
+        box-sizing: border-box;
+    }
+
+    .property{
+        display: table;
+        width: 100%;
+
+        label{
+            display: table-cell;
+            background: rgba(18, 30, 35, 0.57);
+            margin: 0px;
+            padding: 0px 7px;
+            box-sizing: border-box;
+            width: 30%;
+
+            small{
+                opacity: .33;
+                font-weight: 100;
+                font-size: 12px;
+            }
+        }
+
+        .property-options-wrapper{
+            display: table-cell;
+            position: relative;
+
+            input{
+                margin: 0px;
+
+                &:hover, &:focus{
+                    transform: none;
+                }
+            }
+        }
+
+        .property-options{
+            position: absolute;
+            width: 100%;
+            font-size: 0px;
+            background: rgba(60, 87, 100, 0.74);
+            transition: font-size .1s;
+            &.open{
+                font-size: 12px;
+
+                .property-option{
+                    padding: 7px;
+                }
+            }
+        }
+
+        .property-option{
+            padding: 0px;
+            cursor: pointer;
+            transition: padding .1s;
+            &:hover{
+                background: rgba(60, 87, 100, 1);
+            }
+        }
+    }
+}
+
+
+.property-mapper-toggler{
+    text-transform: capitalize;
+}
+
+
+.c-sidebar_elements_properties{
+    .collapsable-toggle{
+        font-size: 12px;
+        font-weight: 100;
+        margin: 0 14px;
+        background: #213F4C;
+        padding: 7px;
+        cursor: pointer;
+    }
+
+    .collapsable-content{
+        opacity: 1;
+        margin: 7px 14px;
+        padding: 7px;
+        font-size: 12px;
+        transition: all .2s;
+    }
+
+    .collapsable-content.collapsed{
+        opacity: 0;
+        margin: 0px;
+        padding: 0px;
+        font-size: 0px;
+    }
+}
+
+
+
+
+.c-dialogue{
+    position: fixed;
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at 50% 250px,rgba(darken(saturate($color-mfly-blue, 28%), 1%), .91) 0,rgba(darken(saturate($color-mfly-blue, 28%), 50%), .91) 100%);
+    top: 0px;
+    padding: 35px 7%;
+    box-sizing: border-box;
+    color: #fff;
+    filter: blur(0px) !important;
+
+    & *{
+        filter: blur(0px) !important;
+    }
+
+    h2{
+        color: #fff;
+        margin: 7px 0px;
+        font-size: 28px;
+        width: 100%;
+        display: table;
+
+        span{
+            display: table-cell;
+
+            &:nth-child(2){
+                text-align: right;
+            }
+        }
+    }
+
+    label {
+        font-size: 14px;
+    }
+}
+
+.c-dialogue_input{
+    &.tasks{
+        padding: 14px 14px 7px;
+        background: rgba(0, 0, 0, 0.21);
+        box-sizing: border-box;
+
+        select, input, .dropdown-tree{
+            width: auto;
+            text-transform: capitalize;
+            margin-right: 7px;
+        }
+
+        input{
+            text-transform: none;
+        }
+
+        .dropdown-tree{
+            display: inline-block;
+            padding: 5px .5%;
+            box-sizing: border-box;
+            vertical-align: middle;
+            margin: 0px 1% 0px 0px;
+            max-width: 100px;
+            width: 18%;
+        }
+
+        .dropdown-tree-selection{
+            width: 100%;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .dropdown-tree-list{
+            width: 112px;
+            top: 28px;
+            background: lighten($color-mfly-blue, 7%);
+        }
+
+        .dropdown-tree-list-item{
+            &:hover{
+                background-color: $color-mfly-green;
+                color: $color-mfly-blue;
+            }
+        }
+    }
+
+}
+
+
+.c-dialogue_inner{
+    width: 100%;
+}
+
+.c-dialogue_input{
+    width: 100%;
+    margin: 7px 0px;
+
+    &.done_buttons{
+        text-align: right;
+        box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.05), 0px -1px 0px rgba(0, 0, 0, 0.51);
+        padding: 14px 0px;
+        margin: 21px 0px;
+    }
+}
+
+.c-dialogue_left{
+    width: 100%;
+    display: inline-block;
+    vertical-align: top;
+    transition: width .2s;
+}
+
+.c-dialogue_right{
+    width: 0%;
+    font-size: 0px;
+    display: inline-block;
+    vertical-align: top;
+    padding: 0px;
+    box-sizing: border-box;
+    height: 100%;
+    position: relative;
+    transition: width .2s, font-size .2s, padding .2s;
+
+    h3{
+        font-size: 0px;
+        transition: font-size .2s;
+    }
+}
+
+.c-dialogue_inner.properties .c-dialogue_left, .c-dialogue_inner.methods .c-dialogue_left{
+    width: 62%;
+}
+
+.c-dialogue_inner.properties .c-dialogue_right, .c-dialogue_inner.methods .c-dialogue_right{
+    width: 38%;
+    padding: 5px 14px 14px;
+    font-size: 14px;
+    h3{
+        font-size: 21px;
+    }
+}
+
+.c-dialogue_event-property-list, .c-dialogue_event-method-list{
+    opacity: 0;
+    position: absolute;
+    top: 4px;
+    left: 14px;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    transition: opacity .2s;
+}
+
+.c-dialogue_inner.properties .c-dialogue_event-property-list, .c-dialogue_inner.methods .c-dialogue_event-method-list{
+    opacity: 1;
+    z-index: 2;
+}
+
+.c-dialogue_event-method-item, .c-dialogue_event-property-item{
+    background: rgba(255,255,255,.07);
+    padding: 7px;
+    border-radius: 2px;
+    margin-bottom: 3px;
+    cursor: pointer;
+}
+
+.c-task_action-string{
+    color: rgba(255,255,255,.38);
+    input{
+        width:50%;
+        max-width: 200px;
+    }
+}
+
+.c-task_action-target{
+    color: $color-mfly-green;
+}
+
+
+
+
+.c-orbiter_body .c-drag_can-accept, .c-orbiter_body .m-active-iteractive-node{
+    box-shadow: inset 0px 0px 0px 1px $color-mfly-green, 0px 0px 0px 1px $color-mfly-green, inset 0px 0px 400px rgba($color-mfly-green, .5);
+}
+
+
+
+
+
+
+.c-interactive-bound{
+    white-space: pre;
+}
+
+
+.dropdown-tree{
+    position: relative;
+    &:hover{
+        & *{
+            font-size: inherit;
+        }
+
+        .dropdown-tree-list-item{
+            padding: 3px 7px;
+        }
+    }
+}
+
+.dropdown-tree-list{
+    position: absolute;
+    left: 1px;
+    border-radius: 2px;
+    & *{
+        font-size: 0px;
+        padding: 0px;
+    }
+}
+
+.dropdown-tree-list-item{
+    position: relative;
+    cursor: pointer;
+    transition: font-size .1s, padding .1s;
 }

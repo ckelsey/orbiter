@@ -13,106 +13,137 @@
         return {
             display:{
                 ruleName: 'display',
-                transform: {
-                    inline: 'inline-block'
-                }
-            },
-            color:{
-                ruleName: 'color'
+                category: 'display'
             },
             "background-color":{
-                ruleName: 'background-color'
-            },
-            "font-size":{
-                ruleName: "font-size"
-            },
-            size: {
-                ruleName: "font-size"
-            },
-            "font-weight": {
-                ruleName: "font-weight"
-            },
-            weight: {
-                ruleName: "font-weight"
-            },
-            "text-align": {
-                ruleName: "text-align"
-            },
-            align: {
-                ruleName: "text-align"
-            },
-            "font-style": {
-                ruleName: "font-style"
-            },
-            "text-decoration": {
-                ruleName: "text-decoration"
-            },
-            "padding-top": {
-                ruleName: "padding-top"
-            },
-            "padding-right": {
-                ruleName: "padding-right"
-            },
-            "padding-bottom": {
-                ruleName: "padding-bottom"
-            },
-            "padding-left": {
-                ruleName: "padding-left"
-            },
-            "margin-top": {
-                ruleName: "margin-top"
-            },
-            "margin-right": {
-                ruleName: "margin-right"
-            },
-            "margin-bottom": {
-                ruleName: "margin-bottom"
-            },
-            "margin-left": {
-                ruleName: "margin-left"
-            },
-            "border-top-color":{
-                ruleName: "border-top-color"
-            },
-            "border-top-width":{
-                ruleName: "border-top-width"
-            },
-            "border-top-style":{
-                ruleName: "border-top-style"
-            },
-            "border-bottom-color":{
-                ruleName: "border-bottom-color"
-            },
-            "border-bottom-width":{
-                ruleName: "border-bottom-width"
-            },
-            "border-bottom-style":{
-                ruleName: "border-bottom-style"
-            },
-            "border-left-color":{
-                ruleName: "border-left-color"
-            },
-            "border-left-width":{
-                ruleName: "border-left-width"
-            },
-            "border-left-style":{
-                ruleName: "border-left-style"
-            },
-            "border-right-color":{
-                ruleName: "border-right-color"
-            },
-            "border-right-width":{
-                ruleName: "border-right-width"
-            },
-            "border-right-style":{
-                ruleName: "border-right-style"
+                ruleName: 'background-color',
+                category: 'display'
             },
             "border-radius":{
-                ruleName: "border-radius"
+                ruleName: "border-radius",
+                category: 'display'
             },
             "box-shadow":{
-                ruleName: "box-shadow"
-            }
+                ruleName: "box-shadow",
+                category: 'display'
+            },
+            color:{
+                ruleName: 'color',
+                category: 'text'
+            },
+            "font-size":{
+                ruleName: "font-size",
+                category: 'text'
+            },
+            size: {
+                ruleName: "font-size",
+                category: 'text'
+            },
+            "font-weight": {
+                ruleName: "font-weight",
+                category: 'text'
+            },
+            weight: {
+                ruleName: "font-weight",
+                category: 'text'
+            },
+            "text-align": {
+                ruleName: "text-align",
+                category: 'text'
+            },
+            align: {
+                ruleName: "text-align",
+                category: 'text'
+            },
+            "font-style": {
+                ruleName: "font-style",
+                category: 'text'
+            },
+            "text-decoration": {
+                ruleName: "text-decoration",
+                category: 'text'
+            },
+            "padding-top": {
+                ruleName: "padding-top",
+                category: 'spacing'
+            },
+            "padding-right": {
+                ruleName: "padding-right",
+                category: 'spacing'
+            },
+            "padding-bottom": {
+                ruleName: "padding-bottom",
+                category: 'spacing'
+            },
+            "padding-left": {
+                ruleName: "padding-left",
+                category: 'spacing'
+            },
+            "margin-top": {
+                ruleName: "margin-top",
+                category: 'spacing'
+            },
+            "margin-right": {
+                ruleName: "margin-right",
+                category: 'spacing'
+            },
+            "margin-bottom": {
+                ruleName: "margin-bottom",
+                category: 'spacing'
+            },
+            "margin-left": {
+                ruleName: "margin-left",
+                category: 'spacing'
+            },
+            "border-top-color":{
+                ruleName: "border-top-color",
+                category: 'border'
+            },
+            "border-top-width":{
+                ruleName: "border-top-width",
+                category: 'border'
+            },
+            "border-top-style":{
+                ruleName: "border-top-style",
+                category: 'border'
+            },
+            "border-bottom-color":{
+                ruleName: "border-bottom-color",
+                category: 'border'
+            },
+            "border-bottom-width":{
+                ruleName: "border-bottom-width",
+                category: 'border'
+            },
+            "border-bottom-style":{
+                ruleName: "border-bottom-style",
+                category: 'border'
+            },
+            "border-left-color":{
+                ruleName: "border-left-color",
+                category: 'border'
+            },
+            "border-left-width":{
+                ruleName: "border-left-width",
+                category: 'border'
+            },
+            "border-left-style":{
+                ruleName: "border-left-style",
+                category: 'border'
+            },
+            "border-right-color":{
+                ruleName: "border-right-color",
+                category: 'border'
+            },
+            "border-right-width":{
+                ruleName: "border-right-width",
+                category: 'border'
+            },
+            "border-right-style":{
+                ruleName: "border-right-style",
+                category: 'border'
+            },
+
         };
     }
 
