@@ -9,53 +9,72 @@
                 'parentPath': '=interactiveNodeParentPath'
             },
             link:function(scope,element,attributes){
-                var thisData = scope.data;
+                scope.dataProperties = InteractiveService.properties[scope.data.id];
+                scope.styles = InteractiveService.getStyles(scope.dataProperties);
+
                 var html = '';
-                var styles = InteractiveService.getStyles(thisData);
 
-                if(thisData.label === 'Block' || thisData.label === 'Text'){
-                    html += '<div ';
-                }else if(thisData.label === 'Link'){
-                    html += '<a href="{{ictlr.InteractiveService.getBinding(data, \'url\')}}" ';
-                }else if(thisData.label === 'Button'){
-                    html += '<button ';
-                }
+                var setCTLR = function(){
+                    html += ' ng-controller="InteractiveCtlr as ictlr"';
+                };
 
-                html += 'ng-controller="InteractiveCtlr as ictlr" ng-style="ictlr.InteractiveService.getStyles(data)';
-                html += '" ';
+                var setStyles = function(){
+                    html += ' ng-style="ictlr.InteractiveService.getStyles(dataProperties)"';
+                };
 
-                for(var ev in thisData.events){
-                    if(thisData.events[ev].fn && thisData.events[ev].fn.length){
-                        html += thisData.events[ev].method +'="ictlr.InteractiveService.runFN(data.events[\''+ ev +'\'])" ';
+                var setEvents = function(){
+                    for(var ev in scope.dataProperties.events){
+                        if(scope.dataProperties.events[ev].fn && scope.dataProperties.events[ev].fn.length){
+                            html += scope.dataProperties.events[ev].method +'="ictlr.InteractiveService.runFN(dataProperties.events[\''+ ev +'\'])" ';
+                        }
                     }
-                }
+                };
 
-                html += 'interactive-id="'+ thisData.id +'"';
-                html += '>';
+                var setID = function(){
+                    html += ' interactive-id="'+ scope.dataProperties.id +'"';
+                };
 
-                if(thisData.label === 'Text' || thisData.label === 'Link' || thisData.label === 'Button'){
-                    html += '<span ng-bind-html="ictlr.InteractiveService.getBinding(data, \'text\')" class="c-interactive-bound"></span>';
-                }
+                var setText = function(){
+                    if(scope.dataProperties.label === 'Text' || scope.dataProperties.label === 'Link' || scope.dataProperties.label === 'Button'){
+                        html += '<span ng-bind-html="ictlr.InteractiveService.getBinding(dataProperties, \'text\')" class="c-interactive-bound"></span>';
+                    }
+                };
 
-                html += '<div ng-repeat="childData in data.nodes track by $index"';
-                html += ' interactive-node="childData"';
-                html += ' interactive-node-parent="data"';
-                html += ' ng-init="thisPath=parentPath + \',nodes,\' + $index"';
-                html += ' interactive-node-parent-path="thisPath"';
-                html += ' path="{{thisPath}}"';
-                html += ' ng-style="ictlr.InteractiveService.getStyles(childData, \'display\')"';
-                html += ' ng-class="childData.id === ictlr.InteractiveService.elementProperties.id ? \'m-active-iteractive-node\' : \'\'"';
-                html += '></div>';
+                var setChildren = function(){
+                    html += '<div ng-repeat="childData in data.nodes track by $index"';
+                    html += ' interactive-node="childData"';
+                    html += ' interactive-node-parent="data"';
+                    html += ' ng-init="thisPath=parentPath + \',nodes,\' + $index"';
+                    html += ' interactive-node-parent-path="thisPath"';
+                    html += ' path="{{thisPath}}"';
+                    html += ' ng-style="ictlr.InteractiveService.getStyles(ictlr.InteractiveService.properties[childData.id], \'display\')"';
+                    html += ' ng-class="childData.id === ictlr.InteractiveService.elementProperties.id ? \'m-active-iteractive-node\' : \'\'"';
+                    html += '></div>';
+                };
 
+                var setHTML = function(){
+                    setCTLR();
+                    setStyles();
+                    setEvents();
+                    setID();
+                    html += '>';
+                    setText();
+                    setChildren();
+                };
 
-                if(thisData.label === 'Block' || thisData.label === 'Text'){
+                if(scope.dataProperties.label === 'Block' || scope.dataProperties.label === 'Text'){
+                    html += '<div';
+                    setHTML();
                     html += '</div>';
-                }else if(thisData.label === 'Link'){
+                }else if(scope.dataProperties.label === 'Link'){
+                    html += '<a href="{{ictlr.InteractiveService.getBinding(dataProperties, \'url\')}}"';
+                    setHTML();
                     html += '</a>';
-                }else if(thisData.label === 'Button'){
+                }else if(scope.dataProperties.label === 'Button'){
+                    html += '<button';
+                    setHTML();
                     html += '</button>';
                 }
-
 
                 element.html(html);
                 $compile(element.contents())(scope);
@@ -87,7 +106,7 @@
                     element.bind("click", function(e){
                         e.stopPropagation();
                         $timeout(function(){
-                            OrbiterService.activeProperties(scope.data);
+                            OrbiterService.activeProperties(scope.dataProperties);
                         });
                     });
 

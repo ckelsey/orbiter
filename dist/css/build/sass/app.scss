@@ -235,7 +235,7 @@ orbiter-canvas{
         }
     }
 
-    .c-sidebar_event_function{
+    .c-sidebar_event_function, .c-sidebar_event_function label, .c-sidebar_event_function span{
         cursor: pointer;
     }
 
@@ -296,7 +296,7 @@ orbiter-canvas{
     button{
         background: $color-mfly-green;
         width: auto;
-        color: #fff;
+        color: $color-mfly-blue;
         cursor: pointer;
 
         &:focus{
@@ -345,10 +345,12 @@ orbiter-canvas{
 
         &.red, &.red:hover{
             background:$color-red;
+            color: #fff;
         }
 
         &.orange, &.orange:hover{
             background: $color-orange;
+            color: #fff;
         }
 
         &.info{
@@ -1053,10 +1055,10 @@ property-mapper-dialogue{
     padding: 35px 7%;
     box-sizing: border-box;
     color: #fff;
-    filter: blur(0px) !important;
+    filter: none;
 
     & *{
-        filter: blur(0px) !important;
+        filter: none;
     }
 
     h2{
@@ -1082,9 +1084,10 @@ property-mapper-dialogue{
 
 .c-dialogue_input{
     &.tasks{
-        padding: 14px 14px 7px;
+        padding: 14px;
         background: rgba(0, 0, 0, 0.21);
         box-sizing: border-box;
+        margin: 1px 0px;
 
         select, input, .dropdown-tree{
             width: auto;
@@ -1094,11 +1097,16 @@ property-mapper-dialogue{
 
         input{
             text-transform: none;
+            margin: 0px;
+        }
+
+        button{
+            margin: 0px 7px 0px 0px;
         }
 
         .dropdown-tree{
+            padding: 0px;
             display: inline-block;
-            padding: 5px .5%;
             box-sizing: border-box;
             vertical-align: middle;
             margin: 0px 1% 0px 0px;
@@ -1110,19 +1118,6 @@ property-mapper-dialogue{
             width: 100%;
             overflow: hidden;
             text-align: center;
-        }
-
-        .dropdown-tree-list{
-            width: 112px;
-            top: 28px;
-            background: lighten($color-mfly-blue, 7%);
-        }
-
-        .dropdown-tree-list-item{
-            &:hover{
-                background-color: $color-mfly-green;
-                color: $color-mfly-blue;
-            }
         }
     }
 
@@ -1182,6 +1177,8 @@ property-mapper-dialogue{
     }
 }
 
+
+
 .c-dialogue_event-property-list, .c-dialogue_event-method-list{
     opacity: 0;
     position: absolute;
@@ -1237,24 +1234,77 @@ property-mapper-dialogue{
 
 .dropdown-tree{
     position: relative;
+    padding: 0px;
+    z-index: 1;
+    position: relative;
+    cursor: pointer;
+
     &:hover{
+        z-index: 9999;
+    }
+
+    .dropdown-tree-list.open, .dropdown-tree-list:hover{
+        z-index: 9999;
+
         & *{
-            font-size: inherit;
+            z-index: 9999;
         }
 
-        .dropdown-tree-list-item{
-            padding: 3px 7px;
+        & > .dropdown-tree-list-item{
+            z-index: 9999;
+            position: relative;
+
+            & > .dropdown-tree-list-item-inner{
+                font-size: 12px;
+                padding: 3px 7px;
+            }
+
+            &:hover > .dropdown-tree-list{
+                & *{
+                    z-index: 9999;
+                }
+
+                & > .dropdown-tree-list-item{
+                    z-index: 9999;
+                    position: relative;
+
+                    & > .dropdown-tree-list-item-inner{
+                        font-size: 12px;
+                        padding: 3px 7px;
+                    }
+                }
+            }
         }
     }
+}
+
+.dropdown-tree-selection{
+    padding: 5px 7px;
+    box-sizing: border-box;
+    z-index: 1;
+    position: relative;
 }
 
 .dropdown-tree-list{
     position: absolute;
     left: 1px;
     border-radius: 2px;
+    width: 100%;
+    top: 28px;
+    background: lighten($color-mfly-blue, 21%);
+
+    .dropdown-tree-list{
+        background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.21) 0%, transparent 33%);
+    }
+
     & *{
         font-size: 0px;
         padding: 0px;
+    }
+
+    &.side{
+        top: 0px;
+        left: 100%;
     }
 }
 
@@ -1262,4 +1312,58 @@ property-mapper-dialogue{
     position: relative;
     cursor: pointer;
     transition: font-size .1s, padding .1s;
+}
+
+.dropdown-tree-list-item-inner{
+    padding: 0px;
+    cursor: pointer;
+
+    &:hover{
+        background-color: $color-mfly-green;
+        color: $color-mfly-blue;
+    }
+}
+
+
+property-selector-dialogue.c-dialogue{
+    background: rgb(19, 49, 63);
+}
+
+
+
+
+.inline-inputs{
+    display: flex;
+    margin: 3px 0 7px;
+    width: 100%;
+
+    input, button{
+        display: inline-block;
+        margin: 0px;
+    }
+}
+
+
+.property-tree{
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    border-spacing: 3px;
+}
+
+.property-tree-cell{
+    display: table-cell;
+    background: rgba(0, 0, 0, 0.13);
+}
+
+.property-tree-cell-item{
+    display: block;
+    padding: 3px 7px;
+    cursor: pointer;
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.03), inset 0px -1px 0px rgba(0, 0, 0, 0.07);
+
+    &:hover, &.active{
+        background-color: $color-mfly-green;
+        color: $color-mfly-blue;
+    }
 }

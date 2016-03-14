@@ -2,8 +2,8 @@
     <h2>
         <span>Functional fun</span>
         <span>
-            <button class="circle" ng-if="eventObj.label && eventObj.fn.length" ng-click="orb.OrbiterService.currentEventObject=null" ng-if="eventObj.label && eventObj.fn.length"><i class="fa fa-check"></i></button>
-            <button class="circle" ng-if="!eventObj.label || !eventObj.fn.length" ng-click="orb.OrbiterService.currentEventObject=null"><i class="fa fa-close"></i></button>
+            <button class="circle" ng-if="eventObj.label" ng-click="orb.OrbiterService.save();orb.OrbiterService.currentEventObject=null" ng-if="eventObj.label && eventObj.fn.length"><i class="fa fa-check"></i></button>
+            <button class="circle orange" ng-if="!eventObj.label || !eventObj.fn.length" ng-click="orb.OrbiterService.currentEventObject=null"><i class="fa fa-close"></i></button>
         </span>
     </h2>
     <div class="c-dialogue_left">
@@ -11,37 +11,43 @@
             <input type="text" ng-model="eventObj.label" placeholder="Function description" />
         </div>
         <h4>Tasks&nbsp;&nbsp;<button class="circle" ng-click="eventObj.fn.push({label:null, method:null, arguments:[{type:null, target:null, action:null, valueType:null, value:null}]});"><i class="fa fa-plus"></i></button></h4>
-        <div class="c-dialogue_input tasks" ng-repeat="task in eventObj.fn track by $index">
-            <div class="dropdown-tree">
-                <div class="dropdown-tree-selection" ng-bind="task.type || 'type'"></div>
-                <div class="dropdown-tree-list">
-                    <div class="dropdown-tree-list-item" ng-click="task.type='set'">Set</div>
+        <div class="c-dialogue_input tasks" ng-repeat="task in eventObj.fn track by $index" ng-init="task.dropdowns={type:{open:false}, target:{open:false}, action:{open:false}, valueType:{open:false}}">
+            <div class="dropdown-tree" ng-mouseleave="task.dropdowns.type.open=false">
+                <div class="dropdown-tree-selection" ng-bind="task.type || 'type'" ng-click="task.dropdowns.type.open=true"></div>
+                <div class="dropdown-tree-list" ng-class="task.dropdowns.type.open ? 'open' : ''">
+                    <div class="dropdown-tree-list-item" ng-click="task.type='set'">
+                        <div class="dropdown-tree-list-item-inner">set</div>
+                    </div>
                 </div>
             </div>
 
-            <div class="dropdown-tree">
-                <div class="dropdown-tree-selection" ng-bind="task.target || 'target'"></div>
-                <div class="dropdown-tree-list">
-                    <div class="dropdown-tree-list-item" ng-repeat="(propKey, prop) in orb.InteractiveService.properties track by $index" ng-if="prop.key && prop.orbiterType === 'property'" ng-bind="prop.key" ng-click="task.target = propKey"></div>
+            <button ng-click="orb.OrbiterService.propertySelectorDialogue={obj:task,key:'target'}" ng-bind="task.target || 'set target'"></button>
+
+            <div class="dropdown-tree" ng-mouseleave="task.dropdowns.action.open=false">
+                <div class="dropdown-tree-selection" ng-bind="task.action || 'action'" ng-click="task.dropdowns.action.open=true"></div>
+                <div class="dropdown-tree-list" ng-class="task.dropdowns.action.open ? 'open' : ''">
+                    <div class="dropdown-tree-list-item" ng-click="task.action='='">
+                        <div class="dropdown-tree-list-item-inner">=</div>
+                    </div>
                 </div>
             </div>
 
-            <div class="dropdown-tree">
-                <div class="dropdown-tree-selection" ng-bind="task.action || 'action'"></div>
-                <div class="dropdown-tree-list">
-                    <div class="dropdown-tree-list-item" ng-click="task.action='='">=</div>
-                </div>
-            </div>
 
-            <div class="dropdown-tree">
-                <div class="dropdown-tree-selection" ng-bind="task.valueType !== 'custom text' ? task.value ? task.value : 'value type' : task.valueType"></div>
-                <div class="dropdown-tree-list">
-                    <div class="dropdown-tree-list-item" ng-click="task.valueType='custom text'">custom text</div>
-                    <div class="dropdown-tree-list-item" ng-repeat="(propKey, prop) in orb.InteractiveService.properties track by $index" ng-if="prop.key && prop.orbiterType === 'property'" ng-bind="prop.key" ng-click="task.valueType='property';task.value=propKey"></div>
+
+            <div class="dropdown-tree" ng-mouseleave="task.dropdowns.valueType.open=false">
+                <div class="dropdown-tree-selection" ng-bind="task.valueType || 'value type'" ng-click="task.dropdowns.valueType.open=true"></div>
+                <div class="dropdown-tree-list" ng-class="task.dropdowns.valueType.open ? 'open' : ''">
+                    <div class="dropdown-tree-list-item" ng-click="task.valueType!=='custom text'? task.value=null : null; task.valueType='custom text'">
+                        <div class="dropdown-tree-list-item-inner">custom text</div>
+                    </div>
+                    <div class="dropdown-tree-list-item" ng-click="task.valueType!=='property'? task.value=null : null; task.valueType='property'">
+                        <div class="dropdown-tree-list-item-inner">property</div>
+                    </div>
                 </div>
             </div>
             <input ng-if="task.valueType==='custom text'" ng-model="task.value" type="text" placeholder="value">
-            <button class="orange circle" style="margin: 7px 0px;" ng-click="orb.OrbiterService.removeArrayElement(eventObj.fn, $index)"><i class="fa fa-trash"></i></button </div>
+            <button ng-if="task.valueType==='property'" ng-click="orb.OrbiterService.propertySelectorDialogue={obj:task,key:'value'}" ng-bind="task.value || 'set value'"></button>
+            <button class="orange circle" ng-click="orb.OrbiterService.removeArrayElement(eventObj.fn, $index)"><i class="fa fa-trash"></i></button </div>
         </div>
     </div>
 

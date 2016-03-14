@@ -25,13 +25,16 @@
                                 html += '<input ng-model="sortedPropertiesToUpdate[\''+ key +'\'].new" type="text" ng-focus="'+ key +'PropertyFieldFocus=true">';
                                 html += '<button ng-if="sortedPropertiesToUpdate[\''+ key +'\'].new !== \'none\'" ng-click="sortedPropertiesToUpdate[\''+ key +'\'].new = \'none\'" class="red" style="position: absolute; right: 0px; top: -3px;"><i class="fa fa-ban"></i></button>'
                                 html += '<div class="property-options" ng-class="'+ key +'PropertyFieldFocus ? \'open\' : \'\'">';
-                                    html += '<div class="property-option" ng-if="';
-                                    html += 'propKey.indexOf(orb.InteractiveService.propertyPrefix) === -1 && (';
-                                    html += 'sortedPropertiesToUpdate[\''+ key +'\'].new === \'\' ||';
-                                    html += 'sortedPropertiesToUpdate[\''+ key +'\'].new === \'none\' ||';
-                                    html += 'orb.lowerCase(prop.key).indexOf(sortedPropertiesToUpdate[\''+ key +'\'].new) > -1';
-                                    html += ')" ng-repeat="(propKey, prop) in orb.InteractiveService.properties" ';
-                                    html += 'ng-bind="prop.key"';
+                                    html += '<div class="property-option"';
+                                    // html += ' ng-if="';
+                                    // html += 'propKey.indexOf(orb.InteractiveService.propertyPrefix) === -1 && (';
+                                    // html += 'sortedPropertiesToUpdate[\''+ key +'\'].new === \'\' ||';
+                                    // html += 'sortedPropertiesToUpdate[\''+ key +'\'].new === \'none\' ||';
+                                    // html += 'orb.lowerCase(prop.key).indexOf(sortedPropertiesToUpdate[\''+ key +'\'].new) > -1';
+                                    // html += ')';
+                                    // html += '"';
+                                    html += ' ng-repeat="(propKey, prop) in orb.InteractiveService.properties" ';
+                                    html += 'ng-bind="prop.key || prop.id"';
                                     html += 'ng-click="sortedPropertiesToUpdate[\''+ key +'\'].new = prop.key;'+ key +'PropertyFieldFocus=false"';
                                     html += '></div>';
                                 html += '</div>';

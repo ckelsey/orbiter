@@ -176,7 +176,7 @@ orbiter-canvas iframe {
   display: table;
   clear: both;
 }
-.c-sidebar_data .c-sidebar_event_function, .c-sidebar_elements_properties .c-sidebar_event_function, .c-dialogue .c-sidebar_event_function, .c-sidebar_events .c-sidebar_event_function {
+.c-sidebar_data .c-sidebar_event_function, .c-sidebar_data .c-sidebar_event_function label, .c-sidebar_data .c-sidebar_event_function span, .c-sidebar_elements_properties .c-sidebar_event_function, .c-sidebar_elements_properties .c-sidebar_event_function label, .c-sidebar_elements_properties .c-sidebar_event_function span, .c-dialogue .c-sidebar_event_function, .c-dialogue .c-sidebar_event_function label, .c-dialogue .c-sidebar_event_function span, .c-sidebar_events .c-sidebar_event_function, .c-sidebar_events .c-sidebar_event_function label, .c-sidebar_events .c-sidebar_event_function span {
   cursor: pointer;
 }
 .c-sidebar_data label, .c-sidebar_elements_properties label, .c-dialogue label, .c-sidebar_events label {
@@ -228,7 +228,7 @@ orbiter-canvas iframe {
 .c-sidebar_data button, .c-sidebar_elements_properties button, .c-dialogue button, .c-sidebar_events button {
   background: #9fbe3c;
   width: auto;
-  color: #fff;
+  color: #213037;
   cursor: pointer;
 }
 .c-sidebar_data button:focus, .c-sidebar_elements_properties button:focus, .c-dialogue button:focus, .c-sidebar_events button:focus {
@@ -270,9 +270,11 @@ orbiter-canvas iframe {
 }
 .c-sidebar_data button.red, .c-sidebar_data button.red:hover, .c-sidebar_elements_properties button.red, .c-sidebar_elements_properties button.red:hover, .c-dialogue button.red, .c-dialogue button.red:hover, .c-sidebar_events button.red, .c-sidebar_events button.red:hover {
   background: #962525;
+  color: #fff;
 }
 .c-sidebar_data button.orange, .c-sidebar_data button.orange:hover, .c-sidebar_elements_properties button.orange, .c-sidebar_elements_properties button.orange:hover, .c-dialogue button.orange, .c-dialogue button.orange:hover, .c-sidebar_events button.orange, .c-sidebar_events button.orange:hover {
   background: #D67100;
+  color: #fff;
 }
 .c-sidebar_data button.info, .c-sidebar_elements_properties button.info, .c-dialogue button.info, .c-sidebar_events button.info {
   font-weight: bold;
@@ -860,10 +862,10 @@ property-mapper-dialogue .property .property-option:hover {
   padding: 35px 7%;
   box-sizing: border-box;
   color: #fff;
-  filter: blur(0px) !important;
+  filter: none;
 }
 .c-dialogue * {
-  filter: blur(0px) !important;
+  filter: none;
 }
 .c-dialogue h2 {
   color: #fff;
@@ -883,9 +885,10 @@ property-mapper-dialogue .property .property-option:hover {
 }
 
 .c-dialogue_input.tasks {
-  padding: 14px 14px 7px;
+  padding: 14px;
   background: rgba(0, 0, 0, 0.21);
   box-sizing: border-box;
+  margin: 1px 0px;
 }
 .c-dialogue_input.tasks select, .c-dialogue_input.tasks input, .c-dialogue_input.tasks .dropdown-tree {
   width: auto;
@@ -894,10 +897,14 @@ property-mapper-dialogue .property .property-option:hover {
 }
 .c-dialogue_input.tasks input {
   text-transform: none;
+  margin: 0px;
+}
+.c-dialogue_input.tasks button {
+  margin: 0px 7px 0px 0px;
 }
 .c-dialogue_input.tasks .dropdown-tree {
+  padding: 0px;
   display: inline-block;
-  padding: 5px .5%;
   box-sizing: border-box;
   vertical-align: middle;
   margin: 0px 1% 0px 0px;
@@ -908,15 +915,6 @@ property-mapper-dialogue .property .property-option:hover {
   width: 100%;
   overflow: hidden;
   text-align: center;
-}
-.c-dialogue_input.tasks .dropdown-tree-list {
-  width: 112px;
-  top: 28px;
-  background: #2e434d;
-}
-.c-dialogue_input.tasks .dropdown-tree-list-item:hover {
-  background-color: #9fbe3c;
-  color: #213037;
 }
 
 .c-dialogue_inner {
@@ -1016,26 +1014,115 @@ property-mapper-dialogue .property .property-option:hover {
 
 .dropdown-tree {
   position: relative;
+  padding: 0px;
+  z-index: 1;
+  position: relative;
+  cursor: pointer;
 }
-.dropdown-tree:hover * {
-  font-size: inherit;
+.dropdown-tree:hover {
+  z-index: 9999;
 }
-.dropdown-tree:hover .dropdown-tree-list-item {
+.dropdown-tree .dropdown-tree-list.open, .dropdown-tree .dropdown-tree-list:hover {
+  z-index: 9999;
+}
+.dropdown-tree .dropdown-tree-list.open *, .dropdown-tree .dropdown-tree-list:hover * {
+  z-index: 9999;
+}
+.dropdown-tree .dropdown-tree-list.open > .dropdown-tree-list-item, .dropdown-tree .dropdown-tree-list:hover > .dropdown-tree-list-item {
+  z-index: 9999;
+  position: relative;
+}
+.dropdown-tree .dropdown-tree-list.open > .dropdown-tree-list-item > .dropdown-tree-list-item-inner, .dropdown-tree .dropdown-tree-list:hover > .dropdown-tree-list-item > .dropdown-tree-list-item-inner {
+  font-size: 12px;
   padding: 3px 7px;
+}
+.dropdown-tree .dropdown-tree-list.open > .dropdown-tree-list-item:hover > .dropdown-tree-list *, .dropdown-tree .dropdown-tree-list:hover > .dropdown-tree-list-item:hover > .dropdown-tree-list * {
+  z-index: 9999;
+}
+.dropdown-tree .dropdown-tree-list.open > .dropdown-tree-list-item:hover > .dropdown-tree-list > .dropdown-tree-list-item, .dropdown-tree .dropdown-tree-list:hover > .dropdown-tree-list-item:hover > .dropdown-tree-list > .dropdown-tree-list-item {
+  z-index: 9999;
+  position: relative;
+}
+.dropdown-tree .dropdown-tree-list.open > .dropdown-tree-list-item:hover > .dropdown-tree-list > .dropdown-tree-list-item > .dropdown-tree-list-item-inner, .dropdown-tree .dropdown-tree-list:hover > .dropdown-tree-list-item:hover > .dropdown-tree-list > .dropdown-tree-list-item > .dropdown-tree-list-item-inner {
+  font-size: 12px;
+  padding: 3px 7px;
+}
+
+.dropdown-tree-selection {
+  padding: 5px 7px;
+  box-sizing: border-box;
+  z-index: 1;
+  position: relative;
 }
 
 .dropdown-tree-list {
   position: absolute;
   left: 1px;
   border-radius: 2px;
+  width: 100%;
+  top: 28px;
+  background: #496a7a;
+}
+.dropdown-tree-list .dropdown-tree-list {
+  background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.21) 0%, transparent 33%);
 }
 .dropdown-tree-list * {
   font-size: 0px;
   padding: 0px;
+}
+.dropdown-tree-list.side {
+  top: 0px;
+  left: 100%;
 }
 
 .dropdown-tree-list-item {
   position: relative;
   cursor: pointer;
   transition: font-size .1s, padding .1s;
+}
+
+.dropdown-tree-list-item-inner {
+  padding: 0px;
+  cursor: pointer;
+}
+.dropdown-tree-list-item-inner:hover {
+  background-color: #9fbe3c;
+  color: #213037;
+}
+
+property-selector-dialogue.c-dialogue {
+  background: #13313f;
+}
+
+.inline-inputs {
+  display: flex;
+  margin: 3px 0 7px;
+  width: 100%;
+}
+.inline-inputs input, .inline-inputs button {
+  display: inline-block;
+  margin: 0px;
+}
+
+.property-tree {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  border-spacing: 3px;
+}
+
+.property-tree-cell {
+  display: table-cell;
+  background: rgba(0, 0, 0, 0.13);
+}
+
+.property-tree-cell-item {
+  display: block;
+  padding: 3px 7px;
+  cursor: pointer;
+  box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.03), inset 0px -1px 0px rgba(0, 0, 0, 0.07);
+}
+.property-tree-cell-item:hover, .property-tree-cell-item.active {
+  background-color: #9fbe3c;
+  color: #213037;
 }

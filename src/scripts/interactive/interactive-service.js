@@ -100,13 +100,11 @@
             },
 
             runFN: function(data){
-                console.log(data);
-
                 var setFunction = function(thisFN){
-                    if(thisFN.valueType === 'custom text'){
-                        self.properties[thisFN.target].value = thisFN.value;
-                    }else if(thisFN.valueType === 'property'){
-                        self.properties[thisFN.target].value = self.properties[thisFN.value].value;
+                    var target = self.lookUpPath(self.properties, thisFN.target);
+                    var newVal = thisFN.valueType === 'custom text' ? thisFN.value : self.lookUpPath(self.properties, thisFN.value);
+                    if(target){
+                        target.value = newVal.hasOwnProperty('value') ? newVal.value : newVal;
                     }
                 };
 

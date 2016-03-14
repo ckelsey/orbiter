@@ -1,0 +1,21 @@
+<div class="c-dialogue_inner">
+    <h2>
+        <span>Available properties&nbsp;&nbsp;</span>
+        <span>
+            <button class="circle" ng-click="savePropertySelectorDialogue()" ng-if="propertySelectorLayersPath.length > 1"><i class="fa fa-check"></i></button>
+            <button class="circle orange" ng-click="orb.OrbiterService.propertySelectorDialogue=null"><i class="fa fa-close"></i></button>
+        </span>
+    </h2>
+
+    <div class="property-tree">
+        <div ng-repeat="(layerIndex, layer) in propertySelectorLayers track by $index" class="property-tree-cell">
+            <div
+            ng-repeat="(propKey, prop) in layer track by $index"
+            ng-bind="prop.label"
+            ng-click="prop.end ? propertySelectorLayersPath.push(prop.label) : setPropertySelectorLayers(prop.path)"
+            class="property-tree-cell-item"
+            ng-class="propertySelectorLayersPath[layerIndex] === prop.label || (propertySelectorLayersPath[layerIndex] === 'element' && prop.label === 'Elements') || (propertySelectorLayersPath[layerIndex] === 'property' && prop.label === 'Properties')? 'active' : ''"
+            ></div>
+        </div>
+    </div>
+</div>

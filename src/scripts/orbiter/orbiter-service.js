@@ -1,4 +1,10 @@
 /* TODO
+
+-   Change event target/values to popups:
+        - dropdown for element or property
+        - list of the above, click to save path
+
+
     APP:
         - CSS
             - clean up transitions, make specific
@@ -59,18 +65,88 @@
 
             addToInteractive: function(parent, data){
                 var node = data;
-                node.nodes = [];
-                node.name = data.label;
-                node.id = data.label +'_'+ new Date().getTime();
+                node.id = data.label;
+                node.orbiterType = 'element';
+                var tempNumber = 1;
+
+                while(InteractiveService.properties.hasOwnProperty(node.id +' '+ tempNumber)){
+                    tempNumber++;
+                }
+
+                node.id = node.id +' '+ tempNumber;
+                for(var p in node.properties){
+                    node.properties[p].bind = node.id +'.properties.'+ p;
+                }
 
                 if(parent.id !== node.id){
-                    InteractiveService.properties[InteractiveService.propertyPrefix + node.id] = {};
-                    for(var p in node.properties){
-                        node.properties[p].bind = InteractiveService.propertyPrefix + node.id +'.'+ p;
-                        InteractiveService.properties[InteractiveService.propertyPrefix + node.id][p] = {value:node.properties[p].value};
+                    parent.nodes.push({
+                        id: node.id,
+                        nodes: []
+                    });
+                    InteractiveService.properties[node.id] = node;
+                    // InteractiveService.properties[node.id] = {};
+                    // for(var p in node.properties){
+                    //     node.properties[p].bind = InteractiveService.propertyPrefix + node.id +'.'+ p;
+                    //     InteractiveService.properties[InteractiveService.propertyPrefix + node.id][p] = {value:node.properties[p].value};
+                    // }
+                    // InteractiveService.elementProperties = node;
+                    // parent.nodes.push(node);
+                }
+            },
+
+            stagedElementIdConflict: null,
+            updateElementId: function(data){
+                var originalID = null;
+                function reset() {
+                    for(var key in InteractiveService.properties){
+                        if(InteractiveService.properties[key].id === data.id){
+                            InteractiveService.properties[key].id = key;
+                            break;
+                        }
                     }
-                    InteractiveService.elementProperties = node;
-                    parent.nodes.push(node);
+                }
+
+                function updateElement(obj){
+                    for(var n=0;n<obj.nodes.length;n++){
+                        if (obj.nodes[n].id === originalID){
+                            obj.nodes[n].id = data.id;
+                        }
+
+                        if(obj.nodes[n].nodes.length > 0){
+                            updateElement(obj.nodes[n]);
+                        }
+                    }
+                }
+
+                if(!data.id){
+                    self.stagedElementIdConflict = "Element name is required";
+                    reset();
+                }else if(data.id.indexOf('.') > -1){
+                    self.stagedElementIdConflict = "Element name cannont contain periods(.)";
+                    reset();
+                }else if(InteractiveService.properties.hasOwnProperty(data.id)){
+                    self.stagedElementIdConflict = "There is already an element with this name";
+                    reset();
+                }else{
+                    self.stagedElementIdConflict = null;
+                    for(var key in InteractiveService.properties){
+                        if(InteractiveService.properties[key].id === data.id){
+                            originalID = key;
+
+                            for(var prop in InteractiveService.properties[key].properties){
+                                var bind = InteractiveService.properties[key].properties[prop].bind.split('.');
+                                if(bind[0] === originalID){
+                                    bind[0] = data.id;
+                                    InteractiveService.properties[key].properties[prop].bind = bind.join('.');
+                                }
+                            }
+                            break;
+                        }
+                    }
+
+                    InteractiveService.properties[data.id] = InteractiveService.properties[originalID];
+                    delete InteractiveService.properties[originalID];
+                    updateElement(InteractiveService.htmlTree)
                 }
             },
 
@@ -81,6 +157,7 @@
                 }
                 data.active = true;
                 InteractiveService.elementProperties = data;
+                console.log(InteractiveService.elementProperties)
             },
 
             save: function(){
@@ -138,9 +215,7 @@
             },
 
             updateProperties: function(data){
-                for(var prop in InteractiveService.properties){
-                    console.log(data)
-                }
+
             },
 
             stagedNewProperty: null,
@@ -156,9 +231,10 @@
                     InteractiveService.properties[data.key] = data;
                     self.stagedNewProperty = null;
                 }
+            },
 
-                console.log(InteractiveService.properties);
-            }
+
+            propertySelectorDialogue: null
         };
 
         if($localStorage.hasOwnProperty('OrbiterInteractiveProperties') && $localStorage.OrbiterInteractiveProperties && Object.keys($localStorage.OrbiterInteractiveProperties).length > 0){
