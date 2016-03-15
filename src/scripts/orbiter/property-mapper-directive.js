@@ -21,6 +21,7 @@
                     var getPropertyHTML = function(key){
                         html += '<div class="property">';
                             html += '<label>' + key + '</label>';
+                            /*
                             html += '<div class="property-options-wrapper">';
                                 html += '<input ng-model="sortedPropertiesToUpdate[\''+ key +'\'].new" type="text" ng-focus="'+ key +'PropertyFieldFocus=true">';
                                 html += '<button ng-if="sortedPropertiesToUpdate[\''+ key +'\'].new !== \'none\'" ng-click="sortedPropertiesToUpdate[\''+ key +'\'].new = \'none\'" class="red" style="position: absolute; right: 0px; top: -3px;"><i class="fa fa-ban"></i></button>'
@@ -39,6 +40,8 @@
                                     html += '></div>';
                                 html += '</div>';
                             html += '</div>';
+                            */
+                            html += '<button ng-click="orb.OrbiterService.propertySelectorDialogue={obj:sortedPropertiesToUpdate[\''+ key +'\'],key:\'new\'}" ng-bind="sortedPropertiesToUpdate[\''+ key +'\'].new || \'set\'"></button>';
                         html += '</div>';
                     };
 

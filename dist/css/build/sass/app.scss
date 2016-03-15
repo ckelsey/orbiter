@@ -211,7 +211,7 @@ orbiter-canvas{
     }
 }
 
-.c-sidebar_data, .c-sidebar_elements_properties, .c-dialogue, .c-sidebar_events{
+.c-sidebar_data, .c-sidebar_elements_properties, .c-dialogue, .c-sidebar_events, .element-operations{
     .c-sidebar_item{
         font-family: $family1;
         font-weight: lighter;
@@ -971,6 +971,10 @@ property-mapper-dialogue{
             }
         }
 
+        button{
+            margin: 0px;
+        }
+
         .property-options-wrapper{
             display: table-cell;
             position: relative;
@@ -1365,5 +1369,44 @@ property-selector-dialogue.c-dialogue{
     &:hover, &.active{
         background-color: $color-mfly-green;
         color: $color-mfly-blue;
+    }
+}
+
+
+.element-operations{
+    display: flex;
+
+    button{
+        margin: 0px 0px 2px;
+        border-radius: 0px;
+        width: auto;
+        display: block;
+        flex-grow: 1;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 14px;
+
+        &:nth-child(1){
+            background-color: saturate(lighten($color-mfly-blue, 28%), 14%);
+        }
+
+        &:nth-child(2){
+            background-color: saturate(lighten($color-mfly-blue, 23%), 14%);
+        }
+
+        &:nth-child(3){
+            background-color: saturate(lighten($color-mfly-blue, 18%), 14%);
+        }
+
+        &:nth-child(4){
+            background-color: saturate(lighten($color-mfly-blue, 13%), 14%);
+        }
+
+        &:nth-child(5){
+            background-color: $color-orange;
+        }
+
+        &:hover{
+            color: #fff;
+        }
     }
 }

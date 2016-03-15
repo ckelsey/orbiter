@@ -41,7 +41,7 @@
                 };
 
                 var setChildren = function(){
-                    html += '<div ng-repeat="childData in data.nodes track by $index"';
+                    html += '<div ng-repeat="childData in data.nodes track by childData.id"';
                     html += ' interactive-node="childData"';
                     html += ' interactive-node-parent="data"';
                     html += ' ng-init="thisPath=parentPath + \',nodes,\' + $index"';

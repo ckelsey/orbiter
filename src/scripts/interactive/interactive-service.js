@@ -76,8 +76,13 @@
             lookUpPath: function(obj, pathString){
                 if(pathString){
                     var path = pathString.split('.');
+
                     if(path.length == 1){
-                        return obj[path[0]];
+                        try{
+                            return obj[path[0]];
+                        }catch(e){
+                            return null;
+                        }
                     }
                     return self.lookUpPath(obj[path[0]], path.slice(1).join("."));
                 }else{
@@ -104,6 +109,9 @@
                     var target = self.lookUpPath(self.properties, thisFN.target);
                     var newVal = thisFN.valueType === 'custom text' ? thisFN.value : self.lookUpPath(self.properties, thisFN.value);
                     if(target){
+                        if(target.hasOwnProperty('bind')){
+                            target.bind = thisFN.value;
+                        }
                         target.value = newVal.hasOwnProperty('value') ? newVal.value : newVal;
                     }
                 };
@@ -118,33 +126,6 @@
                         }
                     }
                 }
-
-                /*
-                if(!self.developer){
-                    for(var f=0;f<data.fn.length;f++){
-                        var thisFN = data.fn[f];
-                        if(thisFN.property){
-                            self.properties[thisFN.property.key].value = thisFN.newValue;
-                        }else if(thisFN.method){
-                            var thisMethod = self.methods[thisFN.method.key];
-                            var thisArguments = [];
-                            var thisArgumentsKeys = [];
-                            for(var a in thisMethod.arguments){
-                                thisArgumentsKeys.push(a);
-                                var path = thisMethod.arguments[a].keyPath.split('.');
-                                var thisVal = self;
-                                for(var p=0;p<path.length;p++){
-                                    thisVal = thisVal[path[p]];
-                                }
-
-                                thisArguments.push(thisVal);
-                            }
-                            var method = new Function(thisArgumentsKeys, thisMethod.fn);
-                            method.apply(this, thisArguments);
-                        }
-                    }
-                }
-                */
             }
         };
 

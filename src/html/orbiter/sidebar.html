@@ -1,4 +1,11 @@
 <div ng-controller="OrbiterCtlr as orb">
+    <div ng-if="orb.InteractiveService.elementProperties" class="element-operations">
+        <button ng-click="orb.OrbiterService.copyElement(orb.InteractiveService.elementProperties)"><i class="fa fa-copy"></i></button>
+        <button ng-click="orb.OrbiterService.pasteElement(orb.InteractiveService.elementProperties)"><i class="fa fa-paste"></i></button>
+        <button ng-click="orb.OrbiterService.moveElementUp(orb.InteractiveService.elementProperties)"><i class="fa fa-level-up"></i></button>
+        <button ng-click="orb.OrbiterService.moveElementDown(orb.InteractiveService.elementProperties)"><i class="fa fa-level-down"></i></button>
+        <button ng-click="orb.OrbiterService.deleteElement(orb.InteractiveService.elementProperties)"><i class="fa fa-trash"></i></button>
+    </div>
     <div class="c-sidebar_elements_properties">
         <h4><span>Text&nbsp;</span><span ng-if="orb.InteractiveService.elementProperties && orb.InteractiveService.elementProperties.properties.text" ng-click="orb.OrbiterService.propertyMapperDialogue={element:orb.InteractiveService.elementProperties, type:'text'}" class="c-sidebar_elements_property_bind-button">@</span></h4>
         <div class="c-sidebar_item" ng-if="orb.InteractiveService.elementProperties && orb.InteractiveService.elementProperties.properties.text">
@@ -55,7 +62,7 @@
             </div>
             <div class="c-sidebar_item">
                 <label>Added</label>
-                <div ng-bind="orb.formatDate(orb.InteractiveService.elementProperties.id.split('_')[1])" style="opacity: .7;"></div>
+                <div ng-bind="orb.formatDate(orb.InteractiveService.elementProperties.created)" style="opacity: .7;"></div>
             </div>
             <div class="c-sidebar_item">
                 <label>Label</label>

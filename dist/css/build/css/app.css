@@ -157,46 +157,46 @@ orbiter-canvas iframe {
   color: #fff;
 }
 
-.c-sidebar_data .c-sidebar_item, .c-sidebar_elements_properties .c-sidebar_item, .c-dialogue .c-sidebar_item, .c-sidebar_events .c-sidebar_item {
+.c-sidebar_data .c-sidebar_item, .c-sidebar_elements_properties .c-sidebar_item, .c-dialogue .c-sidebar_item, .c-sidebar_events .c-sidebar_item, .element-operations .c-sidebar_item {
   font-family: "Open Sans", sans-serif;
   font-weight: lighter;
   font-size: 12px;
   padding: 7px 14px;
   transition: all .1s;
 }
-.c-sidebar_data .c-sidebar_data_item, .c-sidebar_elements_properties .c-sidebar_data_item, .c-dialogue .c-sidebar_data_item, .c-sidebar_events .c-sidebar_data_item {
+.c-sidebar_data .c-sidebar_data_item, .c-sidebar_elements_properties .c-sidebar_data_item, .c-dialogue .c-sidebar_data_item, .c-sidebar_events .c-sidebar_data_item, .element-operations .c-sidebar_data_item {
   padding: 7px 14px;
   transition: all .1s;
 }
-.c-sidebar_data .c-sidebar_data_item button, .c-sidebar_elements_properties .c-sidebar_data_item button, .c-dialogue .c-sidebar_data_item button, .c-sidebar_events .c-sidebar_data_item button {
+.c-sidebar_data .c-sidebar_data_item button, .c-sidebar_elements_properties .c-sidebar_data_item button, .c-dialogue .c-sidebar_data_item button, .c-sidebar_events .c-sidebar_data_item button, .element-operations .c-sidebar_data_item button {
   float: right;
 }
-.c-sidebar_data .c-sidebar_data_item:after, .c-sidebar_elements_properties .c-sidebar_data_item:after, .c-dialogue .c-sidebar_data_item:after, .c-sidebar_events .c-sidebar_data_item:after {
+.c-sidebar_data .c-sidebar_data_item:after, .c-sidebar_elements_properties .c-sidebar_data_item:after, .c-dialogue .c-sidebar_data_item:after, .c-sidebar_events .c-sidebar_data_item:after, .element-operations .c-sidebar_data_item:after {
   content: "";
   display: table;
   clear: both;
 }
-.c-sidebar_data .c-sidebar_event_function, .c-sidebar_data .c-sidebar_event_function label, .c-sidebar_data .c-sidebar_event_function span, .c-sidebar_elements_properties .c-sidebar_event_function, .c-sidebar_elements_properties .c-sidebar_event_function label, .c-sidebar_elements_properties .c-sidebar_event_function span, .c-dialogue .c-sidebar_event_function, .c-dialogue .c-sidebar_event_function label, .c-dialogue .c-sidebar_event_function span, .c-sidebar_events .c-sidebar_event_function, .c-sidebar_events .c-sidebar_event_function label, .c-sidebar_events .c-sidebar_event_function span {
+.c-sidebar_data .c-sidebar_event_function, .c-sidebar_data .c-sidebar_event_function label, .c-sidebar_data .c-sidebar_event_function span, .c-sidebar_elements_properties .c-sidebar_event_function, .c-sidebar_elements_properties .c-sidebar_event_function label, .c-sidebar_elements_properties .c-sidebar_event_function span, .c-dialogue .c-sidebar_event_function, .c-dialogue .c-sidebar_event_function label, .c-dialogue .c-sidebar_event_function span, .c-sidebar_events .c-sidebar_event_function, .c-sidebar_events .c-sidebar_event_function label, .c-sidebar_events .c-sidebar_event_function span, .element-operations .c-sidebar_event_function, .element-operations .c-sidebar_event_function label, .element-operations .c-sidebar_event_function span {
   cursor: pointer;
 }
-.c-sidebar_data label, .c-sidebar_elements_properties label, .c-dialogue label, .c-sidebar_events label {
+.c-sidebar_data label, .c-sidebar_elements_properties label, .c-dialogue label, .c-sidebar_events label, .element-operations label {
   display: block;
   text-transform: capitalize;
   font-size: 12px;
 }
-.c-sidebar_data label:after, .c-sidebar_elements_properties label:after, .c-dialogue label:after, .c-sidebar_events label:after {
+.c-sidebar_data label:after, .c-sidebar_elements_properties label:after, .c-dialogue label:after, .c-sidebar_events label:after, .element-operations label:after {
   content: "";
   display: table;
   clear: both;
 }
-.c-sidebar_data label button, .c-sidebar_elements_properties label button, .c-dialogue label button, .c-sidebar_events label button {
+.c-sidebar_data label button, .c-sidebar_elements_properties label button, .c-dialogue label button, .c-sidebar_events label button, .element-operations label button {
   float: right;
 }
-.c-sidebar_data textarea, .c-sidebar_data input, .c-sidebar_data select, .c-sidebar_elements_properties textarea, .c-sidebar_elements_properties input, .c-sidebar_elements_properties select, .c-dialogue textarea, .c-dialogue input, .c-dialogue select, .c-sidebar_events textarea, .c-sidebar_events input, .c-sidebar_events select {
+.c-sidebar_data textarea, .c-sidebar_data input, .c-sidebar_data select, .c-sidebar_elements_properties textarea, .c-sidebar_elements_properties input, .c-sidebar_elements_properties select, .c-dialogue textarea, .c-dialogue input, .c-dialogue select, .c-sidebar_events textarea, .c-sidebar_events input, .c-sidebar_events select, .element-operations textarea, .element-operations input, .element-operations select {
   font-family: "Open Sans", sans-serif;
   font-weight: lighter;
 }
-.c-sidebar_data textarea, .c-sidebar_data input, .c-sidebar_data select, .c-sidebar_data button, .c-sidebar_data .c-sidebar_event_function, .c-sidebar_data .c-sidebar_elements_property-input, .c-sidebar_data .dropdown-tree, .c-sidebar_elements_properties textarea, .c-sidebar_elements_properties input, .c-sidebar_elements_properties select, .c-sidebar_elements_properties button, .c-sidebar_elements_properties .c-sidebar_event_function, .c-sidebar_elements_properties .c-sidebar_elements_property-input, .c-sidebar_elements_properties .dropdown-tree, .c-dialogue textarea, .c-dialogue input, .c-dialogue select, .c-dialogue button, .c-dialogue .c-sidebar_event_function, .c-dialogue .c-sidebar_elements_property-input, .c-dialogue .dropdown-tree, .c-sidebar_events textarea, .c-sidebar_events input, .c-sidebar_events select, .c-sidebar_events button, .c-sidebar_events .c-sidebar_event_function, .c-sidebar_events .c-sidebar_elements_property-input, .c-sidebar_events .dropdown-tree {
+.c-sidebar_data textarea, .c-sidebar_data input, .c-sidebar_data select, .c-sidebar_data button, .c-sidebar_data .c-sidebar_event_function, .c-sidebar_data .c-sidebar_elements_property-input, .c-sidebar_data .dropdown-tree, .c-sidebar_elements_properties textarea, .c-sidebar_elements_properties input, .c-sidebar_elements_properties select, .c-sidebar_elements_properties button, .c-sidebar_elements_properties .c-sidebar_event_function, .c-sidebar_elements_properties .c-sidebar_elements_property-input, .c-sidebar_elements_properties .dropdown-tree, .c-dialogue textarea, .c-dialogue input, .c-dialogue select, .c-dialogue button, .c-dialogue .c-sidebar_event_function, .c-dialogue .c-sidebar_elements_property-input, .c-dialogue .dropdown-tree, .c-sidebar_events textarea, .c-sidebar_events input, .c-sidebar_events select, .c-sidebar_events button, .c-sidebar_events .c-sidebar_event_function, .c-sidebar_events .c-sidebar_elements_property-input, .c-sidebar_events .dropdown-tree, .element-operations textarea, .element-operations input, .element-operations select, .element-operations button, .element-operations .c-sidebar_event_function, .element-operations .c-sidebar_elements_property-input, .element-operations .dropdown-tree {
   background: rgba(43, 93, 116, 0.21);
   border: none;
   width: 100%;
@@ -214,36 +214,36 @@ orbiter-canvas iframe {
   box-shadow: 0px 1px 0 rgba(0, 0, 0, 0.19);
   transition: all .2s;
 }
-.c-sidebar_data textarea:hover, .c-sidebar_data textarea:focus, .c-sidebar_data input:hover, .c-sidebar_data input:focus, .c-sidebar_data select:hover, .c-sidebar_data select:focus, .c-sidebar_data button:hover, .c-sidebar_data button:focus, .c-sidebar_data .c-sidebar_event_function:hover, .c-sidebar_data .c-sidebar_event_function:focus, .c-sidebar_data .c-sidebar_elements_property-input:hover, .c-sidebar_data .c-sidebar_elements_property-input:focus, .c-sidebar_data .dropdown-tree:hover, .c-sidebar_data .dropdown-tree:focus, .c-sidebar_elements_properties textarea:hover, .c-sidebar_elements_properties textarea:focus, .c-sidebar_elements_properties input:hover, .c-sidebar_elements_properties input:focus, .c-sidebar_elements_properties select:hover, .c-sidebar_elements_properties select:focus, .c-sidebar_elements_properties button:hover, .c-sidebar_elements_properties button:focus, .c-sidebar_elements_properties .c-sidebar_event_function:hover, .c-sidebar_elements_properties .c-sidebar_event_function:focus, .c-sidebar_elements_properties .c-sidebar_elements_property-input:hover, .c-sidebar_elements_properties .c-sidebar_elements_property-input:focus, .c-sidebar_elements_properties .dropdown-tree:hover, .c-sidebar_elements_properties .dropdown-tree:focus, .c-dialogue textarea:hover, .c-dialogue textarea:focus, .c-dialogue input:hover, .c-dialogue input:focus, .c-dialogue select:hover, .c-dialogue select:focus, .c-dialogue button:hover, .c-dialogue button:focus, .c-dialogue .c-sidebar_event_function:hover, .c-dialogue .c-sidebar_event_function:focus, .c-dialogue .c-sidebar_elements_property-input:hover, .c-dialogue .c-sidebar_elements_property-input:focus, .c-dialogue .dropdown-tree:hover, .c-dialogue .dropdown-tree:focus, .c-sidebar_events textarea:hover, .c-sidebar_events textarea:focus, .c-sidebar_events input:hover, .c-sidebar_events input:focus, .c-sidebar_events select:hover, .c-sidebar_events select:focus, .c-sidebar_events button:hover, .c-sidebar_events button:focus, .c-sidebar_events .c-sidebar_event_function:hover, .c-sidebar_events .c-sidebar_event_function:focus, .c-sidebar_events .c-sidebar_elements_property-input:hover, .c-sidebar_events .c-sidebar_elements_property-input:focus, .c-sidebar_events .dropdown-tree:hover, .c-sidebar_events .dropdown-tree:focus {
+.c-sidebar_data textarea:hover, .c-sidebar_data textarea:focus, .c-sidebar_data input:hover, .c-sidebar_data input:focus, .c-sidebar_data select:hover, .c-sidebar_data select:focus, .c-sidebar_data button:hover, .c-sidebar_data button:focus, .c-sidebar_data .c-sidebar_event_function:hover, .c-sidebar_data .c-sidebar_event_function:focus, .c-sidebar_data .c-sidebar_elements_property-input:hover, .c-sidebar_data .c-sidebar_elements_property-input:focus, .c-sidebar_data .dropdown-tree:hover, .c-sidebar_data .dropdown-tree:focus, .c-sidebar_elements_properties textarea:hover, .c-sidebar_elements_properties textarea:focus, .c-sidebar_elements_properties input:hover, .c-sidebar_elements_properties input:focus, .c-sidebar_elements_properties select:hover, .c-sidebar_elements_properties select:focus, .c-sidebar_elements_properties button:hover, .c-sidebar_elements_properties button:focus, .c-sidebar_elements_properties .c-sidebar_event_function:hover, .c-sidebar_elements_properties .c-sidebar_event_function:focus, .c-sidebar_elements_properties .c-sidebar_elements_property-input:hover, .c-sidebar_elements_properties .c-sidebar_elements_property-input:focus, .c-sidebar_elements_properties .dropdown-tree:hover, .c-sidebar_elements_properties .dropdown-tree:focus, .c-dialogue textarea:hover, .c-dialogue textarea:focus, .c-dialogue input:hover, .c-dialogue input:focus, .c-dialogue select:hover, .c-dialogue select:focus, .c-dialogue button:hover, .c-dialogue button:focus, .c-dialogue .c-sidebar_event_function:hover, .c-dialogue .c-sidebar_event_function:focus, .c-dialogue .c-sidebar_elements_property-input:hover, .c-dialogue .c-sidebar_elements_property-input:focus, .c-dialogue .dropdown-tree:hover, .c-dialogue .dropdown-tree:focus, .c-sidebar_events textarea:hover, .c-sidebar_events textarea:focus, .c-sidebar_events input:hover, .c-sidebar_events input:focus, .c-sidebar_events select:hover, .c-sidebar_events select:focus, .c-sidebar_events button:hover, .c-sidebar_events button:focus, .c-sidebar_events .c-sidebar_event_function:hover, .c-sidebar_events .c-sidebar_event_function:focus, .c-sidebar_events .c-sidebar_elements_property-input:hover, .c-sidebar_events .c-sidebar_elements_property-input:focus, .c-sidebar_events .dropdown-tree:hover, .c-sidebar_events .dropdown-tree:focus, .element-operations textarea:hover, .element-operations textarea:focus, .element-operations input:hover, .element-operations input:focus, .element-operations select:hover, .element-operations select:focus, .element-operations button:hover, .element-operations button:focus, .element-operations .c-sidebar_event_function:hover, .element-operations .c-sidebar_event_function:focus, .element-operations .c-sidebar_elements_property-input:hover, .element-operations .c-sidebar_elements_property-input:focus, .element-operations .dropdown-tree:hover, .element-operations .dropdown-tree:focus {
   transform: scale(1.01);
   background: #3c5764;
   box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.07), 0px 2px 0px rgba(0, 0, 0, 0.14);
 }
-.c-sidebar_data .c-sidebar_elements_property-input, .c-sidebar_elements_properties .c-sidebar_elements_property-input, .c-dialogue .c-sidebar_elements_property-input, .c-sidebar_events .c-sidebar_elements_property-input {
+.c-sidebar_data .c-sidebar_elements_property-input, .c-sidebar_elements_properties .c-sidebar_elements_property-input, .c-dialogue .c-sidebar_elements_property-input, .c-sidebar_events .c-sidebar_elements_property-input, .element-operations .c-sidebar_elements_property-input {
   min-height: 32px;
 }
-.c-sidebar_data textarea:hover, .c-sidebar_data textarea:focus, .c-sidebar_elements_properties textarea:hover, .c-sidebar_elements_properties textarea:focus, .c-dialogue textarea:hover, .c-dialogue textarea:focus, .c-sidebar_events textarea:hover, .c-sidebar_events textarea:focus {
+.c-sidebar_data textarea:hover, .c-sidebar_data textarea:focus, .c-sidebar_elements_properties textarea:hover, .c-sidebar_elements_properties textarea:focus, .c-dialogue textarea:hover, .c-dialogue textarea:focus, .c-sidebar_events textarea:hover, .c-sidebar_events textarea:focus, .element-operations textarea:hover, .element-operations textarea:focus {
   transform: scale(1);
 }
-.c-sidebar_data button, .c-sidebar_elements_properties button, .c-dialogue button, .c-sidebar_events button {
+.c-sidebar_data button, .c-sidebar_elements_properties button, .c-dialogue button, .c-sidebar_events button, .element-operations button {
   background: #9fbe3c;
   width: auto;
   color: #213037;
   cursor: pointer;
 }
-.c-sidebar_data button:focus, .c-sidebar_elements_properties button:focus, .c-dialogue button:focus, .c-sidebar_events button:focus {
+.c-sidebar_data button:focus, .c-sidebar_elements_properties button:focus, .c-dialogue button:focus, .c-sidebar_events button:focus, .element-operations button:focus {
   background: #9fbe3c;
   transform: scale(1);
 }
-.c-sidebar_data button:hover, .c-sidebar_elements_properties button:hover, .c-dialogue button:hover, .c-sidebar_events button:hover {
+.c-sidebar_data button:hover, .c-sidebar_elements_properties button:hover, .c-dialogue button:hover, .c-sidebar_events button:hover, .element-operations button:hover {
   background: #9fbe3c;
   transform: scale(1.05);
 }
-.c-sidebar_data button.circle, .c-sidebar_elements_properties button.circle, .c-dialogue button.circle, .c-sidebar_events button.circle {
+.c-sidebar_data button.circle, .c-sidebar_elements_properties button.circle, .c-dialogue button.circle, .c-sidebar_events button.circle, .element-operations button.circle {
   width: 28px;
   border-radius: 50%;
 }
-.c-sidebar_data button.small, .c-sidebar_elements_properties button.small, .c-dialogue button.small, .c-sidebar_events button.small {
+.c-sidebar_data button.small, .c-sidebar_elements_properties button.small, .c-dialogue button.small, .c-sidebar_events button.small, .element-operations button.small {
   padding: 3px;
   width: 15px;
   height: 15px;
@@ -252,31 +252,31 @@ orbiter-canvas iframe {
   vertical-align: middle;
   box-shadow: none;
 }
-.c-sidebar_data button.small.info, .c-sidebar_elements_properties button.small.info, .c-dialogue button.small.info, .c-sidebar_events button.small.info {
+.c-sidebar_data button.small.info, .c-sidebar_elements_properties button.small.info, .c-dialogue button.small.info, .c-sidebar_events button.small.info, .element-operations button.small.info {
   font-size: 12px;
   padding: 1px 3px;
 }
-.c-sidebar_data button.blue, .c-sidebar_elements_properties button.blue, .c-dialogue button.blue, .c-sidebar_events button.blue {
+.c-sidebar_data button.blue, .c-sidebar_elements_properties button.blue, .c-dialogue button.blue, .c-sidebar_events button.blue, .element-operations button.blue {
   background: #213037;
 }
-.c-sidebar_data button.blue:focus, .c-sidebar_data button.blue:hover, .c-sidebar_elements_properties button.blue:focus, .c-sidebar_elements_properties button.blue:hover, .c-dialogue button.blue:focus, .c-dialogue button.blue:hover, .c-sidebar_events button.blue:focus, .c-sidebar_events button.blue:hover {
+.c-sidebar_data button.blue:focus, .c-sidebar_data button.blue:hover, .c-sidebar_elements_properties button.blue:focus, .c-sidebar_elements_properties button.blue:hover, .c-dialogue button.blue:focus, .c-dialogue button.blue:hover, .c-sidebar_events button.blue:focus, .c-sidebar_events button.blue:hover, .element-operations button.blue:focus, .element-operations button.blue:hover {
   background: #213037;
 }
-.c-sidebar_data button.light-blue, .c-sidebar_elements_properties button.light-blue, .c-dialogue button.light-blue, .c-sidebar_events button.light-blue {
+.c-sidebar_data button.light-blue, .c-sidebar_elements_properties button.light-blue, .c-dialogue button.light-blue, .c-sidebar_events button.light-blue, .element-operations button.light-blue {
   background: #35728e;
 }
-.c-sidebar_data button.light-blue:focus, .c-sidebar_data button.light-blue:hover, .c-sidebar_elements_properties button.light-blue:focus, .c-sidebar_elements_properties button.light-blue:hover, .c-dialogue button.light-blue:focus, .c-dialogue button.light-blue:hover, .c-sidebar_events button.light-blue:focus, .c-sidebar_events button.light-blue:hover {
+.c-sidebar_data button.light-blue:focus, .c-sidebar_data button.light-blue:hover, .c-sidebar_elements_properties button.light-blue:focus, .c-sidebar_elements_properties button.light-blue:hover, .c-dialogue button.light-blue:focus, .c-dialogue button.light-blue:hover, .c-sidebar_events button.light-blue:focus, .c-sidebar_events button.light-blue:hover, .element-operations button.light-blue:focus, .element-operations button.light-blue:hover {
   background: #35728e;
 }
-.c-sidebar_data button.red, .c-sidebar_data button.red:hover, .c-sidebar_elements_properties button.red, .c-sidebar_elements_properties button.red:hover, .c-dialogue button.red, .c-dialogue button.red:hover, .c-sidebar_events button.red, .c-sidebar_events button.red:hover {
+.c-sidebar_data button.red, .c-sidebar_data button.red:hover, .c-sidebar_elements_properties button.red, .c-sidebar_elements_properties button.red:hover, .c-dialogue button.red, .c-dialogue button.red:hover, .c-sidebar_events button.red, .c-sidebar_events button.red:hover, .element-operations button.red, .element-operations button.red:hover {
   background: #962525;
   color: #fff;
 }
-.c-sidebar_data button.orange, .c-sidebar_data button.orange:hover, .c-sidebar_elements_properties button.orange, .c-sidebar_elements_properties button.orange:hover, .c-dialogue button.orange, .c-dialogue button.orange:hover, .c-sidebar_events button.orange, .c-sidebar_events button.orange:hover {
+.c-sidebar_data button.orange, .c-sidebar_data button.orange:hover, .c-sidebar_elements_properties button.orange, .c-sidebar_elements_properties button.orange:hover, .c-dialogue button.orange, .c-dialogue button.orange:hover, .c-sidebar_events button.orange, .c-sidebar_events button.orange:hover, .element-operations button.orange, .element-operations button.orange:hover {
   background: #D67100;
   color: #fff;
 }
-.c-sidebar_data button.info, .c-sidebar_elements_properties button.info, .c-dialogue button.info, .c-sidebar_events button.info {
+.c-sidebar_data button.info, .c-sidebar_elements_properties button.info, .c-dialogue button.info, .c-sidebar_events button.info, .element-operations button.info {
   font-weight: bold;
   font-family: serif;
   font-style: italic;
@@ -794,6 +794,9 @@ property-mapper-dialogue .property label small {
   font-weight: 100;
   font-size: 12px;
 }
+property-mapper-dialogue .property button {
+  margin: 0px;
+}
 property-mapper-dialogue .property .property-options-wrapper {
   display: table-cell;
   position: relative;
@@ -1125,4 +1128,35 @@ property-selector-dialogue.c-dialogue {
 .property-tree-cell-item:hover, .property-tree-cell-item.active {
   background-color: #9fbe3c;
   color: #213037;
+}
+
+.element-operations {
+  display: flex;
+}
+.element-operations button {
+  margin: 0px 0px 2px;
+  border-radius: 0px;
+  width: auto;
+  display: block;
+  flex-grow: 1;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+}
+.element-operations button:nth-child(1) {
+  background-color: #4684a0;
+}
+.element-operations button:nth-child(2) {
+  background-color: #3f758f;
+}
+.element-operations button:nth-child(3) {
+  background-color: #37677d;
+}
+.element-operations button:nth-child(4) {
+  background-color: #2f586b;
+}
+.element-operations button:nth-child(5) {
+  background-color: #D67100;
+}
+.element-operations button:hover {
+  color: #fff;
 }

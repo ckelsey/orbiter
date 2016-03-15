@@ -1,8 +1,7 @@
 /* TODO
 
--   Change event target/values to popups:
-        - dropdown for element or property
-        - list of the above, click to save path
+-   Change map property target/values to popups
+
 
 
     APP:
@@ -46,16 +45,14 @@
         - Drag to resize node
 
     Events:
-        - workflow:
-            Tasks:
-                [task type(set, if, endif, for, etc)] [property] [action(=, ===, etc)] [propert, value]
+        - validate that all options are set(type, target, etc...)
 */
 
 
 (function () {
     'use strict';
 
-    function OrbiterService(InteractiveService, InteractiveProperties, InteractiveMethods, OrbiterElementTypes, $localStorage){
+    function OrbiterService(InteractiveService, InteractiveProperties, InteractiveMethods, OrbiterElementTypes, $localStorage, $timeout){
         var self = {
             dragging: null,
             drag: function(data){
@@ -63,35 +60,118 @@
                 InteractiveService.dragging = data;
             },
 
-            addToInteractive: function(parent, data){
-                var node = data;
-                node.id = data.label;
-                node.orbiterType = 'element';
-                var tempNumber = 1;
+            elementClipboard: null,
+            elementTrashcan: {},
 
-                while(InteractiveService.properties.hasOwnProperty(node.id +' '+ tempNumber)){
-                    tempNumber++;
+            deleteElement: function(el){
+                var elData = self.findInHtmlTree(el.id);
+                self.elementTrashcan = {
+                    properties: angular.copy(InteractiveService.properties[el.id]),
+                    elementData: self.findInHtmlTree(el.id)
+                };
+                self.findInHtmlTree(el.id, 'delete');
+                delete InteractiveService.properties[el.id];
+            },
+
+            copyElement: function(el){
+                var elData = self.findInHtmlTree(el.id);
+                self.elementClipboard = {properties: angular.copy(InteractiveService.properties[el.id]), element: elData.element};
+            },
+
+            pasteElement: function(el){
+                var elData = self.findInHtmlTree(el.id);
+                if(self.elementClipboard && elData.element){
+                    var toPaste = self.elementClipboard.properties;
+                    toPaste.nodes = self.elementClipboard.element.nodes;
+                    //Cycle thru nodes and apply new id's
+                    self.addToInteractive(elData.element, toPaste)
+                }
+            },
+
+            moveElementUp: function(el){
+                var elData = self.findInHtmlTree(el.id);
+                var newIndex = elData.index ? elData.index - 1 : elData.index;
+                elData.parent.nodes.splice(newIndex, 0, elData.parent.nodes.splice(elData.index, 1)[0]);
+            },
+
+            moveElementDown: function(el){
+                var elData = self.findInHtmlTree(el.id);
+                var newIndex = elData.index + 1;
+                elData.parent.nodes.splice(newIndex, 0, elData.parent.nodes.splice(elData.index, 1)[0]);
+            },
+
+            findInHtmlTree: function(id, action){
+                function findElement(obj){
+                    for(var n=0;n<obj.nodes.length;n++){
+                        if (obj.nodes[n].id === id){
+                            if(action === 'delete'){
+                                obj.nodes.splice(n, 1);
+                                return InteractiveService.htmlTree;
+                            }else{
+                                return {parent: obj, index: n, element: obj.nodes[n]};
+                            }
+                        }
+
+                        if(obj.nodes[n].nodes.length > 0){
+                            return findElement(obj.nodes[n]);
+                        }
+                    }
                 }
 
-                node.id = node.id +' '+ tempNumber;
+                return findElement(InteractiveService.htmlTree);
+            },
+
+            giveUniqueId: function(node){
+                var tempNumber = 1;
+                node.id = node.id || node.label;
+                var oldID = node.id;
+                if(InteractiveService.properties.hasOwnProperty(node.id)){
+                    while(InteractiveService.properties.hasOwnProperty(node.id +' '+ tempNumber)){
+                        tempNumber++;
+                    }
+                    node.id = node.id +' '+ tempNumber;
+                }
+
+                if(node.id !== oldID){
+                    for(var p in node.properties){
+                        if(node.properties[p].bind){
+                            var bind = node.properties[p].bind.split('.');
+                            if(bind[0] === oldID){
+                                bind[0] = node.id;
+                                node.properties[p].bind = bind.join('.');
+                            }
+                        }
+                    }
+                }
+
+                return node;
+            },
+
+            addToInteractive: function(parent, data){
+                var node = self.giveUniqueId(data);
+                node.created = new Date().getTime();
+                node.orbiterType = 'element';
+
                 for(var p in node.properties){
-                    node.properties[p].bind = node.id +'.properties.'+ p;
+                    node.properties[p].bind = node.properties[p].bind ? node.properties[p].bind : node.id +'.properties.'+ p;
                 }
 
                 if(parent.id !== node.id){
+                    if(!node.nodes){
+                        node.nodes = [];
+                    }else{
+
+                    }
                     parent.nodes.push({
                         id: node.id,
-                        nodes: []
+                        nodes: node.nodes || []
                     });
+
+                    delete node.nodes;
                     InteractiveService.properties[node.id] = node;
-                    // InteractiveService.properties[node.id] = {};
-                    // for(var p in node.properties){
-                    //     node.properties[p].bind = InteractiveService.propertyPrefix + node.id +'.'+ p;
-                    //     InteractiveService.properties[InteractiveService.propertyPrefix + node.id][p] = {value:node.properties[p].value};
-                    // }
-                    // InteractiveService.elementProperties = node;
-                    // parent.nodes.push(node);
                 }
+
+                console.log(InteractiveService.properties)
             },
 
             stagedElementIdConflict: null,
@@ -124,7 +204,7 @@
                 }else if(data.id.indexOf('.') > -1){
                     self.stagedElementIdConflict = "Element name cannont contain periods(.)";
                     reset();
-                }else if(InteractiveService.properties.hasOwnProperty(data.id)){
+                }else if(InteractiveService.properties.hasOwnProperty(data.id) && data.created !== InteractiveService.properties[data.id].created){
                     self.stagedElementIdConflict = "There is already an element with this name";
                     reset();
                 }else{
@@ -146,7 +226,8 @@
 
                     InteractiveService.properties[data.id] = InteractiveService.properties[originalID];
                     delete InteractiveService.properties[originalID];
-                    updateElement(InteractiveService.htmlTree)
+                    updateElement(InteractiveService.htmlTree);
+                    self.save();
                 }
             },
 
@@ -157,7 +238,6 @@
                 }
                 data.active = true;
                 InteractiveService.elementProperties = data;
-                console.log(InteractiveService.elementProperties)
             },
 
             save: function(){
@@ -232,8 +312,6 @@
                     self.stagedNewProperty = null;
                 }
             },
-
-
             propertySelectorDialogue: null
         };
 
@@ -247,6 +325,17 @@
         for(var prop in InteractiveService.properties){
             if(InteractiveService.properties[prop].hasOwnProperty('defaultValue')){
                 InteractiveService.properties[prop].value = InteractiveService.properties[prop].defaultValue;
+            }else if(InteractiveService.properties[prop].hasOwnProperty('properties') && InteractiveService.properties[prop].orbiterType === 'element'){
+                for(var p in InteractiveService.properties[prop].properties){
+                    try{
+                        var bind = InteractiveService.lookUpPath(InteractiveService.properties, InteractiveService.properties[prop].properties[p].bind);
+                        if(bind){
+                            InteractiveService.properties[prop].properties[p].value = bind.hasOwnProperty('defaultValue')? bind.defaultValue : bind.hasOwnProperty('value') ? bind.value : bind;
+                        }
+                    }catch(e){
+                        //console.log(InteractiveService.properties[prop].properties[p], p)
+                    }
+                }
             }
         }
 

@@ -1,6 +1,6 @@
 <div ng-controller="InteractiveCtlr as ictlr" class="m-height100">
     <div
-        ng-repeat="data in ictlr.InteractiveService.htmlTree.nodes track by $index"
+        ng-repeat="data in ictlr.InteractiveService.htmlTree.nodes track by data.id"
         interactive-node="data"
         interactive-node-parent="ictlr.InteractiveService.htmlTree"
         ng-init="path = $index"
