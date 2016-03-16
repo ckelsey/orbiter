@@ -85,15 +85,18 @@
 
         this.dialogueOpen = false;
 
+        this.isDialogueOpen = function(){
+            self.dialogueOpen = false;
+            if(self.OrbiterService.newDataObject || self.OrbiterService.propertyDialogue || self.OrbiterService.currentEventObject || self.OrbiterService.propertyMapperDialogue || self.OrbiterService.propertySelectorDialogue){
+                self.dialogueOpen = true;
+            }
+        };
+
         $scope.$watch(function(){
             return self.OrbiterService.newDataObject;
         }, function(o,n){
             if(o !== n){
-                if(self.OrbiterService.newDataObject){
-                    self.dialogueOpen = true;
-                }else{
-                    self.dialogueOpen = false;
-                }
+                self.isDialogueOpen();
             }
         });
 
@@ -101,11 +104,7 @@
             return self.OrbiterService.propertyDialogue;
         }, function(o,n){
             if(o !== n){
-                if(self.OrbiterService.propertyDialogue){
-                    self.dialogueOpen = true;
-                }else{
-                    self.dialogueOpen = false;
-                }
+                self.isDialogueOpen();
             }
         });
 
@@ -113,11 +112,7 @@
             return self.OrbiterService.currentEventObject;
         }, function(o,n){
             if(o !== n){
-                if(self.OrbiterService.currentEventObject){
-                    self.dialogueOpen = true;
-                }else{
-                    self.dialogueOpen = false;
-                }
+                self.isDialogueOpen();
             }
         });
 
@@ -125,11 +120,7 @@
             return self.OrbiterService.propertyMapperDialogue;
         }, function(o,n){
             if(o !== n){
-                if(self.OrbiterService.propertyMapperDialogue){
-                    self.dialogueOpen = true;
-                }else{
-                    self.dialogueOpen = false;
-                }
+                self.isDialogueOpen();
             }
         });
 
@@ -137,11 +128,7 @@
             return self.OrbiterService.propertySelectorDialogue;
         }, function(o,n){
             if(o !== n){
-                if(self.OrbiterService.propertySelectorDialogue){
-                    self.dialogueOpen = true;
-                }else{
-                    self.dialogueOpen = false;
-                }
+                self.isDialogueOpen();
             }
         });
     }

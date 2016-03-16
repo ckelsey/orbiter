@@ -22,7 +22,7 @@
 
                     var html = ''+
                         '<div class="c-expandable" ng-class="diplayPropertiesToggled ? \'active\' : \'\'">'+
-                            '<div class="c-expandable_toggler" ng-click="diplayPropertiesToggled ? diplayPropertiesToggled=false : diplayPropertiesToggled=true">Display</div>' +
+                            '<div class="c-expandable_toggler c-sidebar_section-wrapper_inner-section" ng-click="diplayPropertiesToggled ? diplayPropertiesToggled=false : diplayPropertiesToggled=true">Display</div>' +
                             '<div class="c-expandable_content">' +
                                 '<div class="c-expandable_content-inner">' +
                                     '<div class="c-input-row">'+

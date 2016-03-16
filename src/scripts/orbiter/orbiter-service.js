@@ -1,9 +1,4 @@
 /* TODO
-
--   Change map property target/values to popups
-
-
-
     APP:
         - CSS
             - clean up transitions, make specific
@@ -13,17 +8,13 @@
         - mflyCommands
 
     Properties:
-        - rename
         - delete
 
         - Style classes
         - Global CSS
 
-    Elements:
-        - delete
-        - move, maybe a copy/cut+paste
-
     CSS:
+        - css states :hover :focus :blur
         - outline
         - cursor
         - box-shadow: breakup into arrays of objects. Example:
@@ -41,11 +32,9 @@
     Node selection:
         - blur/opacity others
         - view buttons : all(show all node borders), selected(blurs others and shows node borders), none(hide all borders)
-        - handle nested elements - <node><node></node></node>
+        - handle nested elements - <node><node>text</node></node>
         - Drag to resize node
 
-    Events:
-        - validate that all options are set(type, target, etc...)
 */
 
 
@@ -64,27 +53,37 @@
             elementTrashcan: {},
 
             deleteElement: function(el){
-                var elData = self.findInHtmlTree(el.id);
-                self.elementTrashcan = {
-                    properties: angular.copy(InteractiveService.properties[el.id]),
-                    elementData: self.findInHtmlTree(el.id)
-                };
-                self.findInHtmlTree(el.id, 'delete');
-                delete InteractiveService.properties[el.id];
+                var id = el.id;
+                self.findInHtmlTree(id, 'delete');
+                delete InteractiveService.properties[id];
             },
 
             copyElement: function(el){
                 var elData = self.findInHtmlTree(el.id);
-                self.elementClipboard = {properties: angular.copy(InteractiveService.properties[el.id]), element: elData.element};
+                self.elementClipboard = self.aggregateElementData(elData.element);
             },
 
             pasteElement: function(el){
+                var paste = function(obj, parent){
+                    var node = self.giveUniqueId(obj);
+                    var children = node.nodes;
+                    delete node.nodes;
+                    var nodeIndex = parent.nodes.length;
+                    parent.nodes.push({
+                        id: node.id,
+                        nodes: []
+                    });
+                    InteractiveService.properties[node.id] = node;
+                    for(var n=0;n<children.length;n++){
+                        paste(children[n], parent.nodes[nodeIndex]);
+                    }
+                };
+
+
+
                 var elData = self.findInHtmlTree(el.id);
                 if(self.elementClipboard && elData.element){
-                    var toPaste = self.elementClipboard.properties;
-                    toPaste.nodes = self.elementClipboard.element.nodes;
-                    //Cycle thru nodes and apply new id's
-                    self.addToInteractive(elData.element, toPaste)
+                    paste(self.elementClipboard, elData.element);
                 }
             },
 
@@ -147,6 +146,15 @@
                 return node;
             },
 
+            aggregateElementData: function(obj){
+                var newObject = angular.copy(InteractiveService.properties[obj.id]);
+                newObject.nodes = angular.copy(obj.nodes);
+                for(var n=0;n<newObject.nodes.length;n++){
+                    newObject.nodes[n] = self.aggregateElementData(newObject.nodes[n]);
+                }
+                return newObject;
+            },
+
             addToInteractive: function(parent, data){
                 var node = self.giveUniqueId(data);
                 node.created = new Date().getTime();
@@ -157,21 +165,16 @@
                 }
 
                 if(parent.id !== node.id){
-                    if(!node.nodes){
-                        node.nodes = [];
-                    }else{
-
-                    }
                     parent.nodes.push({
                         id: node.id,
-                        nodes: node.nodes || []
+                        nodes: []
                     });
 
                     delete node.nodes;
                     InteractiveService.properties[node.id] = node;
+                    return parent.nodes[parent.nodes.length-1];
                 }
-
-                console.log(InteractiveService.properties)
+                return false;
             },
 
             stagedElementIdConflict: null,
@@ -275,6 +278,51 @@
             newDataObject: null,
 
             currentEventObject: null,
+            currentEventObjectError: {label: null, tasks:[], taskErrors: false},
+            currentEventObjectValidator: function(save){
+                self.currentEventObjectError = {label: null, tasks:[], taskErrors: false};
+                if(!self.currentEventObject.label && self.currentEventObject.fn.length > 0){
+                    self.currentEventObjectError.label = 'Title is required';
+                }
+
+                for(var f=0;f<self.currentEventObject.fn.length;f++){
+                    var errors = [];
+                    if(!self.currentEventObject.fn[f].type){
+                        errors.push('Type');
+                    }
+
+                    if(!self.currentEventObject.fn[f].target){
+                        errors.push('Target');
+                    }
+
+                    if(!self.currentEventObject.fn[f].action){
+                        errors.push('Action');
+                    }
+
+                    if(!self.currentEventObject.fn[f].valueType){
+                        errors.push('Value Type');
+                    }
+
+                    if(!self.currentEventObject.fn[f].value && self.currentEventObject.fn[f].valueType === 'proprty'){
+                        errors.push('Value');
+                    }
+
+                    if(errors.length){
+                        errors = 'Missing required fields: ' + errors.join(', ');
+                        self.currentEventObjectError.tasks[f] = errors;
+                        self.currentEventObjectError.taskErrors = true;
+                    }else{
+                        self.currentEventObjectError.tasks[f] = null;
+                    }
+                }
+
+                if(!self.currentEventObjectError.label && !self.currentEventObjectError.taskErrors){
+                    if(save){
+                        self.save();
+                    }
+                    self.currentEventObject = null;
+                }
+            },
 
             removeArrayElement: function(obj, index){
                 return obj.splice(index, 1);
@@ -355,8 +403,6 @@
             self.addToInteractive(InteractiveService.htmlTree, OrbiterElementTypes.block);
 
         }
-
-        console.log(InteractiveService.htmlTree, InteractiveService.properties);
 
 
         return self;

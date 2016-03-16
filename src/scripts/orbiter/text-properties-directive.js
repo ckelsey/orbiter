@@ -19,10 +19,10 @@
                             scope.textProperties[availableStyles[i]] = thisStyle;
                         }
                     }
-                
+
                     var html = ''+
                         '<div class="c-expandable" ng-class="textSettingsToggled ? \'active\' : \'\'">'+
-                            '<div class="c-expandable_toggler" ng-click="textSettingsToggled ? textSettingsToggled=false : textSettingsToggled=true">Text settings</div>' +
+                            '<div class="c-expandable_toggler c-sidebar_section-wrapper_inner-section" ng-click="textSettingsToggled ? textSettingsToggled=false : textSettingsToggled=true">Text settings</div>' +
                             '<div class="c-expandable_content">' +
                                 '<div class="c-expandable_content-inner">' +
                                     '<div class="c-input-row">'+

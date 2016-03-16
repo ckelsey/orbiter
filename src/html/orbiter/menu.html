@@ -1,11 +1,11 @@
 <div class="c-orbiter_menu">
     <div class="left-side">
-        <div class="c-orbiter_menu-item" ng-click="orb.OrbiterService.save()"><i class="fa fa-check"></i></div>
-        <div class="c-orbiter_menu-item c-dropdown">
+        <div class="c-orbiter_menu_item" ng-click="orb.OrbiterService.save()"><i class="fa fa-check"></i></div>
+        <div class="c-orbiter_menu_item c-dropdown">
             <div><i class="fa fa-plus"></i></div>
             <div class="c-dropdown_list">
                 <div
-                    class="c-elements_item"
+                    class="c-dropdown_list_item"
                     ng-class="'type'+element.label"
                     ng-repeat="element in orb.OrbiterElementTypes track by $index"
                     orbiter-draggable="true"
@@ -15,6 +15,6 @@
         </div>
     </div>
     <div class="right-side">
-        <div class="c-orbiter_menu-item" ng-click="orb.OrbiterService.propertyDialogue=true" style="font-weight: bold; font-size: 18px; line-height: 24px; padding-bottom: 4px; box-sizing: border-box;">@</div>
+        <div class="c-orbiter_menu_item" ng-click="orb.OrbiterService.propertyDialogue=true" style="font-weight: bold; font-size: 18px; line-height: 24px; padding-bottom: 4px; box-sizing: border-box;">@</div>
     </div>
 </div>

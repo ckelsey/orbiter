@@ -16,7 +16,7 @@
 
                     var html = ''+
                         '<div class="c-expandable" ng-class="borderPropertiesToggled ? \'active\' : \'\'">'+
-                            '<div class="c-expandable_toggler" ng-click="borderPropertiesToggled ? borderPropertiesToggled=false : borderPropertiesToggled=true">Borders</div>' +
+                            '<div class="c-expandable_toggler c-sidebar_section-wrapper_inner-section" ng-click="borderPropertiesToggled ? borderPropertiesToggled=false : borderPropertiesToggled=true">Borders</div>' +
                             '<div class="c-expandable_content">' +
                                 '<div class="c-expandable_content-inner">' +
                                     '<div class="c-border-table">'+

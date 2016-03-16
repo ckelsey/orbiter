@@ -22,7 +22,7 @@
 
                     var html = ''+
                         '<div class="c-expandable" ng-class="spacingSettingsToggled ? \'active\' : \'\'">'+
-                            '<div class="c-expandable_toggler" ng-click="spacingSettingsToggled ? spacingSettingsToggled=false : spacingSettingsToggled=true">Margin - Padding</div>' +
+                            '<div class="c-expandable_toggler c-sidebar_section-wrapper_inner-section" ng-click="spacingSettingsToggled ? spacingSettingsToggled=false : spacingSettingsToggled=true">Margin - Padding</div>' +
                             '<div class="c-expandable_content">' +
                                 '<div class="c-expandable_content-inner">' +
                                     '<div class="c-spacing-table margin">'+
