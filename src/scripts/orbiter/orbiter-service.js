@@ -1,17 +1,13 @@
 /* TODO
-    - array, number type
-    - orbiterType messing up object selection
-
+    - orbiterType messing up object selection. Combine Available props with prop selector logic. Available props actually shows what I want
+    - img, video, iframe, audio
 
     APP:
-        - Do lists
-        - create templates
 
-    Import libraries:
+    Libraries:
         - manual import
 
     Properties:
-        - delete
         - Style classes
         - Global CSS
         - bind group and individual properties
@@ -40,12 +36,13 @@
     Node selection:
         - blur/opacity others
         - view buttons : all(show all node borders), selected(blurs others and shows node borders), none(hide all borders)
-        - handle nested elements - <node><node>text</node></node>
         - Drag to resize node
 
     - On property delete, find all bindings and update t default(with a warning that that is happening)
     - Walkthru
     - Undo/redo everything
+
+
 
 */
 
@@ -91,6 +88,9 @@
             }
             return true;
         }
+
+
+
         var self = {
             htmlTreeView: false,
             dragging: null,
@@ -105,7 +105,7 @@
             deleteElement: function(el){
                 var id = el.id;
                 self.findInHtmlTree(id, 'delete');
-                delete InteractiveService.properties[id];
+                delete InteractiveService.elements[id];
             },
 
             copyElement: function(el){
@@ -123,7 +123,7 @@
                         id: node.id,
                         nodes: []
                     });
-                    InteractiveService.properties[node.id] = node;
+                    InteractiveService.elements[node.id] = node;
                     for(var n=0;n<children.length;n++){
                         paste(children[n], parent.nodes[nodeIndex]);
                     }
@@ -174,8 +174,8 @@
                 var tempNumber = 1;
                 node.id = node.id || node.label;
                 var oldID = node.id;
-                if(InteractiveService.properties.hasOwnProperty(node.id)){
-                    while(InteractiveService.properties.hasOwnProperty(node.id +' '+ tempNumber)){
+                if(InteractiveService.elements.hasOwnProperty(node.id)){
+                    while(InteractiveService.elements.hasOwnProperty(node.id +' '+ tempNumber)){
                         tempNumber++;
                     }
                     node.id = node.id +' '+ tempNumber;
@@ -197,7 +197,7 @@
             },
 
             aggregateElementData: function(obj){
-                var newObject = angular.copy(InteractiveService.properties[obj.id]);
+                var newObject = angular.copy(InteractiveService.elements[obj.id]);
                 newObject.nodes = angular.copy(obj.nodes);
                 for(var n=0;n<newObject.nodes.length;n++){
                     newObject.nodes[n] = self.aggregateElementData(newObject.nodes[n]);
@@ -211,7 +211,7 @@
                 node.orbiterType = 'element';
 
                 for(var p in node.properties){
-                    node.properties[p].bind = node.properties[p].bind ? node.properties[p].bind : 'properties.'+ node.id +'.properties.'+ p;
+                    node.properties[p].bind = node.properties[p].bind ? node.properties[p].bind : 'elements.'+ node.id +'.properties.'+ p;
                 }
 
                 if(parent.id !== node.id){
@@ -221,7 +221,8 @@
                     });
 
                     delete node.nodes;
-                    InteractiveService.properties[node.id] = node;
+                    InteractiveService.elements[node.id] = node;
+                    console.log(InteractiveService)
                     return parent.nodes[parent.nodes.length-1];
                 }
                 return false;
@@ -231,9 +232,9 @@
             updateElementId: function(data){
                 var originalID = null;
                 function reset() {
-                    for(var key in InteractiveService.properties){
-                        if(InteractiveService.properties[key].id === data.id){
-                            InteractiveService.properties[key].id = key;
+                    for(var key in InteractiveService.elements){
+                        if(InteractiveService.elements[key].id === data.id){
+                            InteractiveService.elements[key].id = key;
                             break;
                         }
                     }
@@ -257,28 +258,28 @@
                 }else if(data.id.indexOf('.') > -1){
                     self.stagedElementIdConflict = "Element name cannont contain periods(.)";
                     reset();
-                }else if(InteractiveService.properties.hasOwnProperty(data.id) && data.created !== InteractiveService.properties[data.id].created){
+                }else if(InteractiveService.elements.hasOwnProperty(data.id) && data.created !== InteractiveService.elements[data.id].created){
                     self.stagedElementIdConflict = "There is already an element with this name";
                     reset();
                 }else{
                     self.stagedElementIdConflict = null;
-                    for(var key in InteractiveService.properties){
-                        if(InteractiveService.properties[key].id === data.id){
+                    for(var key in InteractiveService.elements){
+                        if(InteractiveService.elements[key].id === data.id){
                             originalID = key;
 
-                            for(var prop in InteractiveService.properties[key].properties){
-                                var bind = InteractiveService.properties[key].properties[prop].bind.split('.');
+                            for(var prop in InteractiveService.elements[key].properties){
+                                var bind = InteractiveService.elements[key].properties[prop].bind.split('.');
                                 if(bind[0] === originalID){
                                     bind[0] = data.id;
-                                    InteractiveService.properties[key].properties[prop].bind = bind.join('.');
+                                    InteractiveService.elements[key].properties[prop].bind = bind.join('.');
                                 }
                             }
                             break;
                         }
                     }
 
-                    InteractiveService.properties[data.id] = InteractiveService.properties[originalID];
-                    delete InteractiveService.properties[originalID];
+                    InteractiveService.elements[data.id] = InteractiveService.elements[originalID];
+                    delete InteractiveService.elements[originalID];
                     updateElement(InteractiveService.htmlTree);
                     self.save();
                 }
@@ -307,6 +308,7 @@
                 }
                 $localStorage.OrbiterInteractiveTree = InteractiveService.htmlTree;
                 $localStorage.OrbiterInteractiveProperties = InteractiveService.properties;
+                $localStorage.OrbiterInteractiveElements = InteractiveService.elements;
                 $localStorage.OrbiterInteractiveMethods = InteractiveService.methods;
             },
 
@@ -398,9 +400,9 @@
 
             stagedNewProperty: null,
             stagedPropertyErrors: false,
-            buildObject: function(obj){
+            buildObject: function(obj, parent){
                 obj.errors = {key:null, type:null};
-                if(!obj.key){
+                if(!obj.key && parent && parent.type !== 'array'){
                     self.stagedPropertyErrors = true;
                     obj.errors.key = "Property name is required";
                 }
@@ -409,13 +411,21 @@
                     self.stagedPropertyErrors = true;
                     obj.errors.type = "Data type is required";
                     return null;
-                }else if(obj.type === 'text'){
+                }else if(obj.type === 'text' || obj.type === 'number'){
                     return obj.defaultValue;
                 }else if(obj.type === 'object'){
                     var temp = {};
                     if(obj.defaultValue){
                         for(var p=0;p<obj.defaultValue.length;p++){
-                            temp[obj.defaultValue[p].key] = self.buildObject(obj.defaultValue[p]);
+                            temp[obj.defaultValue[p].key] = self.buildObject(obj.defaultValue[p], obj);
+                        }
+                    }
+                    return temp;
+                }else if(obj.type === 'array'){
+                    var temp = [];
+                    if(obj.defaultValue){
+                        for(var p=0;p<obj.defaultValue.length;p++){
+                            temp.push(self.buildObject(obj.defaultValue[p]), obj);
                         }
                     }
                     return temp;
@@ -425,7 +435,7 @@
             insertNewProperty: function(data){
                 data.errors = {key:null, type:null};
                 self.stagedPropertyErrors = false;
-                if(!data.key){
+                if(!data.key && data.type !== 'array'){
                     self.stagedPropertyErrors = true;
                     data.errors.key = "Property name is required";
                 }else if((InteractiveService.properties.hasOwnProperty(data.key) && !data.hasOwnProperty('originalKey')) || (InteractiveService.properties.hasOwnProperty(data.key) && data.hasOwnProperty('originalKey') && data.key !== data.originalKey)){
@@ -438,7 +448,7 @@
                     data.errors.type = "Data type is required";
                 }
 
-                if(data.type === 'object'){
+                if(data.type === 'object' || data.type === 'array'){
                     data.value = self.buildObject(data);
                 }else{
                     data.value = data.defaultValue;
@@ -461,6 +471,9 @@
             },
 
             deleteProperty: function(parent, index){
+                if(parent.hasOwnProperty('defaultValue') && parent.defaultValue[index] !== undefined){
+                    parent = parent.defaultValue;
+                }
                 if(parent && index !== undefined){
                     if(Array.isArray(parent)){
                         parent.splice(index, 1);
@@ -528,16 +541,21 @@
         for(var prop in InteractiveService.properties){
             if(InteractiveService.properties[prop].hasOwnProperty('defaultValue')){
                 InteractiveService.properties[prop].value = InteractiveService.properties[prop].defaultValue;
-            }else if(InteractiveService.properties[prop].hasOwnProperty('properties') && InteractiveService.properties[prop].orbiterType === 'element'){
-                for(var p in InteractiveService.properties[prop].properties){
-                    try{
-                        var bind = InteractiveService.lookUpPath(InteractiveService.properties, InteractiveService.properties[prop].properties[p].bind);
-                        if(bind){
-                            InteractiveService.properties[prop].properties[p].value = bind.hasOwnProperty('defaultValue')? bind.defaultValue : bind.hasOwnProperty('value') ? bind.value : bind;
-                        }
-                    }catch(e){
-                        //console.log(InteractiveService.properties[prop].properties[p], p)
-                    }
+            }
+        }
+
+        if($localStorage.hasOwnProperty('OrbiterInteractiveElements') && $localStorage.OrbiterInteractiveElements && Object.keys($localStorage.OrbiterInteractiveElements).length > 0){
+            InteractiveService.elements = $localStorage.OrbiterInteractiveElements;
+        }else{
+            $localStorage.OrbiterInteractiveElements = {};
+            InteractiveService.elements = $localStorage.OrbiterInteractiveElements;
+        }
+
+        for(var prop in InteractiveService.elements){
+            for(var p in InteractiveService.elements[prop].properties){
+                var bind = InteractiveService.lookUpPath(InteractiveService, InteractiveService.elements[prop].properties[p].bind);
+                if(bind){
+                    InteractiveService.elements[prop].properties[p].value = bind.hasOwnProperty('defaultValue')? bind.defaultValue : bind.hasOwnProperty('value') ? bind.value : bind;
                 }
             }
         }
@@ -569,7 +587,7 @@
             InteractiveService.htmlTree.current = 'main';
         }
 
-        self.activeProperties(InteractiveService.lookUpPath(InteractiveService.properties, InteractiveService.htmlTree.nodes[0].id));
+        self.activeProperties(InteractiveService.lookUpPath(InteractiveService.elements, InteractiveService.htmlTree.nodes[0].id));
         console.log(InteractiveService)
 
 

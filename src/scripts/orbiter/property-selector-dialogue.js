@@ -50,6 +50,7 @@
                     var obj = InteractiveService[OrbiterService.propertySelectorDialogue.type];
                     var workingObject = {};
                     var currentPath = path[0];
+                    var noKeys = ['key', 'type', 'errors', 'defaultValue', 'orbiterType'];
 
                     for(var pathIndex=0;pathIndex<path.length;pathIndex++){
                         if(pathIndex === 0 && OrbiterService.propertySelectorDialogue.type === 'properties'){
@@ -64,17 +65,35 @@
                             if(OrbiterService.propertySelectorDialogue.type === 'properties'){
                                 if((obj.hasOwnProperty('orbiterType') && (obj.orbiterType === 'element' && prop !== 'properties')) || (pathIndex === 0 && obj[prop].orbiterType !== path[pathIndex])){
                                     continue;
+                                }else if(obj.hasOwnProperty('orbiterType') && obj.hasOwnProperty('defaultValue') && (typeof obj.defaultValue === 'string' || typeof obj.defaultValue === 'number')){
+                                    continue;
+                                }else if(obj.hasOwnProperty('orbiterType') && obj.hasOwnProperty('defaultValue') && noKeys.indexOf(prop) > -1){
+                                    continue;
                                 }else{
                                     var thisPath = path.slice(0, (pathIndex + 1));
                                     thisPath.push(prop);
+                                    var label = prop;
+
                                     var _this = {
-                                        label: prop,
+                                        label: label,
                                         path: thisPath
                                     };
 
-                                    if(obj[prop].hasOwnProperty('orbiterType') && obj[prop].hasOwnProperty('value') || (obj[prop].hasOwnProperty('bind') && obj[prop].hasOwnProperty('value'))){
+                                    // if(obj[prop].hasOwnProperty('orbiterType') && obj[prop].hasOwnProperty('value') || (obj[prop].hasOwnProperty('bind') && obj[prop].hasOwnProperty('value'))){
+                                    //     _this.end = true;
+                                    // }
+                                    // if(obj[prop].hasOwnProperty('orbiterType') && obj[prop].hasOwnProperty('value')){
+                                    //     _this.end = true;
+                                    // }
+
+                                    if(obj[prop].hasOwnProperty('bind') && obj[prop].hasOwnProperty('value') && Object.keys(obj[prop]).length === 2){
                                         _this.end = true;
                                     }
+
+                                    if(obj[prop].hasOwnProperty('bind') && obj[prop].hasOwnProperty('value') && obj[prop].hasOwnProperty('options') && Object.keys(obj[prop]).length === 3){
+                                        _this.end = true;
+                                    }
+
                                     layer.push(_this);
                                 }
                             }else if(OrbiterService.propertySelectorDialogue.type === 'libraries'){

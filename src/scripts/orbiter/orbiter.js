@@ -1,13 +1,14 @@
 (function () {
     'use strict';
 
-    function OrbiterCtlr($localStorage, $window, OrbiterService, OrbiterElementTypes, InteractiveService, $scope){
+    function OrbiterCtlr($localStorage, $window, OrbiterService, OrbiterElementTypes, InteractiveService, $scope, OrbiterPropertyService){
         var self = this;
         this.$localStorage = $localStorage;
         if(!$localStorage.Orbiter){
             $localStorage.Orbiter = {};
         }
         this.OrbiterService = OrbiterService;
+        this.OrbiterPropertyService = OrbiterPropertyService;
         this.OrbiterElementTypes = OrbiterElementTypes;
         this.InteractiveService = InteractiveService;
         InteractiveService.developer = true;

@@ -1,13 +1,13 @@
 <div class="c-dialogue_inner">
-    <h2>
-        <span>Available properties&nbsp;&nbsp;</span>
+    <h3>
+        <span>Available&nbsp;<drop-down options="['properties', 'elements','libraries']" model="orb.OrbiterService" key="propertyDialogue" r="{{orb.debug(orb.OrbiterService.propertyDialogue)}}"></drop-down></span>
         <span>
-            <button class="circle" ng-click="orb.OrbiterService.stagedNewProperty={key:null,defaultValue:null,type:null};orb.OrbiterService.propertyDialogue=null"><i class="fa fa-plus"></i></button>
+            <button ng-if=""class="circle" ng-click="orb.OrbiterService.stagedNewProperty={key:null,defaultValue:null,type:null};orb.OrbiterService.propertyDialogue=null"><i class="fa fa-plus"></i></button>
             <button class="circle orange" ng-click="orb.OrbiterService.propertyDialogue=null"><i class="fa fa-close"></i></button>
         </span>
-    </h2>
+    </h3>
     <div class="c-dialogue_input">
-        <property-element ng-repeat="(propertyKey, property) in orb.InteractiveService.properties track by $index" property="property" property-key="propertyKey" root="true" parent="orb.InteractiveService.properties"></property-element>
+        <property-element ng-repeat="(propertyKey, property) in orb.InteractiveService[orb.OrbiterService.propertyDialogue] track by $index" property="property" property-key="propertyKey" root="true" parent="orb.InteractiveService.properties"></property-element>
     </div>
 </div>
 

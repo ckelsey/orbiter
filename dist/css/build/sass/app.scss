@@ -124,11 +124,33 @@ orbiter-sidebar, .c-dialogue{
                 text-align: right;
             }
         }
+
+        drop-down{
+            display: inline-block;
+        }
+
+        .c-dropdown-tree{
+            padding: 0px 3px;
+            position: relative;
+            top: -5px;
+            font-size: 14px;
+        }
     }
 
     h3{
         font-size: 21px;
         margin: 0px 0px 7px;
+
+        drop-down{
+            display: inline-block;
+        }
+
+        .c-dropdown-tree{
+            padding: 0px 3px;
+            position: relative;
+            top: -2px;
+            font-size: 20px;
+        }
     }
 
     h4{

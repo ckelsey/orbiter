@@ -73,7 +73,8 @@ gulp.task('vendor_scripts', function() {
 
 var app_scripts = [
     'src/scripts/*.js',
-    'src/scripts/**/*.js'
+    'src/scripts/**/*.js',
+    'src/modules/**/*.js'
 ];
 
 gulp.task('app_scripts', function() {
@@ -93,7 +94,8 @@ gulp.task('app_scripts', function() {
 
 var htmlToDo = [
     '*.html',
-    'src/html/**/*.html'
+    'src/html/**/*.html',
+    'src/modules/**/*.html'
 ];
 
 

@@ -8,6 +8,7 @@
 
             htmlTree: {},
             properties: {},
+            elements: {},
             methods: {},
             libraries: {},
 
@@ -171,11 +172,6 @@
                         go(data.fn[f]);
                     }
                 }
-            },
-
-            getRepeat: function(data){
-                console.log(data)
-                return data;
             }
         };
 

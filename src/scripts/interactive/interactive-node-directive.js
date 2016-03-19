@@ -9,7 +9,7 @@
                 'parentPath': '=interactiveNodeParentPath'
             },
             link:function(scope,element,attributes){
-                scope.dataProperties = InteractiveService.properties[scope.data.id];
+                scope.dataProperties = InteractiveService.elements[scope.data.id];
                 scope.styles = InteractiveService.getStyles(scope.dataProperties);
                 scope.mock = ['test', 'test2'];
 
@@ -54,7 +54,7 @@
                     html += ' ng-init="thisPath=parentPath + \',nodes,\' + $index"';
                     html += ' interactive-node-parent-path="thisPath"';
                     html += ' path="{{thisPath}}"';
-                    html += ' ng-style="ictlr.InteractiveService.getStyles(ictlr.InteractiveService.properties[childData.id], \'display\')"';
+                    html += ' ng-style="ictlr.InteractiveService.getStyles(ictlr.InteractiveService.elements[childData.id], \'display\')"';
                     html += ' ng-class="childData.id === ictlr.InteractiveService.elementProperties.id ? \'m-active-iteractive-node\' : \'\'"';
                     html += '></div>';
                 };

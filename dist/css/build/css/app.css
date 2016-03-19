@@ -73,9 +73,27 @@ orbiter-sidebar h2 span, .c-dialogue h2 span {
 orbiter-sidebar h2 span:nth-child(2), .c-dialogue h2 span:nth-child(2) {
   text-align: right;
 }
+orbiter-sidebar h2 drop-down, .c-dialogue h2 drop-down {
+  display: inline-block;
+}
+orbiter-sidebar h2 .c-dropdown-tree, .c-dialogue h2 .c-dropdown-tree {
+  padding: 0px 3px;
+  position: relative;
+  top: -5px;
+  font-size: 14px;
+}
 orbiter-sidebar h3, .c-dialogue h3 {
   font-size: 21px;
   margin: 0px 0px 7px;
+}
+orbiter-sidebar h3 drop-down, .c-dialogue h3 drop-down {
+  display: inline-block;
+}
+orbiter-sidebar h3 .c-dropdown-tree, .c-dialogue h3 .c-dropdown-tree {
+  padding: 0px 3px;
+  position: relative;
+  top: -2px;
+  font-size: 20px;
 }
 orbiter-sidebar h4, .c-dialogue h4 {
   padding: 7px 10px;
