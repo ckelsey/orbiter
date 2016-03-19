@@ -31,6 +31,17 @@ a-ckolor .c-ckolor__input-wrapper:hover, a-ckolor .c-ckolor__input-wrapper:focus
 }
 
 /* ELEMENTS */
+drop-down.red .c-dropdown-tree {
+  background: #a10005;
+}
+
+new-property-dialogue .inline-inputs {
+  padding: 7px 0px;
+}
+new-property-dialogue .inner-property .property .inline-inputs:before {
+  top: 21px;
+}
+
 orbiter-canvas {
   display: inline-block;
   width: 70%;
@@ -206,9 +217,64 @@ orbiter-sidebar button.bind-button:hover, .c-dialogue button.bind-button:hover {
   background: #9fbe3c;
   color: #fff;
 }
+orbiter-sidebar .c-sidebar_event_function, .c-dialogue .c-sidebar_event_function {
+  background: rgba(46, 116, 149, 0.42);
+}
+orbiter-sidebar .c-sidebar_event_function:hover, .c-dialogue .c-sidebar_event_function:hover {
+  background: #2e7495;
+}
+
+orbiter-sidebar {
+  overflow: hidden;
+}
+orbiter-sidebar *::-webkit-scrollbar {
+  display: none;
+}
 
 property-dialogue .property {
-  margin: 21px 0px;
+  margin: 7px 0;
+  padding: 7px;
+  background: rgba(12, 31, 40, 0.62);
+}
+property-dialogue .inner-property .property {
+  margin: 7px 0;
+  padding: 0px;
+  background: transparent;
+}
+property-dialogue h4 {
+  padding: 0px !important;
+}
+
+property-element .inline-inputs {
+  margin: 0px;
+}
+property-element .inline-inputs label {
+  line-height: 32px;
+}
+property-element .inline-inputs label, property-element .inline-inputs drop-down, property-element .inline-inputs input {
+  vertical-align: middle;
+  margin: 0px 7px 0px 0px;
+  max-width: 300px;
+}
+property-element .inline-inputs .c-dropdown-tree {
+  margin: 0px;
+}
+property-element .inline-inputs .c-dropdown-tree-selection {
+  padding: 0px;
+}
+property-element .inline-inputs.readonly label {
+  line-height: 20px;
+}
+property-element .inline-inputs.readonly label + span {
+  font-style: italic;
+  color: #9fbe3c;
+}
+property-element .inline-inputs.readonly span {
+  font-size: 12px;
+  line-height: 21px;
+  font-weight: lighter;
+  opacity: .7;
+  padding: 0px 7px 0px 0px;
 }
 
 property-selector-dialogue.c-dialogue {
@@ -449,12 +515,12 @@ property-selector-dialogue.c-dialogue {
   padding: 14px;
   background: rgba(0, 0, 0, 0.21);
   box-sizing: border-box;
-  margin: 1px 0px;
+  margin: 14px 0px;
 }
 .c-dialogue_input.tasks select, .c-dialogue_input.tasks input, .c-dialogue_input.tasks .c-dropdown-tree {
   width: auto;
   text-transform: capitalize;
-  margin-right: 7px;
+  margin: 7px 1% 7px 0px;
 }
 .c-dialogue_input.tasks input {
   text-transform: none;
@@ -468,9 +534,7 @@ property-selector-dialogue.c-dialogue {
   display: inline-block;
   box-sizing: border-box;
   vertical-align: middle;
-  margin: 0px 1% 0px 0px;
   max-width: 100px;
-  width: 18%;
 }
 .c-dialogue_input.tasks .c-dropdown-tree-selection {
   width: 100%;
@@ -494,7 +558,7 @@ property-selector-dialogue.c-dialogue {
 }
 
 .c-dropdown_list_item {
-  cursor: grab;
+  cursor: pointer;
   padding: 0px;
   font-size: 0px;
   box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.03);
@@ -520,7 +584,13 @@ property-selector-dialogue.c-dialogue {
 .c-dropdown_list_item.typeButton:before {
   content: "\f25a";
 }
-.c-dropdown_list_item:hover {
+.c-dropdown_list_item.new:before {
+  content: "\f067";
+}
+.c-dropdown_list_item.draggable {
+  cursor: grab;
+}
+.c-dropdown_list_item:hover, .c-dropdown_list_item.active {
   transform: scale(1.025);
   background: #9fbe3c;
   box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.03), inset 0 -1px 0 0 rgba(0, 0, 0, 0.3);
@@ -555,6 +625,7 @@ property-selector-dialogue.c-dialogue {
   z-index: 1;
   position: relative;
   cursor: pointer;
+  width: auto;
 }
 .c-dropdown-tree:hover {
   z-index: 9999;
@@ -596,7 +667,7 @@ property-selector-dialogue.c-dialogue {
   position: absolute;
   left: 1px;
   border-radius: 2px;
-  width: 100%;
+  width: 100px;
   top: 28px;
   background: #496a7a;
 }
@@ -629,6 +700,7 @@ property-selector-dialogue.c-dialogue {
 
 .c-element-operations {
   display: flex;
+  margin-top: 3px;
 }
 .c-element-operations button {
   margin: 0px 0px 2px;
@@ -749,6 +821,35 @@ property-selector-dialogue.c-dialogue {
 .c-expandable_content-inner {
   padding: 0px;
   transition: padding .2s;
+}
+
+.c-html-tree-node {
+  font-size: 12px;
+}
+
+.c-html-tree-node_children {
+  padding: 0px 0px 0px 7%;
+}
+
+.c-html-tree-node_node {
+  margin: 1px 0px;
+  border-radius: 2px;
+  cursor: pointer;
+  background: #213037;
+}
+.c-html-tree-node_node.Text {
+  background: #2e434d;
+}
+.c-html-tree-node_node.Button {
+  background: #3c5764;
+}
+.c-html-tree-node_node .c-html-tree-node_node_inner {
+  padding: 1px 4px;
+  border-radius: 2px;
+}
+.c-html-tree-node_node .c-html-tree-node_node_inner.active {
+  background: #9fbe3c;
+  color: #213037;
 }
 
 .c-input-row:after {
@@ -890,7 +991,7 @@ property-selector-dialogue.c-dialogue {
 .c-orbiter_menu_item:nth-child(2) {
   background-color: #2e434d;
 }
-.c-orbiter_menu_item:hover {
+.c-orbiter_menu_item:hover, .c-orbiter_menu_item.active {
   background-color: #9fbe3c;
   transform: scale(1.05);
   color: #fff;
@@ -957,6 +1058,41 @@ property-selector-dialogue.c-dialogue {
   padding: 7px;
 }
 
+.c-sidebar-settings {
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
+  transition: width .2s;
+  height: 100%;
+  overflow: auto;
+}
+
+.c-sidebar-tree {
+  width: 0%;
+  display: inline-block;
+  vertical-align: top;
+  background: rgba(0, 0, 0, 0.38);
+  box-sizing: border-box;
+  height: 100%;
+  overflow: auto;
+  transition: padding .2s, width .2s;
+}
+
+.c-sidebar_wrapper {
+  box-sizing: border-box;
+  padding-top: 35px;
+  margin-top: -35px;
+  height: 100%;
+}
+
+.tree-open .c-sidebar-settings, .tree-open .c-sidebar-tree {
+  width: 50%;
+}
+
+.tree-open .c-sidebar-tree {
+  padding: 7px 7px 7px 0px;
+}
+
 /* MODIFIERS */
 .blur-true * {
   filter: blur(1px);
@@ -986,4 +1122,34 @@ property-selector-dialogue.c-dialogue {
 
 .row-padding {
   padding: 7px 10px;
+}
+
+.inner-property {
+  display: block;
+  margin: 0px 0px 0px 14px;
+  padding: 1px 14px;
+}
+.inner-property .property {
+  position: relative;
+}
+.inner-property .property:before {
+  content: "";
+  position: absolute;
+  display: block;
+  height: 100%;
+  width: 1px;
+  background: #9fbe3c;
+  left: -11px;
+  padding-bottom: 16px;
+  top: -7px;
+}
+.inner-property .property .inline-inputs:before {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 1px;
+  width: 7px;
+  background: #9fbe3c;
+  top: 9px;
+  left: -10px;
 }

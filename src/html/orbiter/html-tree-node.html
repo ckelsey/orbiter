@@ -1,0 +1,8 @@
+<div class="c-html-tree-node" ng-controller="OrbiterCtlr as orb">
+    <div ng-class="node.id ? 'c-html-tree-node_node ' + orb.InteractiveService.lookUpPath(orb.InteractiveService.properties, node.id).label : ''" ng-click="node.id ? orb.OrbiterService.activeProperties(orb.InteractiveService.lookUpPath(orb.InteractiveService.properties, node.id)) : null">
+        <div ng-bind="node.id" class="c-html-tree-node_node_inner" ng-class="node.id === orb.InteractiveService.elementProperties.id ? 'active' : ''"></div>
+    </div>
+    <div class="c-html-tree-node_children">
+        <div ng-repeat="child in node.nodes track by $index" html-tree-node="child"></div>
+    </div>
+</div>

@@ -18,30 +18,10 @@
 
                     var html = '';
 
-                    var getPropertyHTML = function(key){
+                    var getPropertyHTML = function(key, bindCategory){
                         html += '<div class="property">';
                             html += '<label>' + key + '</label>';
-                            /*
-                            html += '<div class="property-options-wrapper">';
-                                html += '<input ng-model="sortedPropertiesToUpdate[\''+ key +'\'].new" type="text" ng-focus="'+ key +'PropertyFieldFocus=true">';
-                                html += '<button ng-if="sortedPropertiesToUpdate[\''+ key +'\'].new !== \'none\'" ng-click="sortedPropertiesToUpdate[\''+ key +'\'].new = \'none\'" class="red" style="position: absolute; right: 0px; top: -3px;"><i class="fa fa-ban"></i></button>'
-                                html += '<div class="property-options" ng-class="'+ key +'PropertyFieldFocus ? \'open\' : \'\'">';
-                                    html += '<div class="property-option"';
-                                    // html += ' ng-if="';
-                                    // html += 'propKey.indexOf(orb.InteractiveService.propertyPrefix) === -1 && (';
-                                    // html += 'sortedPropertiesToUpdate[\''+ key +'\'].new === \'\' ||';
-                                    // html += 'sortedPropertiesToUpdate[\''+ key +'\'].new === \'none\' ||';
-                                    // html += 'orb.lowerCase(prop.key).indexOf(sortedPropertiesToUpdate[\''+ key +'\'].new) > -1';
-                                    // html += ')';
-                                    // html += '"';
-                                    html += ' ng-repeat="(propKey, prop) in orb.InteractiveService.properties" ';
-                                    html += 'ng-bind="prop.key || prop.id"';
-                                    html += 'ng-click="sortedPropertiesToUpdate[\''+ key +'\'].new = prop.key;'+ key +'PropertyFieldFocus=false"';
-                                    html += '></div>';
-                                html += '</div>';
-                            html += '</div>';
-                            */
-                            html += '<button ng-click="orb.OrbiterService.propertySelectorDialogue={obj:sortedPropertiesToUpdate[\''+ key +'\'],key:\'new\'}" ng-bind="sortedPropertiesToUpdate[\''+ key +'\'].new || \'set\'"></button>';
+                            html += '<button ng-click="orb.OrbiterService.propertySelectorDialogue={obj:sortedPropertiesToUpdate[\''+ key +'\'],key:\'new\', type:\''+ bindCategory +'\'}" ng-bind="sortedPropertiesToUpdate[\''+ key +'\'].new || \'set\'"></button>';
                         html += '</div>';
                     };
 
@@ -58,19 +38,17 @@
 
 
 
-                    if(OrbiterService.propertyMapperDialogue.type === 'text'){
-                        var boundObj = InteractiveService.properties[OrbiterService.propertyMapperDialogue.element.properties.text.bind];
-                        var elementId = OrbiterService.propertyMapperDialogue.element;
-                        var bindId = OrbiterService.propertyMapperDialogue.element.properties.text.bind;
-
-                        scope.sortedPropertiesToUpdate = {
-                            text:{
-                                current: boundObj || {key:'none'},
-                                new: boundObj ? boundObj.key : 'none'
-                            }
-                        };
-                        getPropertyHTML('text');
+                    scope.sortedPropertiesToUpdate = {};
+                    scope.sortedPropertiesToUpdate[OrbiterService.propertyMapperDialogue.type] = {
+                        current: OrbiterService.propertyMapperDialogue.element.properties[OrbiterService.propertyMapperDialogue.type].bind,
+                        new: OrbiterService.propertyMapperDialogue.element.properties[OrbiterService.propertyMapperDialogue.type].bind
+                    };
+                    var bindCategory = null;
+                    switch(OrbiterService.propertyMapperDialogue.type){
+                        case 'template': bindCategory = 'htmlTree'; break;
+                        default: bindCategory = 'properties';
                     }
+                    getPropertyHTML(OrbiterService.propertyMapperDialogue.type, bindCategory);
 
                     html += '</div>';
                     html += '</div>';

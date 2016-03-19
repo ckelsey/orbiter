@@ -1,0 +1,85 @@
+<div class="c-dialogue_input tasks" ng-controller="OrbiterCtlr as orb">
+    <small class="error" ng-if="orb.OrbiterService.currentEventObjectError.tasks[$index]" ng-bind="orb.OrbiterService.currentEventObjectError.tasks[$index]"></small>
+
+    <drop-down ng-if="task.promiseType !== undefined" key="promiseType" default="promise type" options="{done:'done', then:'then'}" model="task"></drop-down>
+
+    <drop-down key="type" default="type" options="{set:'set', run:'run'}" model="task"></drop-down>
+    <button
+        ng-if="task.type"
+        ng-click="task.type==='set' ? orb.OrbiterService.propertySelectorDialogue={obj:task,key:'target',type:'properties'} : orb.OrbiterService.propertySelectorDialogue={obj:task,key:'target',type:'libraries'}"
+        ng-bind="task.target || 'set target'"
+    ></button>
+    <drop-down ng-if="task.type==='set'" key="action" options="{'=':'='}" model="task"></drop-down>
+    <drop-down ng-if="task.type==='set'" key="valueType" options="{'custom text':'custom text', property:'property'}" model="task"></drop-down>
+
+
+    <input ng-if="task.type==='set' && task.valueType==='custom text'" ng-model="task.value" type="text" placeholder="value">
+    <button ng-if="task.type==='set' && task.valueType==='property'" ng-click="orb.OrbiterService.propertySelectorDialogue={obj:task,key:'value'}" ng-bind="task.value || 'set value'"></button>
+    <button class="orange circle" ng-click="orb.OrbiterService.removeArrayElement(tasks, taskKey)"><i class="fa fa-trash"></i></button>
+
+    <div ng-if="task.type === 'run' && task.arguments">
+        <p>Arguments</p>
+        <div ng-repeat="arg in task.arguments track by $index">
+            <drop-down key="type" options="{'custom text':'custom text', properties:'properties'}" model="arg"></drop-down>
+            <button
+                ng-if="arg.type === 'properties'"
+                ng-click="orb.OrbiterService.propertySelectorDialogue={obj:arg,key:'value',type:'properties'}"
+                ng-bind="arg.value || 'set'"
+            ></button>
+            <input ng-if="arg.type==='custom text'" ng-model="arg.value" type="text" placeholder="value">
+        </div>
+    </div>
+
+    <div ng-if="task.type === 'run'">
+        <p>Promises&nbsp;&nbsp;<button class="circle small" style="position:relative;top:-2px;" ng-click="task.promises.push({promiseType:null})"><i class="fa fa-plus"></i></button></p>
+        <div ng-repeat="(promiseKey, promise) in task.promises track by promise.promiseType">
+            <interactive-task task="promise" key="promiseKey" tasks="task.promises"></interactive-task>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="c-dropdown-tree" ng-mouseleave="task.dropdowns.type.open=false" >
+    <div class="c-dropdown-tree-selection" ng-bind="task.type || 'type'" ng-click="task.dropdowns.type.open=true"></div>
+    <div class="c-dropdown-tree-list" ng-class="task.dropdowns.type.open ? 'open' : ''">
+        <div class="c-dropdown-tree-list-item" ng-click="task.type='set'">
+            <div class="c-dropdown-tree-list-item-inner">set</div>
+        </div>
+        <div class="c-dropdown-tree-list-item" ng-click="task.type='run'">
+            <div class="c-dropdown-tree-list-item-inner">run</div>
+        </div>
+    </div>
+</div> -->
+
+<!-- <div ng-if="task.type==='set'" class="c-dropdown-tree" ng-mouseleave="task.dropdowns.action.open=false">
+    <div class="c-dropdown-tree-selection" ng-bind="task.action || 'action'" ng-click="task.dropdowns.action.open=true"></div>
+    <div class="c-dropdown-tree-list" ng-class="task.dropdowns.action.open ? 'open' : ''">
+        <div class="c-dropdown-tree-list-item" ng-click="task.action='='">
+            <div class="c-dropdown-tree-list-item-inner">=</div>
+        </div>
+    </div>
+</div> -->
+
+<!-- <div ng-if="task.type==='set'" class="c-dropdown-tree" ng-mouseleave="task.dropdowns.valueType.open=false">
+    <div class="c-dropdown-tree-selection" ng-bind="task.valueType || 'value type'" ng-click="task.dropdowns.valueType.open=true"></div>
+    <div class="c-dropdown-tree-list" ng-class="task.dropdowns.valueType.open ? 'open' : ''">
+        <div class="c-dropdown-tree-list-item" ng-click="task.valueType!=='custom text'? task.value=null : null; task.valueType='custom text'">
+            <div class="c-dropdown-tree-list-item-inner">custom text</div>
+        </div>
+        <div class="c-dropdown-tree-list-item" ng-click="task.valueType!=='property'? task.value=null : null; task.valueType='property'">
+            <div class="c-dropdown-tree-list-item-inner">property</div>
+        </div>
+    </div>
+</div> -->
+
+<!-- <div class="c-dropdown-tree" ng-mouseleave="task.dropdowns.arguments[$index].open=false">
+    <div class="c-dropdown-tree-selection" ng-bind="arg.type || 'argument type'" ng-click="task.dropdowns.arguments[$index].open=true"></div>
+    <div class="c-dropdown-tree-list" ng-class="task.dropdowns.arguments[$index].open ? 'open' : ''">
+        <div class="c-dropdown-tree-list-item" ng-click="arg.type='properties'">
+            <div class="c-dropdown-tree-list-item-inner">properties</div>
+        </div>
+        <div class="c-dropdown-tree-list-item" ng-click="arg.type='custom text'">
+            <div class="c-dropdown-tree-list-item-inner">custom text</div>
+        </div>
+    </div>
+</div> -->

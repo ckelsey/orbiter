@@ -14,7 +14,7 @@
                 var run = function() {
                     scope.diplayProperties = {};
                     for (var i=0;i<availableStyles.length;i++) {
-                        var thisStyle = InteractiveService.lookUpPath(InteractiveService.properties, InteractiveService.elementProperties.properties[availableStyles[i]].bind);
+                        var thisStyle = InteractiveService.lookUpPath(InteractiveService, InteractiveService.elementProperties.properties[availableStyles[i]].bind);
                         if(thisStyle){
                             scope.diplayProperties[availableStyles[i]] = thisStyle;
                         }

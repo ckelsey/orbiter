@@ -1,4 +1,4 @@
-<div ng-controller="OrbiterCtlr as orb">
+<div ng-controller="OrbiterCtlr as orb" ng-class="orb.OrbiterService.htmlTreeView ? 'tree-open' : ''" class="c-sidebar_wrapper">
     <div ng-if="orb.InteractiveService.elementProperties" class="c-element-operations">
         <button ng-click="orb.OrbiterService.copyElement(orb.InteractiveService.elementProperties)"><i class="fa fa-copy"></i></button>
         <button ng-click="orb.OrbiterService.pasteElement(orb.InteractiveService.elementProperties)"><i class="fa fa-paste"></i></button>
@@ -6,65 +6,84 @@
         <button ng-click="orb.OrbiterService.moveElementDown(orb.InteractiveService.elementProperties)"><i class="fa fa-level-down"></i></button>
         <button ng-click="orb.OrbiterService.deleteElement(orb.InteractiveService.elementProperties)"><i class="fa fa-trash"></i></button>
     </div>
-    <div class="c-sidebar_elements_properties c-sidebar_section-wrapper">
-        <h4><span>Text&nbsp;</span><button ng-if="orb.InteractiveService.elementProperties && orb.InteractiveService.elementProperties.properties.text" ng-click="orb.OrbiterService.propertyMapperDialogue={element:orb.InteractiveService.elementProperties, type:'text'}" class="bind-button">@</button></h4>
-        <div class="row-padding" ng-if="orb.InteractiveService.elementProperties && orb.InteractiveService.elementProperties.properties.text">
-            <element-property-input element-model="orb.InteractiveService.elementProperties" property-key="'text'" input-type="'textarea'"></element-property-input>
-        </div>
-    </div>
-    <div class="c-sidebar_elements_properties c-sidebar_section-wrapper">
-        <h4>Style</h4>
-        <div ng-if="orb.InteractiveService.elementProperties" class="c-sidebar_section-wrapper_inner">
-            <text-properties></text-properties>
-            <diplay-properties></diplay-properties>
-            <spacing-properties></spacing-properties>
-            <border-properties></border-properties>
-        </div>
-    </div>
-    <div class="c-sidebar_section-wrapper">
-        <h4>Events</h4>
-        <div ng-if="orb.InteractiveService.elementProperties" class="c-sidebar_section-wrapper_inner">
-            <div ng-repeat="(eventKey, event) in orb.InteractiveService.elementProperties.events track by $index" class="c-sidebar_event-item c-sidebar_section-wrapper_inner-section">
-                <label>
-                    <span ng-bind="eventKey"></span>
-                    <button class="circle small light-blue" ng-if="!event.fn.length" ng-click="orb.OrbiterService.currentEventObject=event"><i class="fa fa-plus"></i></button>
-                </label>
-                <div class="c-sidebar_event_function" ng-if="event.fn.length">
-                    <label>
-                        <span ng-bind="event.label"></span>
-                        <button class="circle small" ng-click="orb.OrbiterService.currentEventObject=event;"><i class="fa fa-pencil"></i></button>
-                    </label>
-                </div>
+    <div class="c-sidebar-settings">
+        <div class="c-sidebar_elements_properties c-sidebar_section-wrapper" ng-if="orb.InteractiveService.elementProperties && orb.InteractiveService.elementProperties.properties.text">
+            <h4><span>Text&nbsp;</span><button ng-click="orb.OrbiterService.propertyMapperDialogue={element:orb.InteractiveService.elementProperties, type:'text'}" class="bind-button">@</button></h4>
+            <div class="row-padding" ng-if="orb.InteractiveService.elementProperties && orb.InteractiveService.elementProperties.properties.text">
+                <element-property-input element-model="orb.InteractiveService.elementProperties" property-key="'text'" input-type="'textarea'"></element-property-input>
             </div>
         </div>
-    </div>
-    <div class="c-sidebar_elements_properties c-sidebar_section-wrapper">
-        <h4>Metadata</h4>
-        <div ng-if="orb.InteractiveService.elementProperties" class="c-sidebar_section-wrapper_inner">
+        <div class="c-sidebar_elements_properties c-sidebar_section-wrapper" ng-if="orb.InteractiveService.elementProperties && orb.InteractiveService.elementProperties.properties.template">
+            <h4><span>Template&nbsp;</span><button ng-click="orb.OrbiterService.propertyMapperDialogue={element:orb.InteractiveService.elementProperties, type:'template'}" class="bind-button">@</button></h4>
+            <div class="c-sidebar_section-wrapper_inner-section" ng-if="orb.InteractiveService.elementProperties.properties.template.bind && orb.InteractiveService.elementProperties.properties.template.bind !== 'properties.'+ orb.InteractiveService.elementProperties.id +'.properties.template'" ng-bind="orb.InteractiveService.elementProperties.properties.template.bind"></div>
+        </div>
+        <div class="c-sidebar_elements_properties c-sidebar_section-wrapper" ng-if="orb.InteractiveService.elementProperties && orb.InteractiveService.elementProperties.properties.repeat">
+            <h4><span>Repeat&nbsp;</span><button ng-click="orb.OrbiterService.propertyMapperDialogue={element:orb.InteractiveService.elementProperties, type:'repeat'}" class="bind-button">@</button></h4>
+            <div class="c-sidebar_section-wrapper_inner-section" ng-if="orb.InteractiveService.elementProperties.properties.repeat.bind && orb.InteractiveService.elementProperties.properties.repeat.bind !== 'properties.'+ orb.InteractiveService.elementProperties.id +'.properties.repeat'" ng-bind="orb.InteractiveService.elementProperties.properties.repeat.bind"></div>
+        </div>
+        <div class="c-sidebar_elements_properties c-sidebar_section-wrapper" ng-if="orb.InteractiveService.elementProperties.properties.href">
+            <h4><span>Link Url&nbsp;</span><button ng-if="orb.InteractiveService.elementProperties && orb.InteractiveService.elementProperties.properties.href" ng-click="orb.OrbiterService.propertyMapperDialogue={element:orb.InteractiveService.elementProperties, type:'href'}" class="bind-button">@</button></h4>
             <div class="row-padding">
-                <label>Name</label>
-                <small ng-if="orb.OrbiterService.stagedElementIdConflict" ng-bind="orb.OrbiterService.stagedElementIdConflict"></small>
-                <div class="inline-inputs">
-                    <input type="text" ng-model="orb.InteractiveService.elementProperties.id" ng-class="orb.OrbiterService.stagedElementIdConflict ? 'red' : ''">
-                    <button ng-click="orb.OrbiterService.updateElementId(orb.InteractiveService.elementProperties)"><i class="fa fa-check"></i></button>
-                </div>
-            </div>
-            <div class="c-sidebar_section-wrapper_inner-section">
-                <label>Children</label>
-                <div ng-bind="orb.InteractiveService.elementProperties.nodes.length" style="opacity: .7;"></div>
-            </div>
-            <div class="c-sidebar_section-wrapper_inner-section">
-                <label>Added</label>
-                <div ng-bind="orb.formatDate(orb.InteractiveService.elementProperties.created)" style="opacity: .7;"></div>
-            </div>
-            <div class="c-sidebar_section-wrapper_inner-section">
-                <label>Label</label>
-                <div ng-bind="orb.InteractiveService.elementProperties.label" style="opacity: .7;"></div>
-            </div>
-            <div class="c-sidebar_section-wrapper_inner-section">
-                <label>ID</label>
-                <div ng-bind="orb.InteractiveService.elementProperties.id" style="opacity: .7;"></div>
+                <element-property-input element-model="orb.InteractiveService.elementProperties" property-key="'href'" input-type="'text'"></element-property-input>
             </div>
         </div>
+        <div class="c-sidebar_elements_properties c-sidebar_section-wrapper" ng-if="orb.InteractiveService.elementProperties && orb.InteractiveService.elementProperties.label !== 'Repeat'">
+            <h4>Style</h4>
+            <div ng-if="orb.InteractiveService.elementProperties" class="c-sidebar_section-wrapper_inner">
+                <text-properties></text-properties>
+                <diplay-properties></diplay-properties>
+                <spacing-properties></spacing-properties>
+                <border-properties></border-properties>
+            </div>
+        </div>
+        <div class="c-sidebar_section-wrapper" ng-if="orb.InteractiveService.elementProperties">
+            <h4>Events</h4>
+            <div ng-if="orb.InteractiveService.elementProperties" class="c-sidebar_section-wrapper_inner">
+                <div ng-repeat="(eventKey, event) in orb.InteractiveService.elementProperties.events track by $index" class="c-sidebar_event-item c-sidebar_section-wrapper_inner-section">
+                    <label>
+                        <span ng-bind="eventKey"></span>
+                        <button class="circle small light-blue" ng-if="!event.fn.length" ng-click="orb.OrbiterService.currentEventObject=event"><i class="fa fa-plus"></i></button>
+                    </label>
+                    <div class="c-sidebar_event_function" ng-if="event.fn.length">
+                        <label>
+                            <span ng-bind="event.label"></span>
+                            <button class="circle small" ng-click="orb.OrbiterService.currentEventObject=event;"><i class="fa fa-pencil"></i></button>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="c-sidebar_elements_properties c-sidebar_section-wrapper" ng-if="orb.InteractiveService.elementProperties">
+            <h4>Metadata</h4>
+            <div ng-if="orb.InteractiveService.elementProperties" class="c-sidebar_section-wrapper_inner">
+                <div class="row-padding">
+                    <label>Name</label>
+                    <small ng-if="orb.OrbiterService.stagedElementIdConflict" ng-bind="orb.OrbiterService.stagedElementIdConflict"></small>
+                    <div class="inline-inputs">
+                        <input type="text" ng-model="orb.InteractiveService.elementProperties.id" ng-class="orb.OrbiterService.stagedElementIdConflict ? 'red' : ''">
+                        <button ng-click="orb.OrbiterService.updateElementId(orb.InteractiveService.elementProperties)"><i class="fa fa-check"></i></button>
+                    </div>
+                </div>
+                <div class="c-sidebar_section-wrapper_inner-section">
+                    <label>Children</label>
+                    <div ng-bind="orb.InteractiveService.elementProperties.nodes.length" style="opacity: .7;"></div>
+                </div>
+                <div class="c-sidebar_section-wrapper_inner-section">
+                    <label>Added</label>
+                    <div ng-bind="orb.formatDate(orb.InteractiveService.elementProperties.created)" style="opacity: .7;"></div>
+                </div>
+                <div class="c-sidebar_section-wrapper_inner-section">
+                    <label>Label</label>
+                    <div ng-bind="orb.InteractiveService.elementProperties.label" style="opacity: .7;"></div>
+                </div>
+                <div class="c-sidebar_section-wrapper_inner-section">
+                    <label>ID</label>
+                    <div ng-bind="orb.InteractiveService.elementProperties.id" style="opacity: .7;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="c-sidebar-tree">
+        <html-tree></html-tree>
     </div>
 </div>

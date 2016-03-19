@@ -1,14 +1,15 @@
 (function () {
     'use strict';
 
-    function InteractiveService(InteractiveStyles, InteractiveProperties, InteractiveMethods, $localStorage){
+    function InteractiveService(InteractiveStyles, InteractiveProperties, InteractiveMethods, InteractiveLibraries, $localStorage, $timeout){
         var self = {
             developer: false,
             propertyPrefix: '!@#$%^&*()|',
 
             htmlTree: {},
             properties: {},
-            methods:{},
+            methods: {},
+            libraries: {},
 
 
             dragging: null,
@@ -65,7 +66,7 @@
             },
 
             getBinding: function(obj, key){
-                var val = self.lookUpPath(self.properties, obj.properties[key].bind);
+                var val = self.lookUpPath(self, obj.properties[key].bind);
                 if(val){
                     return val.value;
                 }else{
@@ -105,27 +106,76 @@
             },
 
             runFN: function(data){
-                var setFunction = function(thisFN){
-                    var target = self.lookUpPath(self.properties, thisFN.target);
-                    var newVal = thisFN.valueType === 'custom text' ? thisFN.value : self.lookUpPath(self.properties, thisFN.value);
+                var setFunction = function(thisFN, passedData){
+                    var target = self.lookUpPath(self, thisFN.target);
+                    var newVal = thisFN.valueType === 'custom text' ? thisFN.value : self.lookUpPath(self, thisFN.value);
+
+                    try{
+                        if(passedData !== undefined && newVal.split('$RESULT$').length > 1){
+                            newVal = passedData;
+                        }
+                    }catch(e){}
+
                     if(target){
                         if(target.hasOwnProperty('bind')){
                             target.bind = thisFN.value;
                         }
-                        target.value = newVal.hasOwnProperty('value') ? newVal.value : newVal;
+
+                        $timeout(function(){
+                            target.value = newVal.hasOwnProperty('value') ? newVal.value : newVal;
+                        });
                     }
                 };
 
-                if(!self.developer){
-                    for(var f=0;f<data.fn.length;f++){
-                        var thisFN = data.fn[f];
-                        switch (thisFN.type) {
-                            case 'set':
-                                setFunction(thisFN);
-                                break;
+                var runFunction = function(thisFN, passedData){
+                    var target = self.lookUpPath(self, thisFN.target);
+                    var argumentArray = [];
+                    for(var a=0;a<thisFN.arguments.length;a++){
+                        if(thisFN.arguments[a].type === 'custom text'){
+                            var arg = thisFN.arguments[a].value;
+                            try{
+                                arg = JSON.parse(thisFN.arguments[a].value);
+                            }catch(e){}
+                            argumentArray.push(arg);
                         }
                     }
+
+                    var fun = target.apply(this, argumentArray);
+
+                    if(thisFN.hasOwnProperty('promises') && thisFN.promises.length){
+                        for(var p=0;p<thisFN.promises.length;p++){
+                            (function(thisPromise) {
+                                if(fun.hasOwnProperty(thisPromise.promiseType)){
+                                    fun[thisPromise.promiseType](function(res){
+                                        go(thisPromise, res);
+                                    });
+                                }
+                            })(thisFN.promises[p]);
+                        }
+                    }
+                };
+
+                var go = function(thisFN, passedData){
+                    switch (thisFN.type) {
+                        case 'set':
+                            setFunction(thisFN, passedData);
+                            break;
+                        case 'run':
+                            runFunction(thisFN, passedData);
+                            break;
+                    }
                 }
+
+                if(!self.developer){
+                    for(var f=0;f<data.fn.length;f++){
+                        go(data.fn[f]);
+                    }
+                }
+            },
+
+            getRepeat: function(data){
+                console.log(data)
+                return data;
             }
         };
 

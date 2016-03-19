@@ -1,0 +1,16 @@
+<div class="property" ng-if="property.orbiterType !== 'element'" ng-controller="OrbiterCtlr as orb">
+    <div class="inline-inputs readonly" ng-if="!newProperty">
+        <button ng-if="root" class="circle small" style="position: relative; top: 2px; margin-right: 7px;" ng-click="orb.OrbiterService.stagedNewProperty=true;orb.OrbiterService.editProperty(property);orb.OrbiterService.propertyDialogue=null"><i class="fa fa-pencil"></i></button>
+        <label ng-bind="propertyKey"></label>
+        <span ng-bind="property.type"></span>
+        <span ng-if="property.type === 'text'" ng-bind="property.defaultValue"></span>
+    </div>
+    <div class="inline-inputs" ng-if="newProperty">
+        <input ng-model="property.key" placeholder="name" type="text" ng-class="property.errors.key ? 'red' : ''">
+        <drop-down model="property" key="type" options="{text:'text', object:'object', array:'array'}" ng-class="property.errors.type ? 'red' : ''"></drop-down>
+        <input ng-if="property.type === 'text'" ng-model="property.defaultValue" type="text" placeholder="default value">
+        <button ng-if="property.type==='object'" ng-click="orb.OrbiterService.addPropertyToProperty(property)">Add property</button>
+        <button class="orange" style="margin-left: 7px;" ng-click="orb.OrbiterService.deleteProperty(parent, propertyKey)"><i class="fa fa-trash"></i></button>
+    </div>
+    <property-element class="inner-property" ng-if="property.type==='object' || property.type==='array'" new-property="newProperty" ng-repeat="(childPropertyKey, childProperty) in property.defaultValue track by childPropertyKey" property="childProperty" property-key="childProperty.key" parent="property.defaultValue"></property-element>
+</div>

@@ -1,0 +1,8 @@
+<div class="c-dropdown-tree" ng-mouseleave="open=false">
+    <div class="c-dropdown-tree-selection" ng-bind="model[key] || defaultValue || key" ng-click="open=true"></div>
+    <div class="c-dropdown-tree-list" ng-class="open ? 'open' : ''">
+        <div ng-repeat="option in options track by $index" ng-click="model[key]=option" class="c-dropdown-tree-list-item">
+            <div class="c-dropdown-tree-list-item-inner" ng-bind="option"></div>
+        </div>
+    </div>
+</div>

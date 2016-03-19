@@ -8,7 +8,7 @@
                 var run = function() {
                     scope.borderProperties = {};
                     for (var i=0;i<availableStyles.length;i++) {
-                        var thisStyle = InteractiveService.lookUpPath(InteractiveService.properties, InteractiveService.elementProperties.properties[availableStyles[i]].bind);
+                        var thisStyle = InteractiveService.lookUpPath(InteractiveService, InteractiveService.elementProperties.properties[availableStyles[i]].bind);
                         if(thisStyle){
                             scope.borderProperties[availableStyles[i]] = thisStyle;
                         }

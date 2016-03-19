@@ -5,7 +5,7 @@
             <div><i class="fa fa-plus"></i></div>
             <div class="c-dropdown_list">
                 <div
-                    class="c-dropdown_list_item"
+                    class="c-dropdown_list_item draggable"
                     ng-class="'type'+element.label"
                     ng-repeat="element in orb.OrbiterElementTypes track by $index"
                     orbiter-draggable="true"
@@ -13,8 +13,20 @@
                 ><span ng-bind="element.label"></span></div>
             </div>
         </div>
-    </div>
-    <div class="right-side">
         <div class="c-orbiter_menu_item" ng-click="orb.OrbiterService.propertyDialogue=true" style="font-weight: bold; font-size: 18px; line-height: 24px; padding-bottom: 4px; box-sizing: border-box;">@</div>
+        <div class="c-orbiter_menu_item" ng-click="orb.OrbiterService.htmlTreeView? orb.OrbiterService.htmlTreeView=false : orb.OrbiterService.htmlTreeView=true" ng-class="orb.OrbiterService.htmlTreeView? 'active' : ''" style="font-weight: bold; font-size: 18px; line-height: 24px; padding-bottom: 4px; box-sizing: border-box;"><i class="fa fa-tree"></i></div>
+        <div class="c-orbiter_menu_item c-dropdown">
+            <div><i class="fa fa-file-text"></i></div>
+            <div class="c-dropdown_list">
+                <div class="c-dropdown_list_item new"><span ng-click="orb.OrbiterService.newTemplate = {title:null}">New</span></div>
+                <div
+                    class="c-dropdown_list_item"
+                    ng-repeat="(templateKey, template) in orb.InteractiveService.htmlTree track by $index"
+                    ng-if="templateKey !== 'nodes' && templateKey !== 'current'"
+                    ng-click="orb.OrbiterService.switchTemplate(templateKey)"
+                    ng-class="templateKey === orb.InteractiveService.htmlTree.current ? 'active' : ''"
+                ><span ng-bind="templateKey"></span></div>
+            </div>
+        </div>
     </div>
 </div>

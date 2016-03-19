@@ -16,7 +16,7 @@
                         scope.property = scope.element.properties[scope.propertyKey];
 
                         if(scope.property){
-                            scope.bindingObj = InteractiveService.lookUpPath(InteractiveService.properties, scope.property.bind);
+                            scope.bindingObj = InteractiveService.lookUpPath(InteractiveService, scope.property.bind);
                             switch (scope.inputType) {
                                 case 'select':
                                     html += '<select ng-model="bindingObj.value"><option ng-repeat="option in property.options track by $index" value="{{option}}" ng-bind="option"></option></select>';

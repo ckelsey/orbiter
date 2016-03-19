@@ -87,7 +87,7 @@
 
         this.isDialogueOpen = function(){
             self.dialogueOpen = false;
-            if(self.OrbiterService.newDataObject || self.OrbiterService.propertyDialogue || self.OrbiterService.currentEventObject || self.OrbiterService.propertyMapperDialogue || self.OrbiterService.propertySelectorDialogue){
+            if(self.OrbiterService.newDataObject || self.OrbiterService.propertyDialogue || self.OrbiterService.currentEventObject || self.OrbiterService.propertyMapperDialogue || self.OrbiterService.propertySelectorDialogue || self.OrbiterService.newTemplate || self.stagedNewProperty){
                 self.dialogueOpen = true;
             }
         };
@@ -131,6 +131,22 @@
                 self.isDialogueOpen();
             }
         });
+
+        $scope.$watch(function(){
+            return self.OrbiterService.newTemplate;
+        }, function(o,n){
+            if(o !== n){
+                self.isDialogueOpen();
+            }
+        });
+
+        $scope.$watch(function(){
+            return self.OrbiterService.stagedNewProperty;
+        }, function(o,n){
+            if(o !== n){
+                self.isDialogueOpen();
+            }
+        });
     }
 
     angular.module('app')
@@ -163,6 +179,71 @@
         return {
             restrict: 'E',
             templateUrl: '../../html/orbiter/current-event-dialogue.html'
+        };
+    })
+    .directive('newTemplateDialogue', function(){
+        return {
+            restrict: 'E',
+            templateUrl: '../../html/orbiter/new-template-dialogue.html'
+        };
+    })
+    .directive('interactiveTask', function(){
+        return {
+            restrict: 'E',
+            scope: {
+                task: '=task',
+                tasks: '=tasks',
+                key: '=key'
+            },
+            templateUrl: '../../html/orbiter/task.html'
+        };
+    })
+    .directive('dropDown', function(){
+        return {
+            restrict: 'E',
+            scope: {
+                model: '=model',
+                key: '@key',
+                defaultValue: '@default',
+                options: '=options'
+            },
+            templateUrl: '../../html/orbiter/drop-down.html'
+        };
+    })
+
+    .directive('htmlTree', function(){
+        return {
+            restrict: 'E',
+            templateUrl: '../../html/orbiter/html-tree.html'
+        };
+    })
+
+    .directive('htmlTreeNode', function(){
+        return {
+            restrict: 'A',
+            scope: {
+                node: '=htmlTreeNode'
+            },
+            templateUrl: '../../html/orbiter/html-tree-node.html'
+        };
+    })
+    .directive('propertyElement', function(){
+        return {
+            restrict: 'E',
+            scope: {
+                property: '=property',
+                propertyKey: '=propertyKey',
+                newProperty: '=newProperty',
+                root: '=root',
+                parent: '=parent'
+            },
+            templateUrl: '../../html/orbiter/property-element.html'
+        };
+    })
+    .directive('newPropertyDialogue', function(){
+        return {
+            restrict: 'E',
+            templateUrl: '../../html/orbiter/new-property-dialogue.html'
         };
     })
     ;

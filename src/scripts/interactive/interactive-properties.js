@@ -6,6 +6,7 @@
                 key: 'Test string',
                 orbiterType: 'property',
                 value: null,
+                type: 'text',
                 defaultValue: 'Hi! This is a testString'
             },
             "$$styleClasses":{

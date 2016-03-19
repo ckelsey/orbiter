@@ -171,6 +171,10 @@
         };
 
         var linkProperties = angular.copy(textProperties);
+        linkProperties.href = {
+            value: null,
+            bind: null
+        };
         var buttonProperties = angular.copy(textProperties);
         var blockProperties = angular.copy(textProperties);
         delete blockProperties.text;
@@ -188,6 +192,11 @@
                 method: 'ng-click',
                 fn: []
             },
+            "Init":{
+                label: null,
+                method: 'ng-init',
+                fn: []
+            },
             "Mouse down":{
                 label: null,
                 method: 'ng-mousedown',
@@ -202,27 +211,42 @@
 
 
         return {
-            block:{
+            block: {
                 label: 'Block',
                 properties: blockProperties,
                 events: basicEvents
             },
 
-            text:{
+            text: {
                 label: 'Text',
                 properties: textProperties,
                 events: basicEvents
             },
 
-            link:{
+            link: {
                 label: 'Link',
                 properties: linkProperties,
                 events: basicEvents
             },
 
-            button:{
+            button: {
                 label: 'Button',
                 properties: buttonProperties,
+                events: basicEvents
+            },
+
+            repeat: {
+                label: 'Repeat',
+                properties: {
+                    template:{
+                        value: null,
+                        bind: null
+                    },
+                    repeat:{
+                        value: null,
+                        bind: null
+                    }
+                },
                 events: basicEvents
             }
 /*

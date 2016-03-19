@@ -1,13 +1,14 @@
 <div class="c-dialogue_inner">
     <h2>
-        <span>Available properties&nbsp;&nbsp;</span>
+        <span><el ng-bind="orb.OrbiterService.stagedNewProperty.originalKey? 'Edit' : 'New'"></el>&nbsp;property</span>
         <span>
-            <button class="circle" ng-click="orb.OrbiterService.stagedNewProperty={key:null,defaultValue:null,type:null};orb.OrbiterService.propertyDialogue=null"><i class="fa fa-plus"></i></button>
-            <button class="circle orange" ng-click="orb.OrbiterService.propertyDialogue=null"><i class="fa fa-close"></i></button>
+            <button class="circle" ng-click="orb.OrbiterService.insertNewProperty(orb.OrbiterService.stagedNewProperty)"><i class="fa fa-check"></i></button>
+            <button class="circle orange" ng-click="orb.OrbiterService.stagedNewProperty=null"><i class="fa fa-close"></i></button>
         </span>
     </h2>
-    <div class="c-dialogue_input">
-        <property-element ng-repeat="(propertyKey, property) in orb.InteractiveService.properties track by $index" property="property" property-key="propertyKey" root="true" parent="orb.InteractiveService.properties"></property-element>
+    <div class="c-dialogue_input" ng-if="orb.OrbiterService.stagedNewProperty" style="background: rgba(0, 0, 0, 0.42); padding: 14px; box-sizing: border-box;">
+        <small class="error" ng-if="orb.OrbiterService.stagedPropertyErrors">Errors detected, please check</small>
+        <property-element property="orb.OrbiterService.stagedNewProperty" new-property="true" property-key="orb.OrbiterService.stagedNewProperty.key" parent="orb.InteractiveService.properties"></property-element>
     </div>
 </div>
 

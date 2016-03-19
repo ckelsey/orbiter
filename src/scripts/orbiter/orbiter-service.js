@@ -1,17 +1,25 @@
 /* TODO
+    - array, number type
+    - orbiterType messing up object selection
+
+
     APP:
-        - CSS
-            - clean up transitions, make specific
-            - convert expandable to collapsable classes
+        - Do lists
+        - create templates
 
     Import libraries:
-        - mflyCommands
+        - manual import
 
     Properties:
         - delete
-
         - Style classes
         - Global CSS
+        - bind group and individual properties
+
+    Tasks:
+        - always, success, error, fail, pipe, progress promises
+        - rearrange tasks
+        - Create custom reusable methods
 
     CSS:
         - css states :hover :focus :blur
@@ -35,14 +43,56 @@
         - handle nested elements - <node><node>text</node></node>
         - Drag to resize node
 
+    - On property delete, find all bindings and update t default(with a warning that that is happening)
+    - Walkthru
+    - Undo/redo everything
+
 */
 
 
 (function () {
     'use strict';
 
-    function OrbiterService(InteractiveService, InteractiveProperties, InteractiveMethods, OrbiterElementTypes, $localStorage, $timeout){
+    function OrbiterService(InteractiveService, InteractiveProperties, InteractiveMethods, InteractiveLibraries, OrbiterElementTypes, $localStorage, $timeout){
+        var equalObjects = function(obj1, obj2){
+            if(obj1 === obj2){
+                return true;
+            }
+            if(!obj1 || !obj2){
+                return false;
+            }
+
+            if(Array.isArray(obj1) && Array.isArray(obj2)){
+                if(obj1.length !== obj2.length){
+                    return false;
+                }
+                for(var i=0;i<obj1.length;i++){
+                    if(obj1[i] !== obj2[i]){
+                        return false;
+                    }
+                }
+                return true;
+            }
+            var keys1 = Object.keys(obj1);
+            var keys2 = Object.keys(obj2);
+
+            if(keys1.length !== keys2.length){
+                return false;
+            }
+            for(var i=0;i<keys1.length;i++){
+                if(keys1[i] !== keys2[i]){
+                    return false;
+                }
+            }
+            var json1 = JSON.stringify(obj1);
+            var json2 = JSON.stringify(obj2);
+            if(json1 !== json2){
+                return false;
+            }
+            return true;
+        }
         var self = {
+            htmlTreeView: false,
             dragging: null,
             drag: function(data){
                 self.dragging = data;
@@ -135,8 +185,8 @@
                     for(var p in node.properties){
                         if(node.properties[p].bind){
                             var bind = node.properties[p].bind.split('.');
-                            if(bind[0] === oldID){
-                                bind[0] = node.id;
+                            if(bind[1] === oldID){
+                                bind[1] = node.id;
                                 node.properties[p].bind = bind.join('.');
                             }
                         }
@@ -161,7 +211,7 @@
                 node.orbiterType = 'element';
 
                 for(var p in node.properties){
-                    node.properties[p].bind = node.properties[p].bind ? node.properties[p].bind : node.id +'.properties.'+ p;
+                    node.properties[p].bind = node.properties[p].bind ? node.properties[p].bind : 'properties.'+ node.id +'.properties.'+ p;
                 }
 
                 if(parent.id !== node.id){
@@ -295,17 +345,17 @@
                         errors.push('Target');
                     }
 
-                    if(!self.currentEventObject.fn[f].action){
-                        errors.push('Action');
-                    }
-
-                    if(!self.currentEventObject.fn[f].valueType){
-                        errors.push('Value Type');
-                    }
-
-                    if(!self.currentEventObject.fn[f].value && self.currentEventObject.fn[f].valueType === 'proprty'){
-                        errors.push('Value');
-                    }
+                    // if(!self.currentEventObject.fn[f].action){
+                    //     errors.push('Action');
+                    // }
+                    //
+                    // if(!self.currentEventObject.fn[f].valueType){
+                    //     errors.push('Value Type');
+                    // }
+                    //
+                    // if(!self.currentEventObject.fn[f].value && self.currentEventObject.fn[f].valueType === 'property'){
+                    //     errors.push('Value');
+                    // }
 
                     if(errors.length){
                         errors = 'Missing required fields: ' + errors.join(', ');
@@ -337,7 +387,7 @@
                     if(data[prop].new && data[prop].new !== 'none'){
                         element.properties[prop].bind = data[prop].new;
                     }else if(data[prop].new === 'none'){
-                        element.properties[prop].bind = InteractiveService.propertyPrefix + element.id +'.'+ prop;
+                        element.properties[prop].bind = element.id +'.'+ prop;
                     }
                 }
             },
@@ -347,20 +397,125 @@
             },
 
             stagedNewProperty: null,
-            stagedNewPropertyKeyConflict: false,
+            stagedPropertyErrors: false,
+            buildObject: function(obj){
+                obj.errors = {key:null, type:null};
+                if(!obj.key){
+                    self.stagedPropertyErrors = true;
+                    obj.errors.key = "Property name is required";
+                }
+
+                if(!obj.type){
+                    self.stagedPropertyErrors = true;
+                    obj.errors.type = "Data type is required";
+                    return null;
+                }else if(obj.type === 'text'){
+                    return obj.defaultValue;
+                }else if(obj.type === 'object'){
+                    var temp = {};
+                    if(obj.defaultValue){
+                        for(var p=0;p<obj.defaultValue.length;p++){
+                            temp[obj.defaultValue[p].key] = self.buildObject(obj.defaultValue[p]);
+                        }
+                    }
+                    return temp;
+                }
+            },
+
             insertNewProperty: function(data){
+                data.errors = {key:null, type:null};
+                self.stagedPropertyErrors = false;
                 if(!data.key){
-                    self.stagedNewPropertyKeyConflict = "Property name is required";
-                }else if(InteractiveService.properties.hasOwnProperty(data.key)){
-                    self.stagedNewPropertyKeyConflict = "There is already a property with this name";
+                    self.stagedPropertyErrors = true;
+                    data.errors.key = "Property name is required";
+                }else if((InteractiveService.properties.hasOwnProperty(data.key) && !data.hasOwnProperty('originalKey')) || (InteractiveService.properties.hasOwnProperty(data.key) && data.hasOwnProperty('originalKey') && data.key !== data.originalKey)){
+                    self.stagedPropertyErrors = true;
+                    data.errors.key = "There is already a property with this name";
+                }
+
+                if(!data.type){
+                    self.stagedPropertyErrors = true;
+                    data.errors.type = "Data type is required";
+                }
+
+                if(data.type === 'object'){
+                    data.value = self.buildObject(data);
                 }else{
                     data.value = data.defaultValue;
+                }
+
+                if(!self.stagedPropertyErrors){
+                    if(data.hasOwnProperty('originalKey')){
+                        delete data.originalKey;
+                    }
+
                     data.orbiterType = 'property';
                     InteractiveService.properties[data.key] = data;
                     self.stagedNewProperty = null;
                 }
             },
-            propertySelectorDialogue: null
+
+            editProperty: function(data){
+                self.stagedNewProperty = angular.copy(data);
+                self.stagedNewProperty.originalKey = angular.copy(data.key);
+            },
+
+            deleteProperty: function(parent, index){
+                if(parent && index !== undefined){
+                    if(Array.isArray(parent)){
+                        parent.splice(index, 1);
+                    }else{
+                        delete parent[index];
+                    }
+
+                    if(equalObjects(parent, InteractiveService.properties)){
+                        self.stagedNewProperty = null;
+                        self.propertyDialogue = true;
+                    }
+                }
+            },
+
+            propertySelectorDialogue: null,
+
+
+
+
+
+
+
+
+
+
+
+            newTemplate: null,
+            switchTemplate: function(template){
+                InteractiveService.htmlTree[InteractiveService.htmlTree.current].nodes = angular.copy(InteractiveService.htmlTree.nodes);
+                InteractiveService.htmlTree.current = template;
+                InteractiveService.htmlTree.nodes = angular.copy(InteractiveService.htmlTree[InteractiveService.htmlTree.current].nodes);
+                self.save();
+            },
+            addNewTemplate: function(){
+                InteractiveService.htmlTree[self.newTemplate.title] = {nodes:[]};
+                self.switchTemplate(self.newTemplate.title);
+                self.addToInteractive(InteractiveService.htmlTree, OrbiterElementTypes.block);
+                self.save();
+                self.newTemplate = null;
+            },
+
+            addPropertyToProperty: function(property){
+                if(property.type === 'object' || property.type === 'array'){
+                    if(!property.defaultValue || typeof property.defaultValue !== 'object'){
+                        property.defaultValue = [];
+                    }
+
+                    property.defaultValue.push({
+                        key: null,
+                        type: null,
+                        defaultValue: null,
+                        value: null
+                    });
+                }
+            }
         };
 
         if($localStorage.hasOwnProperty('OrbiterInteractiveProperties') && $localStorage.OrbiterInteractiveProperties && Object.keys($localStorage.OrbiterInteractiveProperties).length > 0){
@@ -395,14 +550,28 @@
             InteractiveService.methods = $localStorage.OrbiterInteractiveMethods;
         }
 
+        InteractiveService.libraries = InteractiveLibraries;
+
         if($localStorage.hasOwnProperty('OrbiterInteractiveTree') && $localStorage.OrbiterInteractiveTree.hasOwnProperty('nodes') && $localStorage.OrbiterInteractiveTree.nodes.length > 0){
             InteractiveService.htmlTree = $localStorage.OrbiterInteractiveTree;
         }else{
             $localStorage.OrbiterInteractiveTree = {nodes:[]};
             InteractiveService.htmlTree = $localStorage.OrbiterInteractiveTree;
             self.addToInteractive(InteractiveService.htmlTree, OrbiterElementTypes.block);
-
         }
+
+        if(!InteractiveService.htmlTree.hasOwnProperty('main')){
+            InteractiveService.htmlTree.main = {nodes:InteractiveService.htmlTree.nodes};
+            InteractiveService.htmlTree.current = 'main';
+        }
+
+        if(!InteractiveService.htmlTree.current){
+            InteractiveService.htmlTree.current = 'main';
+        }
+
+        self.activeProperties(InteractiveService.lookUpPath(InteractiveService.properties, InteractiveService.htmlTree.nodes[0].id));
+        console.log(InteractiveService)
+
 
 
         return self;

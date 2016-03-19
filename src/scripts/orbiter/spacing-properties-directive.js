@@ -14,7 +14,7 @@
                 var run = function() {
                     scope.spacingProperties = {};
                     for (var i=0;i<availableStyles.length;i++) {
-                        scope.spacingProperties[availableStyles[i]] = InteractiveService.lookUpPath(InteractiveService.properties, InteractiveService.elementProperties.properties[availableStyles[i]].bind);
+                        scope.spacingProperties[availableStyles[i]] = InteractiveService.lookUpPath(InteractiveService, InteractiveService.elementProperties.properties[availableStyles[i]].bind);
                     }
 
                     var inputTitle = 'Units of measurement can be in px, em, %, etc...';

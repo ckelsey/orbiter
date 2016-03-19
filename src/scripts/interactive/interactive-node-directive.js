@@ -11,6 +11,7 @@
             link:function(scope,element,attributes){
                 scope.dataProperties = InteractiveService.properties[scope.data.id];
                 scope.styles = InteractiveService.getStyles(scope.dataProperties);
+                scope.mock = ['test', 'test2'];
 
                 var html = '';
 
@@ -36,6 +37,12 @@
 
                 var setText = function(){
                     if(scope.dataProperties.label === 'Text' || scope.dataProperties.label === 'Link' || scope.dataProperties.label === 'Button'){
+                        html += '<span ng-bind-html="ictlr.InteractiveService.getBinding(dataProperties, \'text\')" class="c-interactive-bound"></span>';
+                    }
+                };
+
+                var setInclude = function(){
+                    if(scope.dataProperties.label === 'Repeat'){
                         html += '<span ng-bind-html="ictlr.InteractiveService.getBinding(dataProperties, \'text\')" class="c-interactive-bound"></span>';
                     }
                 };
@@ -67,17 +74,30 @@
                     setHTML();
                     html += '</div>';
                 }else if(scope.dataProperties.label === 'Link'){
-                    html += '<a href="{{ictlr.InteractiveService.getBinding(dataProperties, \'url\')}}"';
+                    html += '<a href="{{ictlr.InteractiveService.getBinding(dataProperties, \'href\')}}"';
                     setHTML();
                     html += '</a>';
                 }else if(scope.dataProperties.label === 'Button'){
                     html += '<button';
                     setHTML();
                     html += '</button>';
+                }else if(scope.dataProperties.label === 'Repeat'){
+                    scope.repeatObj = InteractiveService.getBinding(scope.dataProperties, 'repeat');
+                    scope.repeatTemplate = InteractiveService.getBinding(scope.dataProperties, 'template');
+                    var display =
+                    html += '<el';
+                    // setCTLR();
+                    // setEvents();
+                    // setID();
+                    html += ' ng-repeat="rep in repeatObj" interactive-repeater="dataProperties">';
+                    html += '</el>';
                 }
 
                 element.html(html);
                 $compile(element.contents())(scope);
+                // $timeout(function () {
+                //     $compile(element.contents())(scope);
+                // });
 
 
 
