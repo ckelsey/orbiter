@@ -1,0 +1,14 @@
+<div class="c-dialogue_inner" style="display: flex; flex-direction: column; height: 100%;">
+    <h3>
+        <span ng-bind="orb.OrbiterService.projectDataDialogue.type === 'import' ? 'Import project' : 'Export project'"></span>
+        <span>
+            <button class="circle" ng-if="orb.OrbiterService.projectDataDialogue.type === 'import'" ng-click="orb.OrbiterService.importProject(orb.OrbiterService.projectDataDialogue);" ng-if="eventObj.label && eventObj.fn.length"><i class="fa fa-check"></i></button>
+            <button class="circle orange" ng-click="orb.OrbiterService.projectDataDialogue=null"><i class="fa fa-close"></i></button>
+        </span>
+    </h3>
+    <div style=" flex-grow: 1; display: block;position: relative;">
+        <div class="c-dialogue_input" style="height: 100%;display: block;position: absolute;margin: 0px;">
+            <textarea ng-model="orb.OrbiterService.projectDataDialogue.data" placeholder="json data" style="height:100%;display:block;"></textarea>
+        </div>
+    </div>
+</div>

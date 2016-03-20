@@ -1,6 +1,5 @@
 <div class="c-orbiter_menu">
     <div class="left-side">
-        <div class="c-orbiter_menu_item" ng-click="orb.OrbiterService.save()"><i class="fa fa-check"></i></div>
         <div class="c-orbiter_menu_item c-dropdown">
             <div><i class="fa fa-table"></i></div>
             <div class="c-dropdown_list">
@@ -19,21 +18,25 @@
                 <div class="c-dropdown_list_item properties" ng-click="orb.OrbiterService.dialogueModelType='properties'">properties</div>
                 <div class="c-dropdown_list_item elements" ng-click="orb.OrbiterService.dialogueModelType='elements'">elements</div>
                 <div class="c-dropdown_list_item libraries" ng-click="orb.OrbiterService.dialogueModelType='libraries'">libraries</div>
+                <div class="c-dropdown_list_item libraries" ng-click="orb.OrbiterService.dialogueModelType='templates'">templates</div>
             </div>
         </div>
 
         <div class="c-orbiter_menu_item c-dropdown">
             <div><i class="fa fa-file-text"></i></div>
             <div class="c-dropdown_list">
-                <div class="c-dropdown_list_item new"><span ng-click="orb.OrbiterService.newTemplate = {title:null}">New</span></div>
+                <div class="c-dropdown_list_item new"><span ng-click="orb.OrbiterTemplatesService.newTemplate = {title:null}">New</span></div>
                 <div
                     class="c-dropdown_list_item"
                     ng-repeat="(templateKey, template) in orb.InteractiveService.htmlTree track by $index"
                     ng-if="templateKey !== 'nodes' && templateKey !== 'current'"
-                    ng-click="orb.OrbiterService.switchTemplate(templateKey)"
+                    ng-click="orb.OrbiterTemplatesService.switchTemplate(templateKey)"
                     ng-class="templateKey === orb.InteractiveService.htmlTree.current ? 'active' : ''"
                 ><span ng-bind="templateKey"></span></div>
             </div>
         </div>
+        <div class="c-orbiter_menu_item" ng-click="orb.OrbiterService.save()"><i class="fa fa-check"></i></div>
+        <div class="c-orbiter_menu_item" ng-click="orb.OrbiterService.projectDataDialogue={type:'import', data:null}"><i class="fa fa-folder-open"></i></div>
+        <div class="c-orbiter_menu_item" ng-click="orb.OrbiterService.exportProject()"><i class="fa fa-external-link"></i></div>
     </div>
 </div>

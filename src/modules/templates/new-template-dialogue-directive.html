@@ -1,0 +1,10 @@
+<div class="c-dialogue_inner">
+    <h2>New template</h2>
+    <div class="c-dialogue_input">
+        <input type="text" ng-model="orb.OrbiterTemplatesService.newTemplate.title" placeholder="template name" />
+    </div>
+    <div class="c-dialogue_input" style="text-align: right;">
+        <button class="circle" ng-click="orb.OrbiterTemplatesService.addNewTemplate()" ng-if="orb.OrbiterTemplatesService.newTemplate.title"><i class="fa fa-check"></i></button>
+        <button class="circle orange" ng-click="orb.OrbiterTemplatesService.newTemplate=null"><i class="fa fa-close"></i></button>
+    </div>
+</div>

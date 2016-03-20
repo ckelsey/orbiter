@@ -1,0 +1,20 @@
+<div class="c-dialogue_inner" ng-controller="OrbiterCtlr as orb">
+    <h3>
+        <span>Available&nbsp;<drop-down options="['properties', 'elements','libraries', 'templates']" model="orb.OrbiterService" key="dialogueModelType"></drop-down></span>
+        <span>
+            <button class="circle" ng-if="orb.OrbiterService.selectedProperty" ng-click="orb.OrbiterService.saveSelectedProperty(orb.OrbiterService.selectedProperty);orb.OrbiterService.dialogueModelType=null"><i class="fa fa-check"></i></button>
+            <button class="circle orange" ng-click="orb.OrbiterService.dialogueModelType=null"><i class="fa fa-close"></i></button>
+        </span>
+    </h3>
+    <div class="c-dialogue_input">
+        <div class="property" ng-repeat="(templateKey, template) in orb.InteractiveService.htmlTree track by $index" ng-if="templateKey !== 'nodes' && templateKey !== 'current'">
+            <div
+                class="inline-inputs readonly"
+                ng-class="'templates.'+ templateKey === orb.OrbiterService.selectedProperty.path ? 'active' : ''"
+                ng-click="orb.OrbiterService.selectedProperty? orb.OrbiterService.selectedProperty.path='templates.'+ templateKey : null">
+                <label ng-bind="templateKey"></label>
+                <span ng-bind="orb.OrbiterTemplatesService.totalNodes(templateKey) + ' elements'"></span>
+            </div>
+        </div>
+    </div>
+</div>

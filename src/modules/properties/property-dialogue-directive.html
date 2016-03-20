@@ -1,0 +1,13 @@
+<div class="c-dialogue_inner" ng-controller="OrbiterCtlr as orb">
+    <h3>
+        <span>Available&nbsp;<drop-down options="['properties', 'elements','libraries', 'templates']" model="orb.OrbiterService" key="dialogueModelType"></drop-down></span>
+        <span>
+            <button class="circle" ng-if="!orb.OrbiterService.selectedProperty" ng-click="orb.OrbiterPropertyService.stagedProperty={key:null,defaultValue:null,type:null};orb.OrbiterService.dialogueModelType=null"><i class="fa fa-plus"></i></button>
+            <button class="circle" ng-if="orb.OrbiterService.selectedProperty" ng-click="orb.OrbiterService.saveSelectedProperty(orb.OrbiterService.selectedProperty);orb.OrbiterService.dialogueModelType=null; orb.OrbiterService.selectedProperty=null;"><i class="fa fa-check"></i></button>
+            <button class="circle orange" ng-click="orb.OrbiterService.dialogueModelType=null"><i class="fa fa-close"></i></button>
+        </span>
+    </h3>
+    <div class="c-dialogue_input">
+        <property-element ng-repeat="(propertyKey, property) in orb.InteractiveService[orb.OrbiterService.dialogueModelType] track by $index" property="property" property-key="propertyKey" root="true" parent="orb.InteractiveService.properties" path="orb.OrbiterService.dialogueModelType +'.'+ propertyKey +'.value'"></property-element>
+    </div>
+</div>

@@ -84,8 +84,7 @@
                 try{
                     if(pathString){
                         var path = pathString.split('.');
-
-                        if(path.length == 1){
+                        if(path.length === 1){
                             try{
                                 return obj[path[0]];
                             }catch(e){
@@ -116,8 +115,17 @@
             },
 
             runFN: function(data){
+                var setValue = function(obj, path, value){
+                    if(path.length === 1){
+                        return obj[path[0]] = value;
+                    }else{
+                        var child = obj[path[0]];
+                        path.shift();
+                        return setValue(child, path, value);
+                    }
+                };
+
                 var setFunction = function(thisFN, passedData){
-                    var target = self.lookUpPath(self, thisFN.target);
                     var newVal = thisFN.valueType === 'custom text' ? thisFN.value : self.lookUpPath(self, thisFN.value);
 
                     try{
@@ -126,15 +134,10 @@
                         }
                     }catch(e){}
 
-                    if(target){
-                        if(target.hasOwnProperty('bind')){
-                            target.bind = thisFN.value;
-                        }
 
-                        $timeout(function(){
-                            target.value = newVal.hasOwnProperty('value') ? newVal.value : newVal;
-                        });
-                    }
+                    $timeout(function(){
+                        setValue(self, thisFN.target.split('.'), newVal)
+                    });
                 };
 
                 var runFunction = function(thisFN, passedData){
@@ -183,6 +186,8 @@
                 }
             }
         };
+
+        self.libraries = InteractiveLibraries;
 
         return self;
     }

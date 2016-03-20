@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function OrbiterCtlr($localStorage, $window, $scope, OrbiterService, OrbiterElementTypes, OrbiterPropertyService, OrbiterElementsService, OrbiterLibrariesService, InteractiveService){
+    function OrbiterCtlr($localStorage, $window, $scope, OrbiterService, OrbiterElementTypes, OrbiterPropertyService, OrbiterElementsService, OrbiterLibrariesService, OrbiterTemplatesService, InteractiveService){
         var self = this;
         this.$localStorage = $localStorage;
         if(!$localStorage.Orbiter){
@@ -11,6 +11,7 @@
         this.OrbiterPropertyService = OrbiterPropertyService;
         this.OrbiterElementsService = OrbiterElementsService;
         this.OrbiterLibrariesService = OrbiterLibrariesService;
+        this.OrbiterTemplatesService = OrbiterTemplatesService;
         this.OrbiterElementTypes = OrbiterElementTypes;
         this.InteractiveService = InteractiveService;
         InteractiveService.developer = true;
@@ -114,7 +115,8 @@
             var openDialogueFlags = [
                 self.OrbiterService.dialogueModelType,
                 self.OrbiterService.currentEventObject,
-                self.OrbiterService.newTemplate,
+                self.OrbiterService.projectDataDialogue,
+                self.OrbiterTemplatesService.newTemplate,
                 self.OrbiterService.propertyMapperDialogue,
                 self.OrbiterPropertyService.stagedProperty
             ];
@@ -151,7 +153,15 @@
         });
 
         $scope.$watch(function(){
-            return self.OrbiterService.newTemplate;
+            return self.OrbiterService.projectDataDialogue;
+        }, function(o,n){
+            if(o !== n){
+                self.isDialogueOpen();
+            }
+        });
+
+        $scope.$watch(function(){
+            return self.OrbiterTemplatesService.newTemplate;
         }, function(o,n){
             if(o !== n){
                 self.isDialogueOpen();
@@ -192,12 +202,6 @@
         return {
             restrict: 'E',
             templateUrl: '../../html/orbiter/current-event-dialogue.html'
-        };
-    })
-    .directive('newTemplateDialogue', function(){
-        return {
-            restrict: 'E',
-            templateUrl: '../../html/orbiter/new-template-dialogue.html'
         };
     })
     .directive('interactiveTask', function(){

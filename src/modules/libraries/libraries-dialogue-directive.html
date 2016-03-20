@@ -1,0 +1,24 @@
+<div class="c-dialogue_inner" ng-controller="OrbiterCtlr as orb">
+    <h3>
+        <span>Available&nbsp;<drop-down options="['properties', 'elements','libraries', 'templates']" model="orb.OrbiterService" key="dialogueModelType"></drop-down></span>
+        <span>
+            <button class="circle" ng-if="orb.OrbiterService.selectedProperty" ng-click="orb.OrbiterService.saveSelectedProperty(orb.OrbiterService.selectedProperty);orb.OrbiterService.dialogueModelType=null"><i class="fa fa-check"></i></button>
+            <button class="circle orange" ng-click="orb.OrbiterService.dialogueModelType=null"><i class="fa fa-close"></i></button>
+        </span>
+    </h3>
+    <div class="c-dialogue_input">
+        <div class="property" ng-repeat="(libraryKey, library) in orb.InteractiveService.libraries track by $index" ng-class="libraryPropertyToggled[libraryKey] ? 'libraryExpanded' : ''">
+            <div class="inline-inputs readonly toggler" ng-click="libraryPropertyToggled[libraryKey] ? libraryPropertyToggled[libraryKey]=false : libraryPropertyToggled[libraryKey]=true">
+                <label ng-bind="libraryKey"></label>
+            </div>
+            <div class="inner-property">
+                <div ng-repeat="(propertyKey, property) in library track by $index" class="property">
+                    <div class="inline-inputs readonly" ng-class="'libraries.'+ libraryKey +'.'+ propertyKey === orb.OrbiterService.selectedProperty.path ? 'active' : ''" ng-click="orb.OrbiterService.selectedProperty? orb.OrbiterService.selectedProperty.path='libraries.'+ libraryKey +'.'+ propertyKey : null">
+                        <label ng-bind="propertyKey"></label>
+                        <span ng-bind="orb.typeOfSafe(library, propertyKey)"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

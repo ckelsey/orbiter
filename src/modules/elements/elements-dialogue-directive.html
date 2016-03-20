@@ -1,0 +1,31 @@
+<div class="c-dialogue_inner" ng-controller="OrbiterCtlr as orb">
+    <h3>
+        <span>Available&nbsp;<drop-down options="['properties', 'elements','libraries', 'templates']" model="orb.OrbiterService" key="dialogueModelType"></drop-down></span>
+        <span>
+            <button class="circle" ng-if="orb.OrbiterService.selectedProperty" ng-click="orb.OrbiterService.saveSelectedProperty(orb.OrbiterService.selectedProperty);orb.OrbiterService.dialogueModelType=null"><i class="fa fa-check"></i></button>
+            <button class="circle orange" ng-click="orb.OrbiterService.dialogueModelType=null"><i class="fa fa-close"></i></button>
+        </span>
+    </h3>
+    <div class="c-dialogue_input">
+        <div class="property" ng-repeat="(elementKey, element) in orb.InteractiveService.elements track by $index" ng-class="elementPropertyToggled[elementKey] ? 'elementExpanded' : ''">
+            <div class="inline-inputs readonly toggler" ng-click="elementPropertyToggled[elementKey] ? elementPropertyToggled[elementKey]=false : elementPropertyToggled[elementKey]=true">
+                <label ng-bind="elementKey"></label>
+                <span ng-bind="element.label"></span>
+                <span ng-bind="orb.InteractiveService.getBinding(element, 'text')"></span>
+            </div>
+            <div class="inner-property">
+                <div ng-repeat="(propertyKey, property) in element.properties track by $index" class="property">
+                    <div
+                        class="inline-inputs readonly"
+                        ng-class="'elements.'+ elementKey +'.properties.'+ propertyKey === orb.OrbiterService.selectedProperty.path ? 'active' : ''"
+                        ng-click="orb.OrbiterService.selectedProperty? orb.OrbiterService.selectedProperty.path='elements.'+ elementKey +'.properties.'+ propertyKey : null"
+                    >
+                        <label ng-bind="propertyKey"></label>
+                        <span ng-bind="property.bind"></span>
+                        <span ng-bind="orb.InteractiveService.getBinding(element, propertyKey)"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

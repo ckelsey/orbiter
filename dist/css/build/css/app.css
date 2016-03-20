@@ -35,36 +35,36 @@ drop-down.red .c-dropdown-tree {
   background: #a10005;
 }
 
-elements-dialogue .c-dialogue_inner .property .inline-inputs.readonly span, libraries-dialogue .c-dialogue_inner .property .inline-inputs.readonly span {
+elements-dialogue .c-dialogue_inner .property .inline-inputs.readonly span, libraries-dialogue .c-dialogue_inner .property .inline-inputs.readonly span, templates-dialogue .c-dialogue_inner .property .inline-inputs.readonly span {
   max-width: 33%;
   overflow: hidden;
   max-height: 18px;
 }
-elements-dialogue .c-dialogue_inner .property .inline-inputs.readonly:before, libraries-dialogue .c-dialogue_inner .property .inline-inputs.readonly:before {
+elements-dialogue .c-dialogue_inner .property .inline-inputs.readonly:before, libraries-dialogue .c-dialogue_inner .property .inline-inputs.readonly:before, templates-dialogue .c-dialogue_inner .property .inline-inputs.readonly:before {
   background: transparent;
   transition: background .3s;
 }
-elements-dialogue .c-dialogue_inner .property:before, libraries-dialogue .c-dialogue_inner .property:before {
+elements-dialogue .c-dialogue_inner .property:before, libraries-dialogue .c-dialogue_inner .property:before, templates-dialogue .c-dialogue_inner .property:before {
   background: transparent;
   transition: background .3s;
 }
-elements-dialogue .c-dialogue_inner .inner-property, libraries-dialogue .c-dialogue_inner .inner-property {
+elements-dialogue .c-dialogue_inner .inner-property, libraries-dialogue .c-dialogue_inner .inner-property, templates-dialogue .c-dialogue_inner .inner-property {
   padding: 0px;
   transition: padding .3s;
 }
-elements-dialogue .c-dialogue_inner .inner-property .property, libraries-dialogue .c-dialogue_inner .inner-property .property {
+elements-dialogue .c-dialogue_inner .inner-property .property, libraries-dialogue .c-dialogue_inner .inner-property .property, templates-dialogue .c-dialogue_inner .inner-property .property {
   margin: 0px;
   transition: margin .3s;
 }
-elements-dialogue .c-dialogue_inner .inner-property .property .inline-inputs label, elements-dialogue .c-dialogue_inner .inner-property .property .inline-inputs span, libraries-dialogue .c-dialogue_inner .inner-property .property .inline-inputs label, libraries-dialogue .c-dialogue_inner .inner-property .property .inline-inputs span {
+elements-dialogue .c-dialogue_inner .inner-property .property .inline-inputs label, elements-dialogue .c-dialogue_inner .inner-property .property .inline-inputs span, libraries-dialogue .c-dialogue_inner .inner-property .property .inline-inputs label, libraries-dialogue .c-dialogue_inner .inner-property .property .inline-inputs span, templates-dialogue .c-dialogue_inner .inner-property .property .inline-inputs label, templates-dialogue .c-dialogue_inner .inner-property .property .inline-inputs span {
   font-size: 0px;
   line-height: 0;
   transition: font-size .3s, line-height .3s;
 }
-elements-dialogue .c-dialogue_inner .toggler, elements-dialogue .c-dialogue_inner .toggler *, libraries-dialogue .c-dialogue_inner .toggler, libraries-dialogue .c-dialogue_inner .toggler * {
+elements-dialogue .c-dialogue_inner .toggler, elements-dialogue .c-dialogue_inner .toggler *, libraries-dialogue .c-dialogue_inner .toggler, libraries-dialogue .c-dialogue_inner .toggler *, templates-dialogue .c-dialogue_inner .toggler, templates-dialogue .c-dialogue_inner .toggler * {
   cursor: pointer;
 }
-elements-dialogue .c-dialogue_inner .toggler:before, libraries-dialogue .c-dialogue_inner .toggler:before {
+elements-dialogue .c-dialogue_inner .toggler:before, libraries-dialogue .c-dialogue_inner .toggler:before, templates-dialogue .c-dialogue_inner .toggler:before {
   content: "";
   display: block;
   border: 5px solid #fff;
@@ -81,7 +81,7 @@ elements-dialogue .c-dialogue_inner .toggler:before, libraries-dialogue .c-dialo
   border-bottom-width: 4px;
   transition: border .1s, top .1s, margin .15s;
 }
-elements-dialogue .c-dialogue_inner .elementExpanded .toggler:before, elements-dialogue .c-dialogue_inner .libraryExpanded .toggler:before, libraries-dialogue .c-dialogue_inner .elementExpanded .toggler:before, libraries-dialogue .c-dialogue_inner .libraryExpanded .toggler:before {
+elements-dialogue .c-dialogue_inner .elementExpanded .toggler:before, elements-dialogue .c-dialogue_inner .libraryExpanded .toggler:before, elements-dialogue .c-dialogue_inner .templateExpanded .toggler:before, libraries-dialogue .c-dialogue_inner .elementExpanded .toggler:before, libraries-dialogue .c-dialogue_inner .libraryExpanded .toggler:before, libraries-dialogue .c-dialogue_inner .templateExpanded .toggler:before, templates-dialogue .c-dialogue_inner .elementExpanded .toggler:before, templates-dialogue .c-dialogue_inner .libraryExpanded .toggler:before, templates-dialogue .c-dialogue_inner .templateExpanded .toggler:before {
   border-top-color: #fff;
   border-left-color: transparent;
   border-top-width: 5px;
@@ -92,20 +92,20 @@ elements-dialogue .c-dialogue_inner .elementExpanded .toggler:before, elements-d
   margin-left: -1px;
   margin-right: 3px;
 }
-elements-dialogue .c-dialogue_inner .elementExpanded .inner-property, elements-dialogue .c-dialogue_inner .libraryExpanded .inner-property, libraries-dialogue .c-dialogue_inner .elementExpanded .inner-property, libraries-dialogue .c-dialogue_inner .libraryExpanded .inner-property {
+elements-dialogue .c-dialogue_inner .elementExpanded .inner-property, elements-dialogue .c-dialogue_inner .libraryExpanded .inner-property, elements-dialogue .c-dialogue_inner .templateExpanded .inner-property, libraries-dialogue .c-dialogue_inner .elementExpanded .inner-property, libraries-dialogue .c-dialogue_inner .libraryExpanded .inner-property, libraries-dialogue .c-dialogue_inner .templateExpanded .inner-property, templates-dialogue .c-dialogue_inner .elementExpanded .inner-property, templates-dialogue .c-dialogue_inner .libraryExpanded .inner-property, templates-dialogue .c-dialogue_inner .templateExpanded .inner-property {
   padding: 1px 0px 1px 14px;
 }
-elements-dialogue .c-dialogue_inner .elementExpanded .inner-property .property, elements-dialogue .c-dialogue_inner .libraryExpanded .inner-property .property, libraries-dialogue .c-dialogue_inner .elementExpanded .inner-property .property, libraries-dialogue .c-dialogue_inner .libraryExpanded .inner-property .property {
+elements-dialogue .c-dialogue_inner .elementExpanded .inner-property .property, elements-dialogue .c-dialogue_inner .libraryExpanded .inner-property .property, elements-dialogue .c-dialogue_inner .templateExpanded .inner-property .property, libraries-dialogue .c-dialogue_inner .elementExpanded .inner-property .property, libraries-dialogue .c-dialogue_inner .libraryExpanded .inner-property .property, libraries-dialogue .c-dialogue_inner .templateExpanded .inner-property .property, templates-dialogue .c-dialogue_inner .elementExpanded .inner-property .property, templates-dialogue .c-dialogue_inner .libraryExpanded .inner-property .property, templates-dialogue .c-dialogue_inner .templateExpanded .inner-property .property {
   margin: 7px 0;
 }
-elements-dialogue .c-dialogue_inner .elementExpanded .inner-property .property .inline-inputs label, elements-dialogue .c-dialogue_inner .elementExpanded .inner-property .property .inline-inputs span, elements-dialogue .c-dialogue_inner .libraryExpanded .inner-property .property .inline-inputs label, elements-dialogue .c-dialogue_inner .libraryExpanded .inner-property .property .inline-inputs span, libraries-dialogue .c-dialogue_inner .elementExpanded .inner-property .property .inline-inputs label, libraries-dialogue .c-dialogue_inner .elementExpanded .inner-property .property .inline-inputs span, libraries-dialogue .c-dialogue_inner .libraryExpanded .inner-property .property .inline-inputs label, libraries-dialogue .c-dialogue_inner .libraryExpanded .inner-property .property .inline-inputs span {
+elements-dialogue .c-dialogue_inner .elementExpanded .inner-property .property .inline-inputs label, elements-dialogue .c-dialogue_inner .elementExpanded .inner-property .property .inline-inputs span, elements-dialogue .c-dialogue_inner .libraryExpanded .inner-property .property .inline-inputs label, elements-dialogue .c-dialogue_inner .libraryExpanded .inner-property .property .inline-inputs span, elements-dialogue .c-dialogue_inner .templateExpanded .inner-property .property .inline-inputs label, elements-dialogue .c-dialogue_inner .templateExpanded .inner-property .property .inline-inputs span, libraries-dialogue .c-dialogue_inner .elementExpanded .inner-property .property .inline-inputs label, libraries-dialogue .c-dialogue_inner .elementExpanded .inner-property .property .inline-inputs span, libraries-dialogue .c-dialogue_inner .libraryExpanded .inner-property .property .inline-inputs label, libraries-dialogue .c-dialogue_inner .libraryExpanded .inner-property .property .inline-inputs span, libraries-dialogue .c-dialogue_inner .templateExpanded .inner-property .property .inline-inputs label, libraries-dialogue .c-dialogue_inner .templateExpanded .inner-property .property .inline-inputs span, templates-dialogue .c-dialogue_inner .elementExpanded .inner-property .property .inline-inputs label, templates-dialogue .c-dialogue_inner .elementExpanded .inner-property .property .inline-inputs span, templates-dialogue .c-dialogue_inner .libraryExpanded .inner-property .property .inline-inputs label, templates-dialogue .c-dialogue_inner .libraryExpanded .inner-property .property .inline-inputs span, templates-dialogue .c-dialogue_inner .templateExpanded .inner-property .property .inline-inputs label, templates-dialogue .c-dialogue_inner .templateExpanded .inner-property .property .inline-inputs span {
   font-size: 12px;
   line-height: 1.5;
 }
-elements-dialogue .c-dialogue_inner .elementExpanded .inner-property .property .inline-inputs:before, elements-dialogue .c-dialogue_inner .libraryExpanded .inner-property .property .inline-inputs:before, libraries-dialogue .c-dialogue_inner .elementExpanded .inner-property .property .inline-inputs:before, libraries-dialogue .c-dialogue_inner .libraryExpanded .inner-property .property .inline-inputs:before {
+elements-dialogue .c-dialogue_inner .elementExpanded .inner-property .property .inline-inputs:before, elements-dialogue .c-dialogue_inner .libraryExpanded .inner-property .property .inline-inputs:before, elements-dialogue .c-dialogue_inner .templateExpanded .inner-property .property .inline-inputs:before, libraries-dialogue .c-dialogue_inner .elementExpanded .inner-property .property .inline-inputs:before, libraries-dialogue .c-dialogue_inner .libraryExpanded .inner-property .property .inline-inputs:before, libraries-dialogue .c-dialogue_inner .templateExpanded .inner-property .property .inline-inputs:before, templates-dialogue .c-dialogue_inner .elementExpanded .inner-property .property .inline-inputs:before, templates-dialogue .c-dialogue_inner .libraryExpanded .inner-property .property .inline-inputs:before, templates-dialogue .c-dialogue_inner .templateExpanded .inner-property .property .inline-inputs:before {
   background: #9fbe3c;
 }
-elements-dialogue .c-dialogue_inner .elementExpanded .property:before, elements-dialogue .c-dialogue_inner .libraryExpanded .property:before, libraries-dialogue .c-dialogue_inner .elementExpanded .property:before, libraries-dialogue .c-dialogue_inner .libraryExpanded .property:before {
+elements-dialogue .c-dialogue_inner .elementExpanded .property:before, elements-dialogue .c-dialogue_inner .libraryExpanded .property:before, elements-dialogue .c-dialogue_inner .templateExpanded .property:before, libraries-dialogue .c-dialogue_inner .elementExpanded .property:before, libraries-dialogue .c-dialogue_inner .libraryExpanded .property:before, libraries-dialogue .c-dialogue_inner .templateExpanded .property:before, templates-dialogue .c-dialogue_inner .elementExpanded .property:before, templates-dialogue .c-dialogue_inner .libraryExpanded .property:before, templates-dialogue .c-dialogue_inner .templateExpanded .property:before {
   background: #9fbe3c;
 }
 
@@ -336,45 +336,45 @@ orbiter-sidebar *::-webkit-scrollbar {
   display: none;
 }
 
-property-dialogue .property, elements-dialogue .property, libraries-dialogue .property {
+property-dialogue .property, elements-dialogue .property, libraries-dialogue .property, templates-dialogue .property {
   margin: 7px 0;
   padding: 7px;
   background: rgba(12, 31, 40, 0.62);
 }
-property-dialogue .inner-property .property, elements-dialogue .inner-property .property, libraries-dialogue .inner-property .property {
+property-dialogue .inner-property .property, elements-dialogue .inner-property .property, libraries-dialogue .inner-property .property, templates-dialogue .inner-property .property {
   margin: 2px 0;
   padding: 0px;
   background: transparent;
 }
-property-dialogue h4, elements-dialogue h4, libraries-dialogue h4 {
+property-dialogue h4, elements-dialogue h4, libraries-dialogue h4, templates-dialogue h4 {
   padding: 0px !important;
 }
 
-property-element .inline-inputs, elements-dialogue .property .inline-inputs, libraries-dialogue .property .inline-inputs {
+property-element .inline-inputs, elements-dialogue .property .inline-inputs, libraries-dialogue .property .inline-inputs, templates-dialogue .property .inline-inputs {
   margin: 0px;
 }
-property-element .inline-inputs label, elements-dialogue .property .inline-inputs label, libraries-dialogue .property .inline-inputs label {
+property-element .inline-inputs label, elements-dialogue .property .inline-inputs label, libraries-dialogue .property .inline-inputs label, templates-dialogue .property .inline-inputs label {
   line-height: 32px;
 }
-property-element .inline-inputs label, property-element .inline-inputs drop-down, property-element .inline-inputs input, elements-dialogue .property .inline-inputs label, elements-dialogue .property .inline-inputs drop-down, elements-dialogue .property .inline-inputs input, libraries-dialogue .property .inline-inputs label, libraries-dialogue .property .inline-inputs drop-down, libraries-dialogue .property .inline-inputs input {
+property-element .inline-inputs label, property-element .inline-inputs drop-down, property-element .inline-inputs input, elements-dialogue .property .inline-inputs label, elements-dialogue .property .inline-inputs drop-down, elements-dialogue .property .inline-inputs input, libraries-dialogue .property .inline-inputs label, libraries-dialogue .property .inline-inputs drop-down, libraries-dialogue .property .inline-inputs input, templates-dialogue .property .inline-inputs label, templates-dialogue .property .inline-inputs drop-down, templates-dialogue .property .inline-inputs input {
   vertical-align: middle;
   margin: 0px 7px 0px 0px;
   max-width: 300px;
 }
-property-element .inline-inputs .c-dropdown-tree, elements-dialogue .property .inline-inputs .c-dropdown-tree, libraries-dialogue .property .inline-inputs .c-dropdown-tree {
+property-element .inline-inputs .c-dropdown-tree, elements-dialogue .property .inline-inputs .c-dropdown-tree, libraries-dialogue .property .inline-inputs .c-dropdown-tree, templates-dialogue .property .inline-inputs .c-dropdown-tree {
   margin: 0px;
 }
-property-element .inline-inputs .c-dropdown-tree-selection, elements-dialogue .property .inline-inputs .c-dropdown-tree-selection, libraries-dialogue .property .inline-inputs .c-dropdown-tree-selection {
+property-element .inline-inputs .c-dropdown-tree-selection, elements-dialogue .property .inline-inputs .c-dropdown-tree-selection, libraries-dialogue .property .inline-inputs .c-dropdown-tree-selection, templates-dialogue .property .inline-inputs .c-dropdown-tree-selection {
   padding: 0px;
 }
-property-element .inline-inputs.readonly label, elements-dialogue .property .inline-inputs.readonly label, libraries-dialogue .property .inline-inputs.readonly label {
+property-element .inline-inputs.readonly label, elements-dialogue .property .inline-inputs.readonly label, libraries-dialogue .property .inline-inputs.readonly label, templates-dialogue .property .inline-inputs.readonly label {
   line-height: 20px;
 }
-property-element .inline-inputs.readonly label + span, elements-dialogue .property .inline-inputs.readonly label + span, libraries-dialogue .property .inline-inputs.readonly label + span {
+property-element .inline-inputs.readonly label + span, elements-dialogue .property .inline-inputs.readonly label + span, libraries-dialogue .property .inline-inputs.readonly label + span, templates-dialogue .property .inline-inputs.readonly label + span {
   font-style: italic;
   color: #9fbe3c;
 }
-property-element .inline-inputs.readonly span, elements-dialogue .property .inline-inputs.readonly span, libraries-dialogue .property .inline-inputs.readonly span {
+property-element .inline-inputs.readonly span, elements-dialogue .property .inline-inputs.readonly span, libraries-dialogue .property .inline-inputs.readonly span, templates-dialogue .property .inline-inputs.readonly span {
   font-size: 12px;
   line-height: 21px;
   font-weight: lighter;
@@ -382,19 +382,19 @@ property-element .inline-inputs.readonly span, elements-dialogue .property .inli
   padding: 0px 7px 0px 0px;
 }
 
-property-dialogue.select-mode .inline-inputs, elements-dialogue.select-mode .elementExpanded .inner-property .inline-inputs, libraries-dialogue.select-mode .libraryExpanded .inner-property .inline-inputs {
+property-dialogue.select-mode .inline-inputs, elements-dialogue.select-mode .elementExpanded .inner-property .inline-inputs, libraries-dialogue.select-mode .libraryExpanded .inner-property .inline-inputs, templates-dialogue.select-mode .inline-inputs {
   cursor: pointer;
   transition: color .1s, background .1s, box-shadow .1s;
 }
-property-dialogue.select-mode .inline-inputs span, elements-dialogue.select-mode .elementExpanded .inner-property .inline-inputs span, libraries-dialogue.select-mode .libraryExpanded .inner-property .inline-inputs span {
+property-dialogue.select-mode .inline-inputs span, elements-dialogue.select-mode .elementExpanded .inner-property .inline-inputs span, libraries-dialogue.select-mode .libraryExpanded .inner-property .inline-inputs span, templates-dialogue.select-mode .inline-inputs span {
   transition: color .1s;
 }
-property-dialogue.select-mode .inline-inputs:hover, property-dialogue.select-mode .inline-inputs.active, elements-dialogue.select-mode .elementExpanded .inner-property .inline-inputs:hover, elements-dialogue.select-mode .elementExpanded .inner-property .inline-inputs.active, libraries-dialogue.select-mode .libraryExpanded .inner-property .inline-inputs:hover, libraries-dialogue.select-mode .libraryExpanded .inner-property .inline-inputs.active {
+property-dialogue.select-mode .inline-inputs:hover, property-dialogue.select-mode .inline-inputs.active, elements-dialogue.select-mode .elementExpanded .inner-property .inline-inputs:hover, elements-dialogue.select-mode .elementExpanded .inner-property .inline-inputs.active, libraries-dialogue.select-mode .libraryExpanded .inner-property .inline-inputs:hover, libraries-dialogue.select-mode .libraryExpanded .inner-property .inline-inputs.active, templates-dialogue.select-mode .inline-inputs:hover, templates-dialogue.select-mode .inline-inputs.active {
   background: #9fbe3c;
   color: #213037;
   box-shadow: 0px 0px 0px 4px #9fbe3c;
 }
-property-dialogue.select-mode .inline-inputs:hover span, property-dialogue.select-mode .inline-inputs.active span, elements-dialogue.select-mode .elementExpanded .inner-property .inline-inputs:hover span, elements-dialogue.select-mode .elementExpanded .inner-property .inline-inputs.active span, libraries-dialogue.select-mode .libraryExpanded .inner-property .inline-inputs:hover span, libraries-dialogue.select-mode .libraryExpanded .inner-property .inline-inputs.active span {
+property-dialogue.select-mode .inline-inputs:hover span, property-dialogue.select-mode .inline-inputs.active span, elements-dialogue.select-mode .elementExpanded .inner-property .inline-inputs:hover span, elements-dialogue.select-mode .elementExpanded .inner-property .inline-inputs.active span, libraries-dialogue.select-mode .libraryExpanded .inner-property .inline-inputs:hover span, libraries-dialogue.select-mode .libraryExpanded .inner-property .inline-inputs.active span, templates-dialogue.select-mode .inline-inputs:hover span, templates-dialogue.select-mode .inline-inputs.active span {
   color: #213037;
 }
 
@@ -704,6 +704,12 @@ property-selector-dialogue.c-dialogue {
 .c-dropdown_list_item.typeButton:before {
   content: "\f25a";
 }
+.c-dropdown_list_item.typeRepeat:before {
+  content: "\f141";
+}
+.c-dropdown_list_item.typeImage:before {
+  content: "\f03e";
+}
 .c-dropdown_list_item.new:before {
   content: "\f067";
 }
@@ -742,7 +748,7 @@ property-selector-dialogue.c-dialogue {
   background: #273841;
   width: 100px;
   top: 34px;
-  left: -7px;
+  left: 0px;
   border-radius: 0px 0px 2px 2px;
   height: auto;
   text-align: left;
@@ -1122,9 +1128,12 @@ property-selector-dialogue.c-dialogue {
   transition: background-color .2s, color .2s, transform .2s;
 }
 .c-orbiter_menu_item:nth-child(1) {
-  background-color: #3c5764;
+  background-color: #496a7a;
 }
 .c-orbiter_menu_item:nth-child(2) {
+  background-color: #3c5764;
+}
+.c-orbiter_menu_item:nth-child(3) {
   background-color: #2e434d;
 }
 .c-orbiter_menu_item:hover, .c-orbiter_menu_item.active {

@@ -81,7 +81,7 @@ drop-down.red{
     }
 }
 
-elements-dialogue, libraries-dialogue{
+elements-dialogue, libraries-dialogue, templates-dialogue{
     .c-dialogue_inner{
         .property{
             .inline-inputs.readonly{
@@ -140,7 +140,7 @@ elements-dialogue, libraries-dialogue{
             transition: border .1s, top .1s, margin .15s;
         }
 
-        .elementExpanded, .libraryExpanded{
+        .elementExpanded, .libraryExpanded, .templateExpanded{
             .toggler:before{
                 border-top-color: #fff;
                 border-left-color: transparent;
@@ -447,7 +447,7 @@ orbiter-sidebar{
     }
 }
 
-property-dialogue, elements-dialogue, libraries-dialogue{
+property-dialogue, elements-dialogue, libraries-dialogue, templates-dialogue{
     .property{
         margin: 7px 0;
         padding: 7px;
@@ -468,7 +468,7 @@ property-dialogue, elements-dialogue, libraries-dialogue{
 }
 
 
-property-element, elements-dialogue .property, libraries-dialogue .property{
+property-element, elements-dialogue .property, libraries-dialogue .property, templates-dialogue .property{
     .inline-inputs{
         margin: 0px;
 
@@ -510,7 +510,7 @@ property-element, elements-dialogue .property, libraries-dialogue .property{
     }
 }
 
-property-dialogue.select-mode, elements-dialogue.select-mode .elementExpanded .inner-property, libraries-dialogue.select-mode .libraryExpanded .inner-property{
+property-dialogue.select-mode, elements-dialogue.select-mode .elementExpanded .inner-property, libraries-dialogue.select-mode .libraryExpanded .inner-property, templates-dialogue.select-mode{
     .inline-inputs{
         cursor: pointer;
         transition: color .1s, background .1s, box-shadow .1s;
@@ -873,6 +873,14 @@ property-selector-dialogue.c-dialogue{
         content: "\f25a";
     }
 
+    &.typeRepeat:before{
+        content: "\f141";
+    }
+
+    &.typeImage:before{
+        content: "\f03e";
+    }
+
     &.new:before{
         content: "\f067";
     }
@@ -920,7 +928,7 @@ property-selector-dialogue.c-dialogue{
     background: lighten($color-mfly-blue, 3%);
     width: 100px;
     top: 34px;
-    left: -7px;
+    left: 0px;
     border-radius: 0px 0px 2px 2px;
     height: auto;
     text-align: left;
@@ -1370,10 +1378,14 @@ property-selector-dialogue.c-dialogue{
     transition: background-color .2s, color .2s, transform .2s;
 
     &:nth-child(1){
-        background-color: lighten($color-mfly-blue, 14%);
+        background-color: lighten($color-mfly-blue, 21%);
     }
 
     &:nth-child(2){
+        background-color: lighten($color-mfly-blue, 14%);
+    }
+
+    &:nth-child(3){
         background-color: lighten($color-mfly-blue, 7%);
     }
 

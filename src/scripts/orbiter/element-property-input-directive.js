@@ -17,19 +17,21 @@
 
                         if(scope.property){
                             scope.bindingObj = InteractiveService.lookUpPath(InteractiveService, scope.property.bind);
-                            if(scope.bindingObj.hasOwnProperty('value')){
-                                scope.bindingObj = scope.bindingObj.value;
-                            }
-                            
+                            // if(scope.bindingObj.hasOwnProperty('value') && scope.inputType !== 'textarea'){
+                            // if(scope.bindingObj.hasOwnProperty('value')){
+                            //     scope.bindingObj = scope.bindingObj.value;
+                            // }
+
                             switch (scope.inputType) {
                                 case 'select':
                                     html += '<select ng-model="bindingObj"><option ng-repeat="option in property.options track by $index" value="{{option}}" ng-bind="option"></option></select>';
                                     break;
                                 case 'textarea':
-                                    html += '<textarea ng-model="bindingObj" ng-trim="false"></textarea>';
+                                    html += '<textarea ng-model="bindingObj.value" ng-trim="false"></textarea>';
+                                    //html += '<textarea ng-model="bindingObj" ng-trim="false"></textarea>';
                                     break;
                                 case 'text':
-                                    html += '<input ng-model="bindingObj" type="text"></textarea>';
+                                    html += '<input ng-model="bindingObj.value" type="text"></textarea>';
                                     break;
                                 case 'color':
                                     html += '<a-ckolor model="bindingObj" type="\'hidden\'"></a-ckolor>';

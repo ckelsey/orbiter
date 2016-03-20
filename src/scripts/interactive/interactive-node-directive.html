@@ -1,0 +1,114 @@
+<script type="text/ng-template" id="innerNode">
+<span
+    ng-if="properties.label === 'Text' || properties.label === 'Button' || properties.label === 'Link'"
+    ng-bind-html="ictlr.InteractiveService.getBinding(properties, 'text')"
+    class="c-interactive-bound"
+></span>
+
+<el
+    ng-repeat="childData in data.nodes track by childData.id"
+    repeater-index="repeaterIndex"
+    repeater-path="repeaterPath"
+    repeater-obj="ictlr.InteractiveService.getBinding(ictlr.InteractiveService.elements[childData.id], 'repeat')"
+    interactive-node="childData"
+    interactive-node-parent="data"
+    r="{{repeaterIndex}}"
+    properties="ictlr.InteractiveService.elements[childData.id]"
+    ng-style="ictlr.InteractiveService.getStyles(ictlr.InteractiveService.elements[childData.id], 'display')"
+    ng-class="childData.id === ictlr.InteractiveService.elementProperties.id ? 'm-active-iteractive-node' : ''"
+></el>
+</script>
+
+
+
+
+<div
+    ng-controller="InteractiveCtlr as ictlr"
+    ng-style="ictlr.InteractiveService.getStyles(properties)"
+    repeater-index="repeaterIndex"
+    repeater-path="repeaterPath"
+    interactive-id="'+ data.id +'"
+    ng-if="properties.label === 'Block'"
+
+    ng-init="ictlr.InteractiveService.runFN(properties.events['Init'])"
+>
+    <ng-include src="'innerNode'"><ng-include>
+</div>
+
+
+
+
+
+<button
+    ng-controller="InteractiveCtlr as ictlr"
+    ng-style="ictlr.InteractiveService.getStyles(properties)"
+    repeater-index="repeaterIndex"
+    repeater-path="repeaterPath"
+    interactive-id="'+ data.id +'"
+    ng-if="properties.label === 'Button'"
+
+    ng-click="ictlr.InteractiveService.runFN(properties.events['click'])"
+>
+    <ng-include src="'innerNode'"><ng-include>
+</button>
+
+
+
+
+
+<el
+    ng-controller="InteractiveCtlr as ictlr"
+    ng-style="ictlr.InteractiveService.getStyles(properties)"
+    repeater-index="repeaterIndex"
+    repeater-path="repeaterPath"
+    interactive-id="'+ data.id +'"
+    ng-if="properties.label === 'Text'"
+>
+    <ng-include src="'innerNode'"><ng-include>
+</el>
+
+
+
+
+
+<!-- <el
+    ng-controller="InteractiveCtlr as ictlr"
+    repeater-index="repeaterIndex"
+    repeater-path="repeaterPath"
+    r="{{ictlr.InteractiveService.getBinding(properties, 'repeat')}}"
+    interactive-repeater="properties"
+    interactive-id="'+ data.id +'"
+    ng-if="properties.label === 'Repeat'"
+>
+    <ng-include src="'innerNode'"><ng-include>
+</el> -->
+
+
+
+
+
+<a
+    ng-controller="InteractiveCtlr as ictlr"
+    ng-style="ictlr.InteractiveService.getStyles(properties)"
+    repeater-index="repeaterIndex"
+    repeater-path="repeaterPath"
+    interactive-id="'+ data.id +'"
+    href="{{ictlr.InteractiveService.getBinding(properties, 'href')}}"
+    ng-if="properties.label === 'Link'"
+>
+    <ng-include src="'innerNode'"><ng-include>
+</a>
+
+
+
+
+
+<img
+    ng-controller="InteractiveCtlr as ictlr"
+    ng-style="ictlr.InteractiveService.getStyles(properties)"
+    repeater-index="repeaterIndex"
+    repeater-path="repeaterPath"
+    interactive-id="'+ data.id +'"
+    ng-src="ictlr.InteractiveService.getBinding(properties, 'src')"
+    ng-if="properties.label === 'Image'"
+ />

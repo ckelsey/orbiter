@@ -10,7 +10,6 @@
             },
             link:function(scope,element,attributes){
                 scope.template = InteractiveService.lookUpPath(InteractiveService, scope.data.properties.template.bind);
-                scope.template = InteractiveService.htmlTree.reps;
                 scope.repeaterPath = scope.data.properties.repeat.bind;
 
                 var html = '<el ng-controller="InteractiveCtlr as ictlr">';
@@ -19,7 +18,6 @@
                 html += ' interactive-node="data"';
                 html += ' repeater-index="repeaterIndex"';
                 html += ' repeater-path="repeaterPath"';
-                html += ' rep-i="{{repeaterIndex}}"';
                 html += ' interactive-node-parent="template"';
                 html += '>';
                 html += '</el>';
