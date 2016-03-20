@@ -22,7 +22,7 @@ a-ckolor .c-ckolor__input-wrapper {
   padding: 4px 7px;
   line-height: 20px;
   box-shadow: 0px 1px 0 rgba(0, 0, 0, 0.19);
-  transition: transform .2s, background .2s, box-shadow .2s;
+  transition: transform .2s, background .2s, box-shadow .2s, opacity .2s, font-size .2s, padding .2s, margin .2s;
 }
 a-ckolor .c-ckolor__input-wrapper:hover, a-ckolor .c-ckolor__input-wrapper:focus {
   transform: scale(1.01);
@@ -33,6 +33,80 @@ a-ckolor .c-ckolor__input-wrapper:hover, a-ckolor .c-ckolor__input-wrapper:focus
 /* ELEMENTS */
 drop-down.red .c-dropdown-tree {
   background: #a10005;
+}
+
+elements-dialogue .c-dialogue_inner .property .inline-inputs.readonly span {
+  max-width: 33%;
+  overflow: hidden;
+  max-height: 18px;
+}
+elements-dialogue .c-dialogue_inner .property .inline-inputs.readonly:before {
+  background: transparent;
+  transition: background .3s;
+}
+elements-dialogue .c-dialogue_inner .property:before {
+  background: transparent;
+  transition: background .3s;
+}
+elements-dialogue .c-dialogue_inner .inner-property {
+  padding: 0px;
+  transition: padding .3s;
+}
+elements-dialogue .c-dialogue_inner .inner-property .property {
+  margin: 0px;
+  transition: margin .3s;
+}
+elements-dialogue .c-dialogue_inner .inner-property .property .inline-inputs label, elements-dialogue .c-dialogue_inner .inner-property .property .inline-inputs span {
+  font-size: 0px;
+  line-height: 0;
+  transition: font-size .3s, line-height .3s;
+}
+elements-dialogue .c-dialogue_inner .toggler, elements-dialogue .c-dialogue_inner .toggler * {
+  cursor: pointer;
+}
+elements-dialogue .c-dialogue_inner .toggler:before {
+  content: "";
+  display: block;
+  border: 5px solid #fff;
+  width: 0px;
+  height: 0px;
+  position: relative;
+  top: 5px;
+  margin-left: 0px;
+  margin-right: 0px;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+  border-top-width: 4px;
+  border-bottom-width: 4px;
+  transition: border .1s, top .1s, margin .15s;
+}
+elements-dialogue .c-dialogue_inner .elementExpanded .toggler:before {
+  border-top-color: #fff;
+  border-left-color: transparent;
+  border-top-width: 5px;
+  border-bottom-width: 5px;
+  border-left-width: 4px;
+  border-right-width: 4px;
+  top: 7px;
+  margin-left: -1px;
+  margin-right: 3px;
+}
+elements-dialogue .c-dialogue_inner .elementExpanded .inner-property {
+  padding: 1px 0px 1px 14px;
+}
+elements-dialogue .c-dialogue_inner .elementExpanded .inner-property .property {
+  margin: 7px 0;
+}
+elements-dialogue .c-dialogue_inner .elementExpanded .inner-property .property .inline-inputs label, elements-dialogue .c-dialogue_inner .elementExpanded .inner-property .property .inline-inputs span {
+  font-size: 12px;
+  line-height: 1.5;
+}
+elements-dialogue .c-dialogue_inner .elementExpanded .inner-property .property .inline-inputs:before {
+  background: #9fbe3c;
+}
+elements-dialogue .c-dialogue_inner .elementExpanded .property:before {
+  background: #9fbe3c;
 }
 
 new-property-dialogue .inline-inputs {
@@ -85,6 +159,8 @@ orbiter-sidebar h2 .c-dropdown-tree, .c-dialogue h2 .c-dropdown-tree {
 orbiter-sidebar h3, .c-dialogue h3 {
   font-size: 21px;
   margin: 0px 0px 7px;
+  display: table;
+  width: 100%;
 }
 orbiter-sidebar h3 drop-down, .c-dialogue h3 drop-down {
   display: inline-block;
@@ -94,6 +170,15 @@ orbiter-sidebar h3 .c-dropdown-tree, .c-dialogue h3 .c-dropdown-tree {
   position: relative;
   top: -2px;
   font-size: 20px;
+}
+orbiter-sidebar h3 .c-dropdown-tree .c-dropdown-tree-list, .c-dialogue h3 .c-dropdown-tree .c-dropdown-tree-list {
+  top: 38px;
+}
+orbiter-sidebar h3 span, .c-dialogue h3 span {
+  display: table-cell;
+}
+orbiter-sidebar h3 span:nth-child(2), .c-dialogue h3 span:nth-child(2) {
+  text-align: right;
 }
 orbiter-sidebar h4, .c-dialogue h4 {
   padding: 7px 10px;
@@ -108,6 +193,9 @@ orbiter-sidebar h4:after, .c-dialogue h4:after {
 }
 orbiter-sidebar h4 button, .c-dialogue h4 button {
   float: right;
+  margin: 0px;
+  line-height: 14px;
+  vertical-align: text-top;
 }
 orbiter-sidebar small.error, .c-dialogue small.error {
   color: #962525;
@@ -143,7 +231,7 @@ orbiter-sidebar textarea, orbiter-sidebar input, orbiter-sidebar select, orbiter
   padding: 7px;
   margin: 3px 0px 7px;
   box-sizing: border-box;
-  transition: transform .15s, background .2s, box-shadow .2s;
+  transition: transform .15s, background .2s, box-shadow .2s, opacity .2s, font-size .2s, padding .2s, margin .2s;
 }
 orbiter-sidebar textarea:hover, orbiter-sidebar textarea:focus, orbiter-sidebar input:hover, orbiter-sidebar input:focus, orbiter-sidebar select:hover, orbiter-sidebar select:focus, orbiter-sidebar button:hover, orbiter-sidebar button:focus, orbiter-sidebar .c-sidebar_event_function:hover, orbiter-sidebar .c-sidebar_event_function:focus, orbiter-sidebar .c-dropdown-tree:hover, orbiter-sidebar .c-dropdown-tree:focus, .c-dialogue textarea:hover, .c-dialogue textarea:focus, .c-dialogue input:hover, .c-dialogue input:focus, .c-dialogue select:hover, .c-dialogue select:focus, .c-dialogue button:hover, .c-dialogue button:focus, .c-dialogue .c-sidebar_event_function:hover, .c-dialogue .c-sidebar_event_function:focus, .c-dialogue .c-dropdown-tree:hover, .c-dialogue .c-dropdown-tree:focus {
   transform: scale(1.01);
@@ -223,9 +311,8 @@ orbiter-sidebar button.bind-button, .c-dialogue button.bind-button {
   text-align: center;
   color: #6492ab;
   border-radius: 50%;
-  vertical-align: middle;
   font-weight: bold;
-  transition: background .2s,color .2s;
+  transition: background .2s, color .2s;
   padding: 0px;
   background: transparent;
   box-shadow: none;
@@ -249,45 +336,45 @@ orbiter-sidebar *::-webkit-scrollbar {
   display: none;
 }
 
-property-dialogue .property {
+property-dialogue .property, elements-dialogue .property {
   margin: 7px 0;
   padding: 7px;
   background: rgba(12, 31, 40, 0.62);
 }
-property-dialogue .inner-property .property {
-  margin: 7px 0;
+property-dialogue .inner-property .property, elements-dialogue .inner-property .property {
+  margin: 2px 0;
   padding: 0px;
   background: transparent;
 }
-property-dialogue h4 {
+property-dialogue h4, elements-dialogue h4 {
   padding: 0px !important;
 }
 
-property-element .inline-inputs {
+property-element .inline-inputs, elements-dialogue .property .inline-inputs {
   margin: 0px;
 }
-property-element .inline-inputs label {
+property-element .inline-inputs label, elements-dialogue .property .inline-inputs label {
   line-height: 32px;
 }
-property-element .inline-inputs label, property-element .inline-inputs drop-down, property-element .inline-inputs input {
+property-element .inline-inputs label, property-element .inline-inputs drop-down, property-element .inline-inputs input, elements-dialogue .property .inline-inputs label, elements-dialogue .property .inline-inputs drop-down, elements-dialogue .property .inline-inputs input {
   vertical-align: middle;
   margin: 0px 7px 0px 0px;
   max-width: 300px;
 }
-property-element .inline-inputs .c-dropdown-tree {
+property-element .inline-inputs .c-dropdown-tree, elements-dialogue .property .inline-inputs .c-dropdown-tree {
   margin: 0px;
 }
-property-element .inline-inputs .c-dropdown-tree-selection {
+property-element .inline-inputs .c-dropdown-tree-selection, elements-dialogue .property .inline-inputs .c-dropdown-tree-selection {
   padding: 0px;
 }
-property-element .inline-inputs.readonly label {
+property-element .inline-inputs.readonly label, elements-dialogue .property .inline-inputs.readonly label {
   line-height: 20px;
 }
-property-element .inline-inputs.readonly label + span {
+property-element .inline-inputs.readonly label + span, elements-dialogue .property .inline-inputs.readonly label + span {
   font-style: italic;
   color: #9fbe3c;
 }
-property-element .inline-inputs.readonly span {
+property-element .inline-inputs.readonly span, elements-dialogue .property .inline-inputs.readonly span {
   font-size: 12px;
   line-height: 21px;
   font-weight: lighter;
@@ -295,8 +382,20 @@ property-element .inline-inputs.readonly span {
   padding: 0px 7px 0px 0px;
 }
 
-property-selector-dialogue.c-dialogue {
-  background: #13313f;
+property-dialogue.select-mode .inline-inputs, elements-dialogue.select-mode .elementExpanded .inner-property .inline-inputs {
+  cursor: pointer;
+  transition: color .1s, background .1s, box-shadow .1s;
+}
+property-dialogue.select-mode .inline-inputs span, elements-dialogue.select-mode .elementExpanded .inner-property .inline-inputs span {
+  transition: color .1s;
+}
+property-dialogue.select-mode .inline-inputs:hover, property-dialogue.select-mode .inline-inputs.active, elements-dialogue.select-mode .elementExpanded .inner-property .inline-inputs:hover, elements-dialogue.select-mode .elementExpanded .inner-property .inline-inputs.active {
+  background: #9fbe3c;
+  color: #213037;
+  box-shadow: 0px 0px 0px 4px #9fbe3c;
+}
+property-dialogue.select-mode .inline-inputs:hover span, property-dialogue.select-mode .inline-inputs.active span, elements-dialogue.select-mode .elementExpanded .inner-property .inline-inputs:hover span, elements-dialogue.select-mode .elementExpanded .inner-property .inline-inputs.active span {
+  color: #213037;
 }
 
 property-mapper-dialogue .left-side {
@@ -528,6 +627,9 @@ property-selector-dialogue.c-dialogue {
 .c-dialogue * {
   filter: none !important;
 }
+.c-dialogue.opaque {
+  background: radial-gradient(ellipse at 50% 250px, #203038 0%, #101e24 100%);
+}
 
 .c-dialogue_input.tasks {
   padding: 14px;
@@ -604,6 +706,15 @@ property-selector-dialogue.c-dialogue {
 }
 .c-dropdown_list_item.new:before {
   content: "\f067";
+}
+.c-dropdown_list_item.properties:before {
+  content: "\f19c";
+}
+.c-dropdown_list_item.elements:before {
+  content: "\f0ce";
+}
+.c-dropdown_list_item.libraries:before {
+  content: "\f02d";
 }
 .c-dropdown_list_item.draggable {
   cursor: grab;
@@ -732,23 +843,30 @@ property-selector-dialogue.c-dialogue {
   z-index: 1;
 }
 .c-element-operations button:nth-child(1) {
-  background-color: #4684a0;
+  background-color: #4d8faf;
 }
 .c-element-operations button:nth-child(2) {
-  background-color: #3f758f;
+  background-color: #4684a0;
 }
 .c-element-operations button:nth-child(3) {
-  background-color: #37677d;
+  background-color: #3f758f;
 }
 .c-element-operations button:nth-child(4) {
-  background-color: #2f586b;
+  background-color: #37677d;
 }
 .c-element-operations button:nth-child(5) {
+  background-color: #2f586b;
+}
+.c-element-operations button.trash {
   background-color: #D67100;
 }
 .c-element-operations button:hover {
   color: #fff;
   z-index: 2;
+}
+.c-element-operations button.active {
+  background: #9fbe3c;
+  color: #213037;
 }
 
 .c-expandable.active .c-border-table .c-border-table-cell .middle-middle {
@@ -838,7 +956,7 @@ property-selector-dialogue.c-dialogue {
 
 .c-expandable_content-inner {
   padding: 0px;
-  transition: padding .2s;
+  transition: padding .2s, margin .2s, opacity .2s, font-size .2s;
 }
 
 .c-html-tree-node {
@@ -882,7 +1000,7 @@ property-selector-dialogue.c-dialogue {
   vertical-align: middle;
   border-radius: 2px;
   float: left;
-  transition: transform .2s;
+  transition: transform .2s, font-size .2s;
 }
 .c-input-group:hover {
   transform: scale(1.05);
@@ -948,7 +1066,7 @@ property-selector-dialogue.c-dialogue {
 }
 
 .c-interactive-bound {
-  white-space: pre;
+  white-space: pre-wrap;
 }
 
 .c-interactive_includer {
@@ -1145,7 +1263,7 @@ property-selector-dialogue.c-dialogue {
 .inner-property {
   display: block;
   margin: 0px 0px 0px 14px;
-  padding: 1px 14px;
+  padding: 1px 0px 1px 14px;
 }
 .inner-property .property {
   position: relative;

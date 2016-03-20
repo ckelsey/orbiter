@@ -67,12 +67,15 @@
             },
 
             getBinding: function(obj, key){
-                var val = self.lookUpPath(self, obj.properties[key].bind);
-                if(val){
-                    return val.value;
-                }else{
-                    return null;
+                if(obj && obj.hasOwnProperty('properties') && obj.properties.hasOwnProperty(key) && obj.properties[key].hasOwnProperty('bind')){
+                    var val = self.lookUpPath(self, obj.properties[key].bind);
+                    if(val){
+                        return val.value;
+                    }else{
+                        return null;
+                    }
                 }
+                return null;
             },
 
             lookUpPath: function(obj, pathString){

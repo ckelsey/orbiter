@@ -2,7 +2,7 @@
     <div class="left-side">
         <div class="c-orbiter_menu_item" ng-click="orb.OrbiterService.save()"><i class="fa fa-check"></i></div>
         <div class="c-orbiter_menu_item c-dropdown">
-            <div><i class="fa fa-plus"></i></div>
+            <div><i class="fa fa-table"></i></div>
             <div class="c-dropdown_list">
                 <div
                     class="c-dropdown_list_item draggable"
@@ -13,8 +13,15 @@
                 ><span ng-bind="element.label"></span></div>
             </div>
         </div>
-        <div class="c-orbiter_menu_item" ng-click="orb.OrbiterService.propertyDialogue='properties'" style="font-weight: bold; font-size: 18px; line-height: 24px; padding-bottom: 4px; box-sizing: border-box;">@</div>
-        <div class="c-orbiter_menu_item" ng-click="orb.OrbiterService.htmlTreeView? orb.OrbiterService.htmlTreeView=false : orb.OrbiterService.htmlTreeView=true" ng-class="orb.OrbiterService.htmlTreeView? 'active' : ''" style="font-weight: bold; font-size: 18px; line-height: 24px; padding-bottom: 4px; box-sizing: border-box;"><i class="fa fa-tree"></i></div>
+        <div class="c-orbiter_menu_item c-dropdown">
+            <div><i class="fa fa-database"></i></div>
+            <div class="c-dropdown_list">
+                <div class="c-dropdown_list_item properties" ng-click="orb.OrbiterService.dialogueModelType='properties'">properties</div>
+                <div class="c-dropdown_list_item elements" ng-click="orb.OrbiterService.dialogueModelType='elements'">elements</div>
+                <div class="c-dropdown_list_item libraries" ng-click="orb.OrbiterService.dialogueModelType='libraries'">libraries</div>
+            </div>
+        </div>
+
         <div class="c-orbiter_menu_item c-dropdown">
             <div><i class="fa fa-file-text"></i></div>
             <div class="c-dropdown_list">

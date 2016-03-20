@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function OrbiterCtlr($localStorage, $window, OrbiterService, OrbiterElementTypes, InteractiveService, $scope, OrbiterPropertyService){
+    function OrbiterCtlr($localStorage, $window, $scope, OrbiterService, OrbiterElementTypes, OrbiterPropertyService, OrbiterElementsService, InteractiveService){
         var self = this;
         this.$localStorage = $localStorage;
         if(!$localStorage.Orbiter){
@@ -9,6 +9,7 @@
         }
         this.OrbiterService = OrbiterService;
         this.OrbiterPropertyService = OrbiterPropertyService;
+        this.OrbiterElementsService = OrbiterElementsService;
         this.OrbiterElementTypes = OrbiterElementTypes;
         this.InteractiveService = InteractiveService;
         InteractiveService.developer = true;
@@ -47,6 +48,7 @@
             self.$localStorage.Orbiter.elementsWidth = ((($window.innerWidth - width) / $window.innerWidth) * 100) + '%';
             self.$localStorage.Orbiter.canvasWidth = ((width / $window.innerWidth) * 100) + '%';
         };
+
 
 
         this.debug = function(msg){
@@ -88,10 +90,29 @@
 
         this.isDialogueOpen = function(){
             self.dialogueOpen = false;
-            if(self.OrbiterService.newDataObject || self.OrbiterService.propertyDialogue || self.OrbiterService.currentEventObject || self.OrbiterService.propertyMapperDialogue || self.OrbiterService.propertySelectorDialogue || self.OrbiterService.newTemplate || self.stagedNewProperty){
-                self.dialogueOpen = true;
+            var openDialogueFlags = [
+                self.OrbiterService.newDataObject,
+                self.OrbiterService.dialogueModelType,
+                self.OrbiterService.currentEventObject,
+                self.OrbiterService.newTemplate,
+                self.OrbiterService.propertyMapperDialogue,
+                self.OrbiterPropertyService.stagedProperty
+            ];
+            for(var f=0;f<openDialogueFlags.length;f++){
+                if(openDialogueFlags[f]){
+                    self.dialogueOpen = true;
+                    break;
+                }
             }
         };
+
+        $scope.$watch(function(){
+            return self.OrbiterService.propertyMapperDialogue;
+        }, function(o,n){
+            if(o !== n){
+                self.isDialogueOpen();
+            }
+        });
 
         $scope.$watch(function(){
             return self.OrbiterService.newDataObject;
@@ -102,7 +123,7 @@
         });
 
         $scope.$watch(function(){
-            return self.OrbiterService.propertyDialogue;
+            return self.OrbiterService.dialogueModelType;
         }, function(o,n){
             if(o !== n){
                 self.isDialogueOpen();
@@ -118,22 +139,6 @@
         });
 
         $scope.$watch(function(){
-            return self.OrbiterService.propertyMapperDialogue;
-        }, function(o,n){
-            if(o !== n){
-                self.isDialogueOpen();
-            }
-        });
-
-        $scope.$watch(function(){
-            return self.OrbiterService.propertySelectorDialogue;
-        }, function(o,n){
-            if(o !== n){
-                self.isDialogueOpen();
-            }
-        });
-
-        $scope.$watch(function(){
             return self.OrbiterService.newTemplate;
         }, function(o,n){
             if(o !== n){
@@ -142,7 +147,7 @@
         });
 
         $scope.$watch(function(){
-            return self.OrbiterService.stagedNewProperty;
+            return self.OrbiterPropertyService.stagedProperty;
         }, function(o,n){
             if(o !== n){
                 self.isDialogueOpen();
@@ -170,12 +175,7 @@
             templateUrl: '../../html/orbiter/menu.html'
         };
     })
-    .directive('propertyDialogue', function(){
-        return {
-            restrict: 'E',
-            templateUrl: '../../html/orbiter/property-dialogue.html'
-        };
-    })
+
     .directive('currentEventDialogue', function(){
         return {
             restrict: 'E',
@@ -212,40 +212,5 @@
         };
     })
 
-    .directive('htmlTree', function(){
-        return {
-            restrict: 'E',
-            templateUrl: '../../html/orbiter/html-tree.html'
-        };
-    })
-
-    .directive('htmlTreeNode', function(){
-        return {
-            restrict: 'A',
-            scope: {
-                node: '=htmlTreeNode'
-            },
-            templateUrl: '../../html/orbiter/html-tree-node.html'
-        };
-    })
-    .directive('propertyElement', function(){
-        return {
-            restrict: 'E',
-            scope: {
-                property: '=property',
-                propertyKey: '=propertyKey',
-                newProperty: '=newProperty',
-                root: '=root',
-                parent: '=parent'
-            },
-            templateUrl: '../../html/orbiter/property-element.html'
-        };
-    })
-    .directive('newPropertyDialogue', function(){
-        return {
-            restrict: 'E',
-            templateUrl: '../../html/orbiter/new-property-dialogue.html'
-        };
-    })
     ;
 })();

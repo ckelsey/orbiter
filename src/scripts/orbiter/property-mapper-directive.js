@@ -21,18 +21,19 @@
                     var getPropertyHTML = function(key, bindCategory){
                         html += '<div class="property">';
                             html += '<label>' + key + '</label>';
-                            html += '<button ng-click="orb.OrbiterService.propertySelectorDialogue={obj:sortedPropertiesToUpdate[\''+ key +'\'],key:\'new\', type:\''+ bindCategory +'\'}" ng-bind="sortedPropertiesToUpdate[\''+ key +'\'].new || \'set\'"></button>';
+                            // html += '<button ng-click="orb.OrbiterService.propertySelectorDialogue={obj:sortedPropertiesToUpdate[\''+ key +'\'],key:\'new\', type:\''+ bindCategory +'\'}" ng-bind="sortedPropertiesToUpdate[\''+ key +'\'].new || \'set\'"></button>';
+                            html += '<button ng-click="orb.OrbiterService.selectedProperty={obj:sortedPropertiesToUpdate[\''+ key +'\'], key:\'new\', type:\''+ bindCategory +'\', path:sortedPropertiesToUpdate[\''+ key +'\'].new || null}; orb.OrbiterService.dialogueModelType=\'properties\'" ng-bind="sortedPropertiesToUpdate[\''+ key +'\'].new || \'set\'"></button>';
                         html += '</div>';
                     };
 
                     html += '<div class="c-dialogue_inner">';
-                    html += '<h2>';
+                    html += '<h3>';
                     html += '<span>Map properties</span>';
                     html += '<span>';
                     html += '<button class="circle" ng-click="orb.OrbiterService.mapProperties(orb.OrbiterService.propertyMapperDialogue.element, sortedPropertiesToUpdate);orb.OrbiterService.propertyMapperDialogue=null" style="margin-right: 7px;"><i class="fa fa-check"></i></button>';
                     html += '<button class="circle orange" ng-click="orb.OrbiterService.propertyMapperDialogue=null"><i class="fa fa-close"></i></button>';
                     html == '</span>';
-                    html += '</h2>';
+                    html += '</h3>';
                     html += '<div>'
 
 

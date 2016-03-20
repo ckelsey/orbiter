@@ -1,10 +1,11 @@
-<div ng-controller="OrbiterCtlr as orb" ng-class="orb.OrbiterService.htmlTreeView ? 'tree-open' : ''" class="c-sidebar_wrapper">
+<div ng-controller="OrbiterCtlr as orb" ng-class="orb.OrbiterElementsService.htmlTreeView ? 'tree-open' : ''" class="c-sidebar_wrapper">
     <div ng-if="orb.InteractiveService.elementProperties" class="c-element-operations">
-        <button ng-click="orb.OrbiterService.copyElement(orb.InteractiveService.elementProperties)"><i class="fa fa-copy"></i></button>
-        <button ng-click="orb.OrbiterService.pasteElement(orb.InteractiveService.elementProperties)"><i class="fa fa-paste"></i></button>
-        <button ng-click="orb.OrbiterService.moveElementUp(orb.InteractiveService.elementProperties)"><i class="fa fa-level-up"></i></button>
-        <button ng-click="orb.OrbiterService.moveElementDown(orb.InteractiveService.elementProperties)"><i class="fa fa-level-down"></i></button>
-        <button ng-click="orb.OrbiterService.deleteElement(orb.InteractiveService.elementProperties)"><i class="fa fa-trash"></i></button>
+        <button class="tree" ng-click="orb.OrbiterElementsService.htmlTreeView? orb.OrbiterElementsService.htmlTreeView=false : orb.OrbiterElementsService.htmlTreeView=true" ng-class="orb.OrbiterElementsService.htmlTreeView? 'active' : ''"><i class="fa fa-tree"></i></button>
+        <button class="copy" ng-click="orb.OrbiterElementsService.copyElement(orb.InteractiveService.elementProperties)"><i class="fa fa-copy"></i></button>
+        <button class="paste" ng-click="orb.OrbiterElementsService.pasteElement(orb.InteractiveService.elementProperties)"><i class="fa fa-paste"></i></button>
+        <button class="up" ng-click="orb.OrbiterElementsService.moveElementUp(orb.InteractiveService.elementProperties)"><i class="fa fa-level-up"></i></button>
+        <button class="down" ng-click="orb.OrbiterElementsService.moveElementDown(orb.InteractiveService.elementProperties)"><i class="fa fa-level-down"></i></button>
+        <button class="trash" ng-click="orb.OrbiterElementsService.deleteElement(orb.InteractiveService.elementProperties)"><i class="fa fa-trash"></i></button>
     </div>
     <div class="c-sidebar-settings">
         <div class="c-sidebar_elements_properties c-sidebar_section-wrapper" ng-if="orb.InteractiveService.elementProperties && orb.InteractiveService.elementProperties.properties.text">
@@ -58,10 +59,10 @@
             <div ng-if="orb.InteractiveService.elementProperties" class="c-sidebar_section-wrapper_inner">
                 <div class="row-padding">
                     <label>Name</label>
-                    <small ng-if="orb.OrbiterService.stagedElementIdConflict" ng-bind="orb.OrbiterService.stagedElementIdConflict"></small>
+                    <small ng-if="orb.OrbiterElementsService.stagedElementIdConflict" ng-bind="orb.OrbiterElementsService.stagedElementIdConflict"></small>
                     <div class="inline-inputs">
-                        <input type="text" ng-model="orb.InteractiveService.elementProperties.id" ng-class="orb.OrbiterService.stagedElementIdConflict ? 'red' : ''">
-                        <button ng-click="orb.OrbiterService.updateElementId(orb.InteractiveService.elementProperties)"><i class="fa fa-check"></i></button>
+                        <input type="text" ng-model="orb.InteractiveService.elementProperties.tempId" ng-class="orb.OrbiterElementsService.stagedElementIdConflict ? 'red' : ''">
+                        <button ng-click="orb.OrbiterElementsService.updateElementId(orb.InteractiveService.elementProperties)"><i class="fa fa-check"></i></button>
                     </div>
                 </div>
                 <div class="c-sidebar_section-wrapper_inner-section">

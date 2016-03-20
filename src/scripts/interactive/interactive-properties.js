@@ -9,6 +9,7 @@
                 type: 'text',
                 defaultValue: 'Hi! This is a testString'
             },
+            /*
             "$$styleClasses":{
                 body:{
                     color:{
@@ -103,6 +104,7 @@
                     }
                 }
             }
+            */
         };
     }
 

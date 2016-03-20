@@ -62,7 +62,7 @@ a-ckolor .c-ckolor__input-wrapper{
     padding: 4px 7px;
     line-height: 20px;
     box-shadow: 0px 1px 0 rgba(0,0,0,.19);
-    transition: transform .2s, background .2s, box-shadow .2s;
+    transition: transform .2s, background .2s, box-shadow .2s, opacity .2s, font-size .2s, padding .2s, margin .2s;
 
     &:hover, &:focus{
         transform: scale(1.01);
@@ -78,6 +78,101 @@ a-ckolor .c-ckolor__input-wrapper{
 drop-down.red{
     .c-dropdown-tree{
         background: #a10005;
+    }
+}
+
+elements-dialogue{
+    .c-dialogue_inner{
+        .property{
+            .inline-inputs.readonly{
+                span{
+                    max-width: 33%;
+                    overflow: hidden;
+                    max-height: 18px;
+                }
+                &:before{
+                    background: transparent;
+                    transition: background .3s;
+                }
+            }
+
+            &:before{
+                background: transparent;
+                transition: background .3s;
+            }
+        }
+
+        .inner-property{
+            padding: 0px;
+            transition: padding .3s;
+            .property{
+                margin: 0px;
+                transition: margin .3s;
+                .inline-inputs{
+                    label, span{
+                        font-size: 0px;
+                        line-height: 0;
+                        transition: font-size .3s, line-height .3s;
+                    }
+                }
+            }
+        }
+
+        .toggler, .toggler *{
+            cursor: pointer;
+        }
+
+        .toggler:before{
+            content: "";
+            display: block;
+            border: 5px solid #fff;
+            width: 0px;
+            height: 0px;
+            position: relative;
+            top: 5px;
+            margin-left: 0px;
+            margin-right: 0px;
+            border-top-color: transparent;
+            border-bottom-color: transparent;
+            border-right-color: transparent;
+            border-top-width: 4px;
+            border-bottom-width: 4px;
+            transition: border .1s, top .1s, margin .15s;
+        }
+
+        .elementExpanded{
+            .toggler:before{
+                border-top-color: #fff;
+                border-left-color: transparent;
+                border-top-width: 5px;
+                border-bottom-width: 5px;
+                border-left-width: 4px;
+                border-right-width: 4px;
+                top:7px;
+                margin-left: -1px;
+                margin-right: 3px;
+            }
+
+            .inner-property{
+                padding: 1px 0px 1px 14px;
+                .property{
+                    margin: 7px 0;
+                    .inline-inputs{
+                        label, span{
+                            font-size: 12px;
+                            line-height: 1.5;
+                        }
+                        &:before{
+                            background: $color-mfly-green;
+                        }
+                    }
+                }
+            }
+
+            .property:before{
+                background: $color-mfly-green;
+            }
+        }
     }
 }
 
@@ -140,6 +235,8 @@ orbiter-sidebar, .c-dialogue{
     h3{
         font-size: 21px;
         margin: 0px 0px 7px;
+        display: table;
+        width: 100%;
 
         drop-down{
             display: inline-block;
@@ -150,6 +247,18 @@ orbiter-sidebar, .c-dialogue{
             position: relative;
             top: -2px;
             font-size: 20px;
+
+            .c-dropdown-tree-list{
+                top:38px;
+            }
+        }
+
+        span{
+            display: table-cell;
+
+            &:nth-child(2){
+                text-align: right;
+            }
         }
     }
 
@@ -167,6 +276,9 @@ orbiter-sidebar, .c-dialogue{
 
         button{
             float: right;
+            margin: 0px;
+            line-height: 14px;
+            vertical-align: text-top;
         }
     }
 
@@ -211,7 +323,7 @@ orbiter-sidebar, .c-dialogue{
         margin: 3px 0px 7px;
         box-sizing: border-box;
 
-        transition: transform .15s, background .2s, box-shadow .2s;
+        transition: transform .15s, background .2s, box-shadow .2s, opacity .2s, font-size .2s, padding .2s, margin .2s;
 
         &:hover, &:focus{
             transform: scale(1.01);
@@ -306,9 +418,8 @@ orbiter-sidebar, .c-dialogue{
             text-align: center;
             color: #6492ab;
             border-radius: 50%;
-            vertical-align: middle;
             font-weight: bold;
-            transition: background .2s,color .2s;
+            transition: background .2s, color .2s;
             padding: 0px;
             background: transparent;
             box-shadow: none;
@@ -336,7 +447,7 @@ orbiter-sidebar{
     }
 }
 
-property-dialogue{
+property-dialogue, elements-dialogue{
     .property{
         margin: 7px 0;
         padding: 7px;
@@ -345,7 +456,7 @@ property-dialogue{
 
     .inner-property{
         .property{
-            margin: 7px 0;
+            margin: 2px 0;
             padding: 0px;
             background: transparent;
         }
@@ -356,7 +467,8 @@ property-dialogue{
     }
 }
 
-property-element{
+
+property-element, elements-dialogue .property{
     .inline-inputs{
         margin: 0px;
 
@@ -398,9 +510,28 @@ property-element{
     }
 }
 
-property-selector-dialogue.c-dialogue{
-    background: rgb(19, 49, 63);
+property-dialogue.select-mode, elements-dialogue.select-mode .elementExpanded .inner-property{
+    .inline-inputs{
+        cursor: pointer;
+        transition: color .1s, background .1s, box-shadow .1s;
+
+        span{
+            transition: color .1s;
+        }
+
+        &:hover, &.active{
+            background: $color-mfly-green;
+            color: $color-mfly-blue;
+            box-shadow: 0px 0px 0px 4px $color-mfly-green;
+
+            span{
+                color: $color-mfly-blue;
+            }
+        }
+    }
 }
+
+
 
 property-mapper-dialogue{
     .left-side{
@@ -650,6 +781,10 @@ property-selector-dialogue.c-dialogue{
     & *{
         filter: none !important;
     }
+
+    &.opaque{
+        background: radial-gradient(ellipse at 50% 250px, saturate($color-mfly-blue, 3%) 0, darken(saturate($color-mfly-blue, 14%), 7%) 100%);
+    }
 }
 
 .c-dialogue_input{
@@ -740,6 +875,18 @@ property-selector-dialogue.c-dialogue{
 
     &.new:before{
         content: "\f067";
+    }
+
+    &.properties:before{
+        content: "\f19c";
+    }
+
+    &.elements:before{
+        content: "\f0ce";
+    }
+
+    &.libraries:before{
+        content: "\f02d";
     }
 
     &.draggable{
@@ -888,28 +1035,37 @@ property-selector-dialogue.c-dialogue{
         z-index: 1;
 
         &:nth-child(1){
-            background-color: saturate(lighten($color-mfly-blue, 28%), 14%);
+            background-color: saturate(lighten($color-mfly-blue, 32%), 14%);
         }
 
         &:nth-child(2){
-            background-color: saturate(lighten($color-mfly-blue, 23%), 14%);
+            background-color: saturate(lighten($color-mfly-blue, 28%), 14%);
         }
 
         &:nth-child(3){
-            background-color: saturate(lighten($color-mfly-blue, 18%), 14%);
+            background-color: saturate(lighten($color-mfly-blue, 23%), 14%);
         }
 
         &:nth-child(4){
-            background-color: saturate(lighten($color-mfly-blue, 13%), 14%);
+            background-color: saturate(lighten($color-mfly-blue, 18%), 14%);
         }
 
         &:nth-child(5){
+            background-color: saturate(lighten($color-mfly-blue, 13%), 14%);
+        }
+
+        &.trash{
             background-color: $color-orange;
         }
 
         &:hover{
             color: #fff;
             z-index: 2;
+        }
+
+        &.active{
+            background: $color-mfly-green;
+            color: $color-mfly-blue;
         }
     }
 }
@@ -1031,7 +1187,7 @@ property-selector-dialogue.c-dialogue{
 
 .c-expandable_content-inner{
     padding: 0px;
-    transition: padding .2s;
+    transition: padding .2s, margin .2s, opacity .2s, font-size .2s;
 }
 
 .c-html-tree-node{
@@ -1080,7 +1236,7 @@ property-selector-dialogue.c-dialogue{
     vertical-align: middle;
     border-radius: 2px;
     float: left;
-    transition: transform .2s;
+    transition: transform .2s, font-size .2s;
 
     &:hover{
         transform: scale(1.05);
@@ -1157,7 +1313,7 @@ property-selector-dialogue.c-dialogue{
 }
 
 .c-interactive-bound{
-    white-space: pre;
+    white-space: pre-wrap;
 }
 
 .c-interactive_includer{
@@ -1363,7 +1519,7 @@ property-selector-dialogue.c-dialogue{
 .inner-property{
     display: block;
     margin: 0px 0px 0px 14px;
-    padding: 1px 14px;
+    padding: 1px 0px 1px 14px;
 
     .property{
         position: relative;

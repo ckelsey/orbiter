@@ -49,6 +49,14 @@
                         run();
                     }
                 });
+
+                scope.$watch(function(){
+                    return InteractiveService.lookUpPath(InteractiveService, scope.property.bind);
+                }, function(o,n){
+                    if(o !== n){
+                        run();
+                    }
+                });
             }
         };
     }

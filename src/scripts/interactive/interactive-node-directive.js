@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-    function interactiveNode(InteractiveService, OrbiterService, $timeout, $compile){
+    function interactiveNode(InteractiveService, OrbiterService, OrbiterElementsService, $timeout, $compile){
         return {
             restrict: 'A',
             scope: {
@@ -48,7 +48,7 @@
                 };
 
                 var setChildren = function(){
-                    html += '<div ng-repeat="childData in data.nodes track by childData.id"';
+                    html += '<el ng-repeat="childData in data.nodes track by childData.id"';
                     html += ' interactive-node="childData"';
                     html += ' interactive-node-parent="data"';
                     html += ' ng-init="thisPath=parentPath + \',nodes,\' + $index"';
@@ -56,7 +56,7 @@
                     html += ' path="{{thisPath}}"';
                     html += ' ng-style="ictlr.InteractiveService.getStyles(ictlr.InteractiveService.elements[childData.id], \'display\')"';
                     html += ' ng-class="childData.id === ictlr.InteractiveService.elementProperties.id ? \'m-active-iteractive-node\' : \'\'"';
-                    html += '></div>';
+                    html += '></el>';
                 };
 
                 var setHTML = function(){
@@ -69,10 +69,14 @@
                     setChildren();
                 };
 
-                if(scope.dataProperties.label === 'Block' || scope.dataProperties.label === 'Text'){
+                if(scope.dataProperties.label === 'Block'){
                     html += '<div';
                     setHTML();
                     html += '</div>';
+                }else if(scope.dataProperties.label === 'Text'){
+                    html += '<el';
+                    setHTML();
+                    html += '</el>';
                 }else if(scope.dataProperties.label === 'Link'){
                     html += '<a href="{{ictlr.InteractiveService.getBinding(dataProperties, \'href\')}}"';
                     setHTML();
@@ -118,7 +122,7 @@
                         e.stopPropagation();
                         $timeout(function(){
                             angular.element(document.querySelectorAll('.'+InteractiveService.canAcceptDragClass)).removeClass(InteractiveService.canAcceptDragClass);
-                            OrbiterService.addToInteractive(scope.data, OrbiterService.dragging);
+                            OrbiterElementsService.addToInteractive(scope.data, OrbiterService.dragging);
                         });
                         return false;
                     });
@@ -126,7 +130,7 @@
                     element.bind("click", function(e){
                         e.stopPropagation();
                         $timeout(function(){
-                            OrbiterService.activeProperties(scope.dataProperties);
+                            OrbiterElementsService.activeProperties(scope.dataProperties);
                         });
                     });
 

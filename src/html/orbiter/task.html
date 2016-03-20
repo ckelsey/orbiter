@@ -6,7 +6,7 @@
     <drop-down key="type" default="type" options="{set:'set', run:'run'}" model="task"></drop-down>
     <button
         ng-if="task.type"
-        ng-click="task.type==='set' ? orb.OrbiterService.propertySelectorDialogue={obj:task,key:'target',type:'properties'} : orb.OrbiterService.propertySelectorDialogue={obj:task,key:'target',type:'libraries'}"
+        ng-click="task.type==='set' ? orb.OrbiterService.selectedProperty={obj:task,key:'target',type:'properties',path:task.target} : orb.OrbiterService.selectedProperty={obj:task,key:'target',type:'libraries',path:task.target}; orb.OrbiterService.dialogueModelType= task.type==='set'? 'properties' : 'libraries';"
         ng-bind="task.target || 'set target'"
     ></button>
     <drop-down ng-if="task.type==='set'" key="action" options="{'=':'='}" model="task"></drop-down>
@@ -14,7 +14,7 @@
 
 
     <input ng-if="task.type==='set' && task.valueType==='custom text'" ng-model="task.value" type="text" placeholder="value">
-    <button ng-if="task.type==='set' && task.valueType==='property'" ng-click="orb.OrbiterService.propertySelectorDialogue={obj:task,key:'value'}" ng-bind="task.value || 'set value'"></button>
+    <button ng-if="task.type==='set' && task.valueType==='property'" ng-click="orb.OrbiterService.selectedProperty={obj:task,key:'value',path:task.value}; orb.OrbiterService.dialogueModelType='properties'" ng-bind="task.value || 'set value'"></button>
     <button class="orange circle" ng-click="orb.OrbiterService.removeArrayElement(tasks, taskKey)"><i class="fa fa-trash"></i></button>
 
     <div ng-if="task.type === 'run' && task.arguments">
@@ -23,7 +23,7 @@
             <drop-down key="type" options="{'custom text':'custom text', properties:'properties'}" model="arg"></drop-down>
             <button
                 ng-if="arg.type === 'properties'"
-                ng-click="orb.OrbiterService.propertySelectorDialogue={obj:arg,key:'value',type:'properties'}"
+                ng-click="orb.OrbiterService.selectedProperty={obj:arg,key:'value',type:'properties',path:task.value}; orb.OrbiterService.dialogueModelType='properties'"
                 ng-bind="arg.value || 'set'"
             ></button>
             <input ng-if="arg.type==='custom text'" ng-model="arg.value" type="text" placeholder="value">
