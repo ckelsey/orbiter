@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function OrbiterCtlr($localStorage, $window, $scope, OrbiterService, OrbiterElementTypes, OrbiterPropertyService, OrbiterElementsService, InteractiveService){
+    function OrbiterCtlr($localStorage, $window, $scope, OrbiterService, OrbiterElementTypes, OrbiterPropertyService, OrbiterElementsService, OrbiterLibrariesService, InteractiveService){
         var self = this;
         this.$localStorage = $localStorage;
         if(!$localStorage.Orbiter){
@@ -10,6 +10,7 @@
         this.OrbiterService = OrbiterService;
         this.OrbiterPropertyService = OrbiterPropertyService;
         this.OrbiterElementsService = OrbiterElementsService;
+        this.OrbiterLibrariesService = OrbiterLibrariesService;
         this.OrbiterElementTypes = OrbiterElementTypes;
         this.InteractiveService = InteractiveService;
         InteractiveService.developer = true;
@@ -77,13 +78,33 @@
         };
 
         this.typeOf = function(thing){
-            if(thing instanceof Object){
-                return 'object';
-            }else if(thing instanceof Array){
-                return 'array';
-            }else{
-                return 'string';
+            try{
+                if(thing instanceof HTMLElement){
+                    return 'DOM';
+                }else if(typeof thing === 'undefined'){
+                    return 'undefined';
+                }else if(typeof thing === 'function'){
+                    return 'function';
+                }else if(typeof thing === 'number'){
+                    return 'number';
+                }else if(typeof thing === 'boolean'){
+                    return 'boolean';
+                }else if(thing instanceof Object){
+                    return 'object';
+                }else if(thing instanceof Array){
+                    return 'array';
+                }else{
+                    return 'string';
+                }
+            }catch(e){
+                return true;
             }
+
+            return true;
+        };
+
+        this.typeOfSafe = function(obj, key){
+            return self.typeOf(obj[key]);
         };
 
         this.dialogueOpen = false;
@@ -91,7 +112,6 @@
         this.isDialogueOpen = function(){
             self.dialogueOpen = false;
             var openDialogueFlags = [
-                self.OrbiterService.newDataObject,
                 self.OrbiterService.dialogueModelType,
                 self.OrbiterService.currentEventObject,
                 self.OrbiterService.newTemplate,
@@ -108,14 +128,6 @@
 
         $scope.$watch(function(){
             return self.OrbiterService.propertyMapperDialogue;
-        }, function(o,n){
-            if(o !== n){
-                self.isDialogueOpen();
-            }
-        });
-
-        $scope.$watch(function(){
-            return self.OrbiterService.newDataObject;
         }, function(o,n){
             if(o !== n){
                 self.isDialogueOpen();

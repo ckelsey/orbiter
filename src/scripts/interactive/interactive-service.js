@@ -69,8 +69,10 @@
             getBinding: function(obj, key){
                 if(obj && obj.hasOwnProperty('properties') && obj.properties.hasOwnProperty(key) && obj.properties[key].hasOwnProperty('bind')){
                     var val = self.lookUpPath(self, obj.properties[key].bind);
-                    if(val){
+                    if(val && val.hasOwnProperty('value')){
                         return val.value;
+                    }else if(val){
+                        return val;
                     }else{
                         return null;
                     }
@@ -79,18 +81,22 @@
             },
 
             lookUpPath: function(obj, pathString){
-                if(pathString){
-                    var path = pathString.split('.');
+                try{
+                    if(pathString){
+                        var path = pathString.split('.');
 
-                    if(path.length == 1){
-                        try{
-                            return obj[path[0]];
-                        }catch(e){
-                            return null;
+                        if(path.length == 1){
+                            try{
+                                return obj[path[0]];
+                            }catch(e){
+                                return null;
+                            }
                         }
+                        return self.lookUpPath(obj[path[0]], path.slice(1).join("."));
+                    }else{
+                        return null;
                     }
-                    return self.lookUpPath(obj[path[0]], path.slice(1).join("."));
-                }else{
+                }catch(e){
                     return null;
                 }
             },

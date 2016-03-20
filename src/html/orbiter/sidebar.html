@@ -23,9 +23,15 @@
             <div class="c-sidebar_section-wrapper_inner-section" ng-if="orb.InteractiveService.elementProperties.properties.repeat.bind && orb.InteractiveService.elementProperties.properties.repeat.bind !== 'properties.'+ orb.InteractiveService.elementProperties.id +'.properties.repeat'" ng-bind="orb.InteractiveService.elementProperties.properties.repeat.bind"></div>
         </div>
         <div class="c-sidebar_elements_properties c-sidebar_section-wrapper" ng-if="orb.InteractiveService.elementProperties.properties.href">
-            <h4><span>Link Url&nbsp;</span><button ng-if="orb.InteractiveService.elementProperties && orb.InteractiveService.elementProperties.properties.href" ng-click="orb.OrbiterService.propertyMapperDialogue={element:orb.InteractiveService.elementProperties, type:'href'}" class="bind-button">@</button></h4>
+            <h4><span>Link Url&nbsp;</span><button ng-click="orb.OrbiterService.propertyMapperDialogue={element:orb.InteractiveService.elementProperties, type:'href'}" class="bind-button">@</button></h4>
             <div class="row-padding">
                 <element-property-input element-model="orb.InteractiveService.elementProperties" property-key="'href'" input-type="'text'"></element-property-input>
+            </div>
+        </div>
+        <div class="c-sidebar_elements_properties c-sidebar_section-wrapper" ng-if="orb.InteractiveService.elementProperties.properties.src">
+            <h4><span>Source Url&nbsp;</span><button ng-click="orb.OrbiterService.propertyMapperDialogue={element:orb.InteractiveService.elementProperties, type:'src'}" class="bind-button">@</button></h4>
+            <div class="row-padding">
+                <element-property-input element-model="orb.InteractiveService.elementProperties" property-key="'src'" input-type="'text'"></element-property-input>
             </div>
         </div>
         <div class="c-sidebar_elements_properties c-sidebar_section-wrapper" ng-if="orb.InteractiveService.elementProperties && orb.InteractiveService.elementProperties.label !== 'Repeat'">

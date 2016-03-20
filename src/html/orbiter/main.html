@@ -16,11 +16,11 @@
 
     <orbiter-menu></orbiter-menu>
 
-    <new-data-dialogue class="c-dialogue" ng-if="orb.OrbiterService.newDataObject"></new-data-dialogue>
     <current-event-dialogue class="c-dialogue" ng-if="orb.OrbiterService.currentEventObject" ng-init="eventObj=orb.OrbiterService.currentEventObject"></current-event-dialogue>
     <new-template-dialogue class="c-dialogue" ng-if="orb.OrbiterService.newTemplate"></new-template-dialogue>
     <new-property-dialogue class="c-dialogue" ng-if="orb.OrbiterPropertyService.stagedProperty"></new-property-dialogue>
     <property-mapper-dialogue class="c-dialogue" ng-if="orb.OrbiterService.propertyMapperDialogue"></property-mapper-dialogue>
     <property-dialogue class="c-dialogue" ng-if="orb.OrbiterService.dialogueModelType && orb.OrbiterService.dialogueModelType === 'properties'" ng-class="orb.OrbiterService.selectedProperty ? 'opaque select-mode' : ''"></property-dialogue>
     <elements-dialogue class="c-dialogue" ng-if="orb.OrbiterService.dialogueModelType && orb.OrbiterService.dialogueModelType === 'elements'" ng-class="orb.OrbiterService.selectedProperty ? 'opaque select-mode' : ''"></elements-dialogue>
+    <libraries-dialogue class="c-dialogue" ng-if="orb.OrbiterService.dialogueModelType && orb.OrbiterService.dialogueModelType === 'libraries'" ng-class="orb.OrbiterService.selectedProperty ? 'opaque select-mode' : ''"></libraries-dialogue>
 </div>

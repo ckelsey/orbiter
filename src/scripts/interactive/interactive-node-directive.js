@@ -6,12 +6,17 @@
             scope: {
                 'data': '=interactiveNode',
                 'parent': '=interactiveNodeParent',
-                'parentPath': '=interactiveNodeParentPath'
+                'repeaterIndex': '=repeaterIndex',
+                'repeaterPath': '=repeaterPath'
             },
             link:function(scope,element,attributes){
-                scope.dataProperties = InteractiveService.elements[scope.data.id];
+                scope.dataProperties = angular.copy(InteractiveService.elements[scope.data.id]);
                 scope.styles = InteractiveService.getStyles(scope.dataProperties);
                 scope.mock = ['test', 'test2'];
+                scope.repeaterPathArray = [];
+                if(scope.repeaterPath){
+                    scope.repeaterPathArray = scope.repeaterPath.split('.');
+                }
 
                 var html = '';
 
@@ -35,25 +40,45 @@
                     html += ' interactive-id="'+ scope.dataProperties.id +'"';
                 };
 
+                var setRepeat = function(){
+                    if(scope.repeaterIndex !== undefined && scope.repeaterIndex !== null){
+                        html += ' repeater-index="repeaterIndex" repeater-path="repeaterPath"';
+                        for(var property in scope.dataProperties.properties){
+                            var originalBindingArray = scope.dataProperties.properties[property].bind.split('.');
+                            var needsUpdatedBinding = false;
+                            for(var i=0;i<scope.repeaterPathArray.length;i++){
+                                if(scope.repeaterPathArray[i] !== originalBindingArray[0]){
+                                    needsUpdatedBinding = false;
+                                    break;
+                                }else{
+                                    originalBindingArray.shift();
+                                    needsUpdatedBinding = true;
+                                }
+                            }
+
+                            if(needsUpdatedBinding){
+                                var newBindingArray = angular.copy(scope.repeaterPathArray);
+                                newBindingArray.push(scope.repeaterIndex);
+                                originalBindingArray.shift();
+                                newBindingArray = newBindingArray.concat(originalBindingArray);
+                                var newBinding = newBindingArray.join('.');
+                                scope.dataProperties.properties[property].bind = newBinding;
+                            }
+                        }
+                    }
+                };
+
                 var setText = function(){
                     if(scope.dataProperties.label === 'Text' || scope.dataProperties.label === 'Link' || scope.dataProperties.label === 'Button'){
                         html += '<span ng-bind-html="ictlr.InteractiveService.getBinding(dataProperties, \'text\')" class="c-interactive-bound"></span>';
                     }
                 };
 
-                var setInclude = function(){
-                    if(scope.dataProperties.label === 'Repeat'){
-                        html += '<span ng-bind-html="ictlr.InteractiveService.getBinding(dataProperties, \'text\')" class="c-interactive-bound"></span>';
-                    }
-                };
-
                 var setChildren = function(){
                     html += '<el ng-repeat="childData in data.nodes track by childData.id"';
+                    setRepeat();
                     html += ' interactive-node="childData"';
                     html += ' interactive-node-parent="data"';
-                    html += ' ng-init="thisPath=parentPath + \',nodes,\' + $index"';
-                    html += ' interactive-node-parent-path="thisPath"';
-                    html += ' path="{{thisPath}}"';
                     html += ' ng-style="ictlr.InteractiveService.getStyles(ictlr.InteractiveService.elements[childData.id], \'display\')"';
                     html += ' ng-class="childData.id === ictlr.InteractiveService.elementProperties.id ? \'m-active-iteractive-node\' : \'\'"';
                     html += '></el>';
@@ -61,6 +86,7 @@
 
                 var setHTML = function(){
                     setCTLR();
+                    setRepeat();
                     setStyles();
                     setEvents();
                     setID();
@@ -81,6 +107,9 @@
                     html += '<a href="{{ictlr.InteractiveService.getBinding(dataProperties, \'href\')}}"';
                     setHTML();
                     html += '</a>';
+                }else if(scope.dataProperties.label === 'Image'){
+                    html += '<img src="{{ictlr.InteractiveService.getBinding(dataProperties, \'src\')}}"';
+                    setHTML();
                 }else if(scope.dataProperties.label === 'Button'){
                     html += '<button';
                     setHTML();
@@ -88,20 +117,17 @@
                 }else if(scope.dataProperties.label === 'Repeat'){
                     scope.repeatObj = InteractiveService.getBinding(scope.dataProperties, 'repeat');
                     scope.repeatTemplate = InteractiveService.getBinding(scope.dataProperties, 'template');
-                    var display =
                     html += '<el';
-                    // setCTLR();
-                    // setEvents();
-                    // setID();
-                    html += ' ng-repeat="rep in repeatObj" interactive-repeater="dataProperties">';
+                    setRepeat();
+                    setEvents();
+                    setID();
+                    html += ' ng-repeat="(repKey, rep) in repeatObj track by $index" repeater-index="repKey" interactive-repeater="dataProperties" repeater-path="repeaterPath">';
                     html += '</el>';
                 }
 
                 element.html(html);
                 $compile(element.contents())(scope);
-                // $timeout(function () {
-                //     $compile(element.contents())(scope);
-                // });
+
 
 
 

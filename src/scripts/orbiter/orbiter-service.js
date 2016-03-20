@@ -1,13 +1,15 @@
 /* TODO
-    - copy/paste is broken
-    - Available libraries
-    - img, video, iframe, audio
+    - Spilt off templates
+    - Available templates
+    - repeat mapping
     - import export
     - make demo using mflycommamds
+    - video, iframe, audio
 
 
     APP:
         - move templates and events out of OrbiterService
+        - default image url
 
     Libraries:
         - manual import
@@ -55,7 +57,7 @@
 (function () {
     'use strict';
 
-    function OrbiterService(InteractiveService, InteractiveProperties, InteractiveMethods, InteractiveLibraries, OrbiterElementTypes, $localStorage, $timeout){
+    function OrbiterService(InteractiveService, InteractiveProperties, InteractiveMethods, InteractiveLibraries, OrbiterElementsService, OrbiterElementTypes, $localStorage, $timeout){
         var self = {
             dialogueModelType: null,
             dragging: null,
@@ -64,14 +66,32 @@
                 InteractiveService.dragging = data;
             },
 
+            /* Property Mapping */
             selectedProperty: null,
             saveSelectedProperty: function(data){
                 $timeout(function(){data.obj[data.key] = data.path;});
             },
 
+            removeArrayElement: function(obj, index){
+                return obj.splice(index, 1);
+            },
+
+            mapProperties: function(element, data){
+                for(var prop in data){
+                    if(data[prop].new && data[prop].new !== 'none'){
+                        element.properties[prop].bind = data[prop].new;
+                    }else if(data[prop].new === 'none'){
+                        element.properties[prop].bind = element.id +'.'+ prop;
+                    }
+                }
+            },
+            /* End Property Mapping */
+
 
 
             save: function(){
+                InteractiveService.htmlTree[InteractiveService.htmlTree.current] = {nodes:InteractiveService.htmlTree.nodes};
+
                 if(!$localStorage.OrbiterInteractiveTree){
                     $localStorage.OrbiterInteractiveTree = {};
                 }
@@ -103,8 +123,6 @@
                 }
                 return results;
             },
-
-            newDataObject: null,
 
             currentEventObject: null,
             currentEventObjectError: {label: null, tasks:[], taskErrors: false},
@@ -153,23 +171,7 @@
                 }
             },
 
-            removeArrayElement: function(obj, index){
-                return obj.splice(index, 1);
-            },
 
-
-
-
-
-            mapProperties: function(element, data){
-                for(var prop in data){
-                    if(data[prop].new && data[prop].new !== 'none'){
-                        element.properties[prop].bind = data[prop].new;
-                    }else if(data[prop].new === 'none'){
-                        element.properties[prop].bind = element.id +'.'+ prop;
-                    }
-                }
-            },
 
 
             newTemplate: null,
@@ -182,34 +184,11 @@
             addNewTemplate: function(){
                 InteractiveService.htmlTree[self.newTemplate.title] = {nodes:[]};
                 self.switchTemplate(self.newTemplate.title);
-                self.addToInteractive(InteractiveService.htmlTree, OrbiterElementTypes.block);
+                OrbiterElementsService.addToInteractive(InteractiveService.htmlTree, OrbiterElementTypes.block);
                 self.save();
                 self.newTemplate = null;
             }
         };
-
-
-
-
-        if($localStorage.hasOwnProperty('OrbiterInteractiveMethods') && $localStorage.OrbiterInteractiveMethods && Object.keys($localStorage.OrbiterInteractiveMethods).length > 0){
-            InteractiveService.methods = $localStorage.OrbiterInteractiveMethods;
-        }else{
-            $localStorage.OrbiterInteractiveMethods = angular.copy(InteractiveMethods);
-            InteractiveService.methods = $localStorage.OrbiterInteractiveMethods;
-        }
-
-        InteractiveService.libraries = InteractiveLibraries;
-
-
-
-        if(!InteractiveService.htmlTree.hasOwnProperty('main')){
-            InteractiveService.htmlTree.main = {nodes:InteractiveService.htmlTree.nodes};
-            InteractiveService.htmlTree.current = 'main';
-        }
-
-        if(!InteractiveService.htmlTree.current){
-            InteractiveService.htmlTree.current = 'main';
-        }
 
         console.log(InteractiveService)
 

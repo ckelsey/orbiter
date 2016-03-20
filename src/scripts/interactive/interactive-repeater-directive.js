@@ -4,17 +4,23 @@
         return {
             restrict: 'A',
             scope: {
-                data: '=interactiveRepeater'
+                data: '=interactiveRepeater',
+                repeaterIndex: '=repeaterIndex',
+                repeaterPath: '=repeaterPath'
             },
             link:function(scope,element,attributes){
                 scope.template = InteractiveService.lookUpPath(InteractiveService, scope.data.properties.template.bind);
+                scope.template = InteractiveService.htmlTree.reps;
+                scope.repeaterPath = scope.data.properties.repeat.bind;
+
                 var html = '<el ng-controller="InteractiveCtlr as ictlr">';
                 html += '<el';
                 html += ' ng-repeat="data in template.nodes track by data.id"';
                 html += ' interactive-node="data"';
+                html += ' repeater-index="repeaterIndex"';
+                html += ' repeater-path="repeaterPath"';
+                html += ' rep-i="{{repeaterIndex}}"';
                 html += ' interactive-node-parent="template"';
-                html += ' ng-init="path = $index"';
-                html += ' interactive-node-parent-path="path"';
                 html += '>';
                 html += '</el>';
                 html += '</el>';

@@ -81,7 +81,7 @@ drop-down.red{
     }
 }
 
-elements-dialogue{
+elements-dialogue, libraries-dialogue{
     .c-dialogue_inner{
         .property{
             .inline-inputs.readonly{
@@ -140,7 +140,7 @@ elements-dialogue{
             transition: border .1s, top .1s, margin .15s;
         }
 
-        .elementExpanded{
+        .elementExpanded, .libraryExpanded{
             .toggler:before{
                 border-top-color: #fff;
                 border-left-color: transparent;
@@ -447,7 +447,7 @@ orbiter-sidebar{
     }
 }
 
-property-dialogue, elements-dialogue{
+property-dialogue, elements-dialogue, libraries-dialogue{
     .property{
         margin: 7px 0;
         padding: 7px;
@@ -468,7 +468,7 @@ property-dialogue, elements-dialogue{
 }
 
 
-property-element, elements-dialogue .property{
+property-element, elements-dialogue .property, libraries-dialogue .property{
     .inline-inputs{
         margin: 0px;
 
@@ -510,7 +510,7 @@ property-element, elements-dialogue .property{
     }
 }
 
-property-dialogue.select-mode, elements-dialogue.select-mode .elementExpanded .inner-property{
+property-dialogue.select-mode, elements-dialogue.select-mode .elementExpanded .inner-property, libraries-dialogue.select-mode .libraryExpanded .inner-property{
     .inline-inputs{
         cursor: pointer;
         transition: color .1s, background .1s, box-shadow .1s;
