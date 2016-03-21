@@ -117,7 +117,8 @@
             runFN: function(data){
                 var setValue = function(obj, path, value){
                     if(path.length === 1){
-                        return obj[path[0]] = value;
+                        obj[path[0]] = value
+                        return obj[path[0]];
                     }else{
                         var child = obj[path[0]];
                         path.shift();
@@ -136,7 +137,8 @@
 
 
                     $timeout(function(){
-                        setValue(self, thisFN.target.split('.'), newVal)
+                        var sets = setValue(self, thisFN.target.split('.'), newVal);
+                        console.log(sets, self)
                     });
                 };
 
@@ -160,6 +162,7 @@
                             (function(thisPromise) {
                                 if(fun.hasOwnProperty(thisPromise.promiseType)){
                                     fun[thisPromise.promiseType](function(res){
+                                        console.log('res',res)
                                         go(thisPromise, res);
                                     });
                                 }

@@ -9,10 +9,8 @@
                 'repeaterIndex': '=repeaterIndex',
                 'repeaterPath': '=repeaterPath'
             },
-            //templateUrl: 'interactive-node-directive.html',
-            link:function(scope,element,attributes){
 
-                //scope.repeatObj = InteractiveService.getBinding(scope.dataProperties, 'repeat');
+            link:function(scope,element,attributes){
                 function run() {
                     scope.dataProperties = angular.copy(InteractiveService.elements[scope.data.id]);
                     scope.styles = InteractiveService.getStyles(scope.dataProperties);
@@ -74,7 +72,14 @@
 
                     var setText = function(){
                         if(scope.dataProperties.label === 'Text' || scope.dataProperties.label === 'Link' || scope.dataProperties.label === 'Button'){
-                            html += '<span ng-bind-html="ictlr.InteractiveService.getBinding(dataProperties, \'text\')" class="c-interactive-bound"></span>';
+                            var bindPath = scope.dataProperties.properties.text.bind;
+                            var boundToSelf = 'elements.' + scope.dataProperties.id + '.properties.text';
+
+                            if(InteractiveService.developer && bindPath !== boundToSelf){
+                                html += '<span ng-bind-html="ictlr.InteractiveService.getBinding(dataProperties, \'text\') || \'No data, placeholder text\'" class="c-interactive-bound"></span>';
+                            }else{
+                                html += '<span ng-bind-html="ictlr.InteractiveService.getBinding(dataProperties, \'text\')" class="c-interactive-bound"></span>';
+                            }
                         }
                     };
 
@@ -112,7 +117,11 @@
                         setHTML();
                         html += '</a>';
                     }else if(scope.dataProperties.label === 'Image'){
-                        html += '<img src="{{ictlr.InteractiveService.getBinding(dataProperties, \'src\')}}"';
+                        if(InteractiveService.developer){
+                            html += '<img src="{{ictlr.InteractiveService.getBinding(dataProperties, \'src\') || \'src/media/default.png\'}}"';
+                        }else{
+                            html += '<img src="{{ictlr.InteractiveService.getBinding(dataProperties, \'src\')}}"';
+                        }
                         setHTML();
                     }else if(scope.dataProperties.label === 'Button'){
                         html += '<button';

@@ -1,13 +1,11 @@
 /* TODO
-    - make demo using mflycommamds
-
 
     APP:
         - Create middleman module, specifically for save() and switchTemplate()
         - default image url
         - video, iframe, audio
         - template, repeat binding doesn't update view
-        - mock for data. Maybe if in developer mode, if data is null, display null text
+        - Mock data, if not bound to self, display the no data text, otherwise keep blank
         - Export standalone app
         - On property delete, find all bindings and update t default(with a warning that that is happening)
         - Walkthru
@@ -30,8 +28,6 @@
 
     CSS:
         - css states :hover :focus :blur
-        - outline
-        - cursor
         - box-shadow: breakup into arrays of objects. Example:
             [
                 {

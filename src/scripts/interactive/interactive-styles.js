@@ -27,6 +27,87 @@
                 ruleName: "box-shadow",
                 category: 'display'
             },
+            "overflow":{
+                ruleName: "overflow",
+                category: 'display'
+            },
+            "cursor":{
+                ruleName: "cursor",
+                category: 'display'
+            },
+            "vertical-align":{
+                ruleName: "vertical-align",
+                category: 'display'
+            },
+            "outline":{
+                ruleName: "outline",
+                category: 'display'
+            },
+            "z-index":{
+                ruleName: "z-index",
+                category: 'display'
+            },
+            "transition":{
+                ruleName: "transition",
+                category: 'display'
+            },
+
+
+
+            "width":{
+                ruleName: "width",
+                category: 'dimensions'
+            },
+            "max-width":{
+                ruleName: "max-width",
+                category: 'dimensions'
+            },
+            "min-width":{
+                ruleName: "min-width",
+                category: 'dimensions'
+            },
+            "height":{
+                ruleName: "height",
+                category: 'dimensions'
+            },
+            "max-height":{
+                ruleName: "max-height",
+                category: 'dimensions'
+            },
+            "min-height":{
+                ruleName: "min-height",
+                category: 'dimensions'
+            },
+
+
+
+            "position":{
+                ruleName: "position",
+                category: 'position'
+            },
+            "top":{
+                ruleName: "top",
+                category: 'position'
+            },
+            "bottom":{
+                ruleName: "bottom",
+                category: 'position'
+            },
+            "left":{
+                ruleName: "left",
+                category: 'position'
+            },
+            "right":{
+                ruleName: "right",
+                category: 'position'
+            },
+            "transform":{
+                ruleName: "transform",
+                category: 'position'
+            },
+
+
+
             color:{
                 ruleName: 'color',
                 category: 'text'
@@ -63,6 +144,14 @@
                 ruleName: "text-decoration",
                 category: 'text'
             },
+            "line-height": {
+                ruleName: "line-height",
+                category: "text"
+            },
+
+
+
+
             "padding-top": {
                 ruleName: "padding-top",
                 category: 'spacing'
@@ -143,6 +232,8 @@
                 ruleName: "border-right-style",
                 category: 'border'
             },
+
+
 
         };
     }

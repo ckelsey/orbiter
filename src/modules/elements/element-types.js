@@ -1,6 +1,7 @@
-(function () {
+(function() {
     'use strict';
-    function OrbiterElementTypes(){
+
+    function OrbiterElementTypes() {
         var borderStyleOptions = ['dashed', 'dotted', 'double', 'groove', 'hidden', 'inherit', 'inset', 'none', 'outset', 'ridge', 'solid'];
         var textProperties = {
             text: {
@@ -10,31 +11,31 @@
 
             /* TEXT */
             color: {
-                value: "inherit",
+                value: null,
                 bind: null
             },
             "font-size": {
-                value: 'inherit',
+                value: null,
                 bind: null
             },
             "font-weight": {
-                options: ['light', 'normal', 'bold', 'inherit'],
-                value: 'inherit',
+                value: null,
                 bind: null
             },
             "font-style": {
-                options: ['italic', 'normal', 'oblique', 'inherit'],
-                value: 'inherit',
+                value: null,
                 bind: null
             },
             "text-decoration": {
-                options: ['none', 'line-through', 'overline', 'underline', 'inherit'],
-                value: 'inherit',
+                value: null,
                 bind: null
             },
             "text-align": {
-                options: ['left', 'center', 'right', 'inherit'],
-                value: 'inherit',
+                value: null,
+                bind: null
+            },
+            "line-height": {
+                value: null,
                 bind: null
             },
 
@@ -80,88 +81,189 @@
 
 
             "background-color": {
-                value: 'transparent',
+                value: null,
                 bind: null
             },
 
             display: {
-                options: ['block', 'inline'],
-                value: 'inline',
+                value: null,
                 bind: null
             },
 
-            "box-shadow":{
-                value: 'none',
+            "box-shadow": {
+                value: null,
                 bind: null
             },
 
-            "border-radius":{
-                value: '0px',
+            "border-radius": {
+                value: null,
+                bind: null
+            },
+
+            overflow: {
+                value: null,
+                bind: null
+            },
+
+            cursor: {
+                value: null,
+                bind: null
+            },
+
+            "vertical-align": {
+                value: null,
+                bind: null
+            },
+
+            "outline": {
+                value: null,
+                bind: null
+            },
+
+            "z-index":{
+                value: null,
+                bind: null
+            },
+
+            "transition":{
+                value: null,
                 bind: null
             },
 
 
 
 
-            "border-top-color":{
+
+            width: {
+                value: null,
+                bind: null
+            },
+
+            "max-width": {
+                value: null,
+                bind: null
+            },
+
+            "min-width": {
+                value: null,
+                bind: null
+            },
+
+            height: {
+                value: null,
+                bind: null
+            },
+
+            "max-height": {
+                value: null,
+                bind: null
+            },
+
+            "min-height": {
+                value: null,
+                bind: null
+            },
+
+
+
+
+
+
+            position: {
+                value: null,
+                bind: null
+            },
+
+            top: {
+                value: null,
+                bind: null
+            },
+
+            bottom: {
+                value: null,
+                bind: null
+            },
+
+            left: {
+                value: null,
+                bind: null
+            },
+
+            right: {
+                value: null,
+                bind: null
+            },
+
+            transform: {
+                value: null,
+                bind: null
+            },
+
+
+
+
+
+
+
+            "border-top-color": {
                 value: 'transparent',
                 bind: null
             },
 
-            "border-top-width":{
+            "border-top-width": {
                 value: '0px',
                 bind: null
             },
 
-            "border-top-style":{
+            "border-top-style": {
                 value: 'none',
                 options: borderStyleOptions,
                 bind: null
             },
 
-            "border-bottom-color":{
+            "border-bottom-color": {
                 value: 'transparent',
                 bind: null
             },
 
-            "border-bottom-width":{
+            "border-bottom-width": {
                 value: '0px',
                 bind: null
             },
 
-            "border-bottom-style":{
+            "border-bottom-style": {
                 value: 'none',
                 options: borderStyleOptions,
                 bind: null
             },
 
-            "border-left-color":{
+            "border-left-color": {
                 value: 'transparent',
                 bind: null
             },
 
-            "border-left-width":{
+            "border-left-width": {
                 value: '0px',
                 bind: null
             },
 
-            "border-left-style":{
+            "border-left-style": {
                 value: 'none',
                 options: borderStyleOptions,
                 bind: null
             },
 
-            "border-right-color":{
+            "border-right-color": {
                 value: 'transparent',
                 bind: null
             },
 
-            "border-right-width":{
+            "border-right-width": {
                 value: '0px',
                 bind: null
             },
 
-            "border-right-style":{
+            "border-right-style": {
                 value: 'none',
                 options: borderStyleOptions,
                 bind: null
@@ -194,22 +296,22 @@
 
 
         var basicEvents = {
-            click:{
+            click: {
                 label: null,
                 method: 'ng-click',
                 fn: []
             },
-            "Init":{
+            "Init": {
                 label: null,
                 method: 'ng-init',
                 fn: []
             },
-            "Mouse down":{
+            "Mouse down": {
                 label: null,
                 method: 'ng-mousedown',
                 fn: []
             },
-            "Mouse move":{
+            "Mouse move": {
                 label: null,
                 method: 'ng-mousemove',
                 fn: []
@@ -251,11 +353,11 @@
             repeat: {
                 label: 'Repeat',
                 properties: {
-                    template:{
+                    template: {
                         value: null,
                         bind: null
                     },
-                    repeat:{
+                    repeat: {
                         value: null,
                         bind: null
                     }
@@ -266,5 +368,5 @@
     }
 
     angular.module('app')
-    .service('OrbiterElementTypes', OrbiterElementTypes);
+        .service('OrbiterElementTypes', OrbiterElementTypes);
 })();

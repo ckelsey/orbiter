@@ -10,6 +10,7 @@
             },
             link:function(scope,element,attributes){
                 scope.template = InteractiveService.lookUpPath(InteractiveService, scope.data.properties.template.bind);
+                console.log(scope.data)
                 scope.repeaterPath = scope.data.properties.repeat.bind;
 
                 var html = '<el ng-controller="InteractiveCtlr as ictlr">';

@@ -10,8 +10,8 @@
         <div class="property" ng-repeat="(templateKey, template) in orb.InteractiveService.htmlTree track by $index" ng-if="templateKey !== 'nodes' && templateKey !== 'current'">
             <div
                 class="inline-inputs readonly"
-                ng-class="'templates.'+ templateKey === orb.OrbiterService.selectedProperty.path ? 'active' : ''"
-                ng-click="orb.OrbiterService.selectedProperty? orb.OrbiterService.selectedProperty.path='templates.'+ templateKey : null">
+                ng-class="'htmlTree.'+ templateKey === orb.OrbiterService.selectedProperty.path ? 'active' : ''"
+                ng-click="orb.OrbiterService.selectedProperty? orb.OrbiterService.selectedProperty.path='htmlTree.'+ templateKey : null">
                 <label ng-bind="templateKey"></label>
                 <span ng-bind="orb.OrbiterTemplatesService.totalNodes(templateKey) + ' elements'"></span>
             </div>

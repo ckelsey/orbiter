@@ -10,7 +10,7 @@
         return {
             restrict: 'E',
             link:function(scope,element,attributes){
-                var availableStyles = ['font-size', 'font-weight', 'font-style', 'text-decoration', 'text-align', 'color'];
+                var availableStyles = ['font-size', 'font-weight', 'font-style', 'text-decoration', 'text-align', 'color', 'line-height'];
                 var run = function() {
                     scope.textProperties = {};
                     for (var i=0;i<availableStyles.length;i++) {
@@ -29,6 +29,10 @@
                                         '<div class="c-input-group">'+
                                             '<label><i class="fa fa-text-height"></i></label>' +
                                             '<input ng-model="textProperties[\'font-size\'].value" type="text" />' +
+                                        '</div>' +
+                                        '<div class="c-input-group">'+
+                                            '<label><i class="fa fa-reorder"></i></label>' +
+                                            '<input ng-model="textProperties[\'line-height\'].value" type="text" />' +
                                         '</div>' +
                                         '<div class="c-input-group">'+
                                             '<label><i class="fa fa-bold"></i></label>' +
@@ -61,7 +65,7 @@
                                             '</select>' +
                                         '</div>' +
                                         '<div class="c-input-group">'+
-                                            '<label><i class="fa fa-align-justify"></i></label>' +
+                                            '<label><i class="fa fa-align-center"></i></label>' +
                                             '<select ng-model="textProperties[\'text-align\'].value">' +
                                                 '<option value="left">left</option>' +
                                                 '<option value="center">center</option>' +
